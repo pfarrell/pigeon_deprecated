@@ -32,7 +32,6 @@ end
 def process!(email)
   begin
     links = {}
-    puts email.body.parts.count
     email.body.parts.each do |part|
       find_links!(part.decoded, links)
     end
@@ -52,7 +51,5 @@ def find_links!(part, links)
 end
 
 def save_page(link) 
-  puts link
-  system("wget -r -l 1 " << link)
-  puts 'save done'
+  system("wget -r -q -np --random-wait -p -l 1 -k -P " + String.random_alphanumeric() + " " + link)
 end
