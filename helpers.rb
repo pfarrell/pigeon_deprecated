@@ -6,23 +6,6 @@ def String.random_alphanumeric(size=16)
   s
 end
 
-def send_email(from, from_alias, to, to_alias, subject, message)
-  Pony.mail(
-    :to => to,
-    :via => :smtp, 
-    :via_options => {
-      :port => '587',
-      :address => 'smtp.gmail.com',
-      :enable_starttls_auto => true,
-      :user_name => $yml["smtp"]["user"],
-      :password => $yml["smtp"]["password"],
-      :authentication => :plain,
-      :domain => 'HELO',
-    },
-    :subject => subject, 
-    :body => message)
-end
-
 def mkdir!(directory) 
   if !FileTest::directory?(directory)
     Dir::mkdir(directory)
