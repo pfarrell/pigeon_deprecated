@@ -36,6 +36,7 @@ def process!(email)
       find_links!(part.decoded, links)
     end
     links.each do |key, val|
+      puts key
       save_page(key)
     end
   ensure
@@ -44,7 +45,7 @@ def process!(email)
 end
 
 def find_links!(part, links)
-  arr = part.scan(/http[s]?:\/\/[a-zA-Z0-9\/\.-]*/)
+  arr = part.scan(/http[s]?:\/\/[a-zA-Z0-9\/\.\_-]*/)
   arr.each do |entry|
     if /www\.w3\.org/.match(entry).nil? \
       and /schemas\.microsoft/.match(entry).nil?
@@ -57,6 +58,13 @@ def save_page(link)
   mkdir!("sites")
   dir = String.random_alphanumeric()
   uri = URI.parse(link)
-  system("wget -nd -pHEKk --random-wait -P sites/" + dir + " " + link)
-  File.open("sites/index.html", 'a') {|f| f.write("<div><a href='" + dir + '/' + link.split('/').last + "'>" + link + "</a></div>")}
+  file = link.split('/').last
+  if link.match(/\/$/)
+    file = 'index.html'
+  end
+  if !file.match(/\.html$/)  
+    file = file + '.html'
+  end
+  system("wget -qnd -pHEKk --random-wait -P sites/" + dir + " " + link)
+  File.open("sites/index.html", 'a') {|f| f.write("<div><a href='" + dir + '/' + file + "'>" + link + "</a></div>")}
 end
