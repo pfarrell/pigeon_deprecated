@@ -57,6 +57,6 @@ def save_page(link)
   mkdir!("sites")
   dir = String.random_alphanumeric()
   uri = URI.parse(link)
-  system("wget -r -p -q --progress=dot:binary -np --domains " + uri.host + " --random-wait -p -l 1 -k -P sites/" + dir + " " + link)
-  File.open("sites/index.html", 'a') {|f| f.write("<div><a href='" + dir + '/' + uri.host + '/' + uri.path + "'>" + link + "</a></div>")}
+  system("wget -nd -pHEKk --random-wait -P sites/" + dir + " " + link)
+  File.open("sites/index.html", 'a') {|f| f.write("<div><a href='" + dir + '/' + link.split('/').last + "'>" + link + "</a></div>")}
 end
