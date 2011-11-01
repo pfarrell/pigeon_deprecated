@@ -38,7 +38,7 @@ def find_links!(part, links)
 end
 
 def save_page(link) 
-  mkdir!("sites")
+  mkdir!("public/sites")
   dir = String.random_alphanumeric()
   uri = URI.parse(link)
   file = link.split('/').last
@@ -48,6 +48,31 @@ def save_page(link)
   if !file.match(/\.html$/)  
     file = file + '.html'
   end
-  system("wget -qnd -pHEKk --random-wait -P sites/" + dir + " " + link)
-  File.open("sites/index.html", 'a') {|f| f.write("<div><a href='" + dir + '/' + file + "'>" + link + "</a></div>")}
+  system("wget -qnd -pHEKk --random-wait -P public/sites/" + dir + " " + link)
+  File.open("views/index.haml", 'a') do |f| 
+    f.write("  %div\n")
+    f.write("    %a{:href=>'sites/" + dir + '/' + file + "'}\n") 
+    f.write("      " + link + "\n")
+  end
+  #File.open("sites/index.html", 'a') {|f| f.write("<div><a href='" + dir + '/' + file + "'>" + link + "</a></div>")}
+end
+
+def partial(template, *args)
+  options = args.last.is_a?(Hash) ? args.pop : { }
+  options.merge!(:layout => false)
+  if collection = options.delete(:collection) then
+    haml_concat(collection.inject([]) do |buffer, member|
+    buffer << haml(template, options.merge(
+      :layout => false,
+      :locals => {template.to_sym => member}
+      )
+    )
+    end.join("\n"))
+  else
+    haml_concat(haml(template, options))
+  end
+end
+
+def ajax?
+  request.xhr?
 end

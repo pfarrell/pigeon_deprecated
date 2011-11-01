@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+%html
+  %head
+    %title 
+    %meta{:charset => "utf-8"}
+    %meta{:name => "viewport", :content=>"width-device-width, initial-scale=1.0"}
+    %link{:rel => "stylesheet", :href => "http://fonts.googleapis.com/css?family=Cabin", :type => "text/css", :media => "all"}
+    %link{:rel => "stylesheet", :href => "/css/1140.css", :type => "text/css", :media => "screen" }
+    %link{:rel => "stylesheet", :href => "/#{@style}", :type => "text/css", :media => "screen" }
+
+    %script{:type => "text/javascript", :src => "/js/css3-mediaqueries.js"}
+  %body
+    %div.header
+      - partial @nav
+    =yield
