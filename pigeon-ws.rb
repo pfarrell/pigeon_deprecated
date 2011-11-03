@@ -13,6 +13,7 @@ before do
 end
 
 get '/' do 
+  @links = get_links()
   haml :index
 end
 

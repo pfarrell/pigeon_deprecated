@@ -1,4 +1,4 @@
-%w(yaml gmail ./helpers).each { |dependency| require dependency }
+%w(yaml gmail mongo_mapper ./helpers).each { |dependency| require dependency }
 
 yml = YAML::load(File.open('config/config.rb'))
 
