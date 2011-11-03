@@ -67,7 +67,6 @@ def save_page(link, email)
   link = Link.new(:title=>email.subject, :remote_url=>link, :local_url=>"sites/" + dir + "/" + CGI.escapeHTML(file))
   link.save!
   system("curl -s http://localhost:4568 > public/index.html")
-  end
 end
 
 def get_links()
