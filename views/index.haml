@@ -1,6 +1,6 @@
 %div.container.main
   -@links.each do |link|
     %div
-      %a{:href=>"/#{link.local_url}", :title=>"#{link.remote_url}"}
+      %a{:href=>"#{link.local_url}", :title=>"#{link.remote_url}"}
         #{link.title}
   

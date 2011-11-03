@@ -10,6 +10,7 @@ before do
   @style = 'style.css'
   @time = Time.now
   @nav = :nav
+  @title = 'Pigeon'
 end
 
 get '/' do 

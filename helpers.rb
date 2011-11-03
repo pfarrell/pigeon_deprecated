@@ -1,4 +1,4 @@
-%w(mail uri mongo_mapper).each { |dependency| require dependency }
+%w(cgi mail uri mongo_mapper).each { |dependency| require dependency }
 
 MongoMapper.connection = Mongo::Connection.new('localhost', 27017, :pool_size => 5, :timout => 5);
 MongoMapper.database = 'pigeon'
@@ -27,9 +27,8 @@ end
 def process!(email)
   begin
     links = {}
-    
     find_links!(email.body.decoded, links)
-
+    find_links!(email.body.decoded, links)
     email.body.parts.each do |part|
       find_links!(part.decoded, links)
     end
@@ -46,7 +45,8 @@ def find_links!(part, links)
   arr = part.split(/\s+/).find_all { |u| u =~ /^https?:/ }
   arr.each do |entry|
     if /www\.w3\.org/.match(entry).nil? \
-      and /schemas\.microsoft/.match(entry).nil?
+      and /schemas\.microsoft/.match(entry).nil? \
+      and /=$/.match(entry).nil?
       links[entry] = entry
     end
   end
@@ -60,12 +60,14 @@ def save_page(link, email)
   if link.match(/\/$/)
     file = 'index.html'
   end
-  if !file.match(/\.html$/)  
+  if !file.match(/\.html$/) && !file.match(/\.pdf$/)  
     file = file + '.html'
   end
   system("wget -qnd -pHEKk --random-wait -P public/sites/" + dir + " " + link)
-  link = Link.new(:title=>email.subject, :remote_url=>link, :local_url=>"sites/" + dir + "/" + file)
+  link = Link.new(:title=>email.subject, :remote_url=>link, :local_url=>"sites/" + dir + "/" + CGI.escapeHTML(file))
   link.save!
+  system("curl -s http://localhost:4568 > public/index.html")
+  end
 end
 
 def get_links()
