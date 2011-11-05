@@ -1,6 +1,6 @@
 %w(yaml sinatra haml sass helpers).each { |dependency| require dependency }
 
-set :port, 4567
+set :port, 4569
 set :haml =>{:format => :html5}
 
 enable :sessions
