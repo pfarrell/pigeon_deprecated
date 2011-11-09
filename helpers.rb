@@ -58,13 +58,28 @@ def save_page(link, email)
   dir = String.random_alphanumeric()
   uri = URI.parse(link)
   file = link.split('/').last
+
   if link.match(/\/$/)
     file = 'index.html'
   end
+
   if !file.match(/\.html$/) && !file.match(/\.pdf$/)  
     file = file + '.html'
   end
+
   system("wget -qnd -pHEKk --random-wait -P public/sites/" + dir + " " + link)
+
+  Dir.foreach("public/sites/" + dir) do |entry|
+    if File.fnmatch?(file + '*html', entry) 
+      file = entry
+    end
+  end
+  
+  if file.match(/\?/)
+    File.rename("public/sites/" + dir + "/" + file, "public/sites/" + dir + "/index.html")
+    file = 'index.html'
+  end
+
   link = Link.new(:title=>email.subject, :remote_url=>link, :local_url=>"sites/" + dir + "/" + CGI.escapeHTML(file))
   link.save!
   system("curl -s http://localhost:4568 > public/index.html")

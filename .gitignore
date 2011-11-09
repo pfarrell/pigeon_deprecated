@@ -1,4 +1,4 @@
 config/config.rb
-reset.sh
+reset.rb
 sites
 public
