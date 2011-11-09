@@ -20,6 +20,14 @@ h1 {
   font-size: 1.5em;
 }
 
+.link {
+  border-bottom:1px solid black;
+  &:hover { 
+    text-decoration: underline;
+    }
+}
+
+
 p {
   line-height: 1.2em;
 }

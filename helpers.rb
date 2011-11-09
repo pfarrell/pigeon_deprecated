@@ -33,8 +33,9 @@ def process!(email)
       find_links!(part.decoded, links)
     end
     links.each do |key, val|
-      puts key
-      save_page(key, email)
+      if Link.find_by_remote_url(key).nil?
+        save_page(key, email)
+      end
     end
   ensure
     email.mark(:unread)
