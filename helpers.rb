@@ -71,7 +71,7 @@ def save_page(link, email)
 end
 
 def get_links()
-  Link.all
+  Link.sort(:updated_at.desc).all
 end
 
 def partial(template, *args)
