@@ -85,8 +85,12 @@ def save_page(link, email)
   system("curl -s http://localhost:4568 > public/index.html")
 end
 
-def get_links()
-  Link.sort(:updated_at.desc).all
+def get_links(page, limit)
+  @prev = page - 1
+  @next = page + 1
+  page -= 1
+  offset = limit * page
+  Link.sort(:updated_at.desc).all(:limit=>limit, :offset=>offset)
 end
 
 def partial(template, *args)

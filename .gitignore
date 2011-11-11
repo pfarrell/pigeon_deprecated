@@ -2,3 +2,4 @@ config/config.rb
 reset.rb
 sites
 public
+.sass-cache

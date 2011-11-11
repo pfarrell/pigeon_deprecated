@@ -11,14 +11,21 @@ before do
   @time = Time.now
   @nav = :nav
   @title = 'Pigeon'
+  @limit = 5
 end
 
 get '/' do 
-  @links = get_links()
-  haml :index
+  redirect '/1'
 end
 
 get '/style.css' do
   content_type 'text/css', :charset => 'utf-8'
   scss :style
 end
+
+get '/:page' do
+  page = params[:page]
+  @links = get_links(page.to_i, @limit)
+  haml :index
+end
+
