@@ -85,6 +85,14 @@ def save_page(link, email)
   system("curl -s http://localhost:4568 > public/index.html")
 end
 
+def search_links(search)
+  links = Link.sort(:updated_at.desc).all(:title => {:$regex => /#{search}/i})
+  if links.nil?
+    links = 'Confounded!!!'
+  end
+  links
+end
+
 def get_links(page, limit)
   @prev = page - 1
   @next = page + 1

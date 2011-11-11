@@ -12,6 +12,8 @@ before do
   @nav = :nav
   @title = 'Pigeon'
   @limit = 5
+  @prev = 0
+  @next = ''
 end
 
 get '/' do 
@@ -21,6 +23,15 @@ end
 get '/style.css' do
   content_type 'text/css', :charset => 'utf-8'
   scss :style
+end
+
+post '/search' do
+  if params['search'] == ''
+    redirect '/'
+  else
+    @links = search_links(params['search'])
+  end
+  haml :index
 end
 
 get '/:page' do

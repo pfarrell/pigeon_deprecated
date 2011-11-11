@@ -14,6 +14,7 @@
       %span.page
         %a{:href=>"/#{@prev}"}
           <<
-    %span.page
-      %a{:href=>"/#{@next}"}
-        >>
+    -if @next != ''
+      %span.page
+        %a{:href=>"/#{@next}"}
+          >>
