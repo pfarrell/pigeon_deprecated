@@ -30,6 +30,12 @@ p {
   line-height: 1.2em;
 }
 
+.datesec {
+  padding-top:1em;
+  border-bottom: 1px dashed #000000;
+
+}
+
 .header {
   padding-right: .25em;
   background-color: #44973c;
@@ -45,7 +51,7 @@ p {
   }
 
 .main {
-  margin-top: .8em; }
+}
 
 .artist {
   font-size: 1.8em;

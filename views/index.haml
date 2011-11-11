@@ -1,6 +1,12 @@
 %div.container.main
+  -prevdate = ''
   -@links.each do |link|
+    -currdate = link.updated_at.strftime('%a %b %d, %Y')
+    -if currdate != prevdate
+      %div{:class=>"datesec"}
+        =currdate
     %div{:class=>"link"}
       %a{:href=>"#{link.local_url}", :title=>"#{link.remote_url}"}
         #{link.title}
+    -prevdate = currdate
   
