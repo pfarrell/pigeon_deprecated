@@ -7,20 +7,25 @@
     %meta{:name=>"apple-mobile-web-app-capable", :content=>"yes"}
     %meta{:name => "viewport", :content=>"width-device-width, initial-scale=1.0, userscalable=no"}
     %link{:href=>'/img/birdie.png', :rel=>'apple-touch-icon'}
+    %script{:type => "text/javascript", :src => "http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"}
+    %link{:rel => "stylesheet", :href => "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/base/jquery-ui.css", :type => "text/css"}
     %link{:rel => "stylesheet", :href => "http://fonts.googleapis.com/css?family=Cabin", :type => "text/css", :media => "all"}
     %link{:rel => "stylesheet", :href => "/css/1140.css", :type => "text/css", :media => "screen" }
     %link{:rel => "stylesheet", :href => "/#{@style}", :type => "text/css", :media => "screen" }
-
     %script{:type => "text/javascript", :src => "/js/css3-mediaqueries.js"}
     :javascript
-      function swiped() {
-        alert('swiped');
+      window.ontouchmove = function(e){
+        if(e.touches.length == 1){ // Only deal with one finger
+          var touch = e.touches[0]; // Get the information for finger #1
+          var node = touch.target; // Find the node the drag started from
+          $("last").html(
+            "clienty: " + touch.clientY + "<br/>" +
+            "screenY: " + touch.screenY + "<br/>" +
+            "pageY: "   + touch.pageY
+          );
+        }
       }
 
-      document.addEventListener('swiped', function(event) {
-        event.preventDefault();
-        var touch = event.touches[0];
-      }
   %body
     %div.header
       - partial @nav
