@@ -80,15 +80,9 @@ def save_page(link, email)
     file = 'index.html'
   end
 
-  get_thumb(link, dir)
-  link = Link.new(:title=>email.subject, :thumb_url=> "sites/" + dir + "/thumb.png", :remote_url=>link, :local_url=>"sites/" + dir + "/" + CGI.escapeHTML(file))
+  link = Link.new(:title=>email.subject, :thumb_url=> "sites/" + dir + "/favicon.ico", :remote_url=>link, :local_url=>"sites/" + dir + "/" + CGI.escapeHTML(file))
   link.save!
   system("curl -s http://localhost:4569 > public/index.html")
-end
-
-def get_thumb(link, dir) do
-  system("xvfb-run --server-args='-screen 0, 1024x768x24' ./CutyCapt --url=" + link + "--out=sites/" + dir + "/thumbfull.png")
-  system("convert -resize '48' sites/" + dir + "/thumbfull.png sites/" + dir + "/thumb.png")
 end
 
 def search_links(search)

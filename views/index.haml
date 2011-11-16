@@ -7,6 +7,8 @@
       %div.datesec
         =currdate
     %div.link
+      -if !link.thumb_url.nil?
+        %img{:src=>"#{link.thumb_url}"}
       %a{:href=>"#{link.local_url}", :title=>"#{link.remote_url}"}
         #{link.title}
     -prevdate = currdate
