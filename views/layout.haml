@@ -13,19 +13,6 @@
     %link{:rel => "stylesheet", :href => "/css/1140.css", :type => "text/css", :media => "screen" }
     %link{:rel => "stylesheet", :href => "/#{@style}", :type => "text/css", :media => "screen" }
     %script{:type => "text/javascript", :src => "/js/css3-mediaqueries.js"}
-    :javascript
-      window.ontouchmove = function(e){
-        if(e.touches.length == 1){ // Only deal with one finger
-          var touch = e.touches[0]; // Get the information for finger #1
-          var node = touch.target; // Find the node the drag started from
-          $("last").html(
-            "clienty: " + touch.clientY + "<br/>" +
-            "screenY: " + touch.screenY + "<br/>" +
-            "pageY: "   + touch.pageY
-          );
-        }
-      }
-
   %body
     %div.header
       - partial @nav
