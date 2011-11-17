@@ -7,6 +7,7 @@ class Link
   include MongoMapper::Document
   key :local_url, String
   key :remote_url, String
+  key :thumb_url, String
   key :title, String
   timestamps!
 end

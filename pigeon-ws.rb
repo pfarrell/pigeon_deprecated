@@ -1,4 +1,6 @@
 %w(yaml sinatra haml sass helpers).each { |dependency| require dependency }
+gem 'emk-sinatra-url-for'
+require 'sinatra/url_for'
 
 set :port, 4569
 set :haml =>{:format => :html5}
@@ -7,6 +9,7 @@ enable :sessions
 enable :methodoverride
 
 before do
+  request.env['PATH_INFO'] = '/' if request.env['PATH_INFO'].empty?
   @style = 'style.css'
   @time = Time.now
   @nav = :nav
@@ -16,8 +19,8 @@ before do
   @next = ''
 end
 
-get '/' do 
-  redirect '/1'
+get '/?' do 
+  redirect url_for('/1')
 end
 
 get '/style.css' do
@@ -25,16 +28,16 @@ get '/style.css' do
   scss :style
 end
 
-post '/search' do
+post '/search/?' do
   if params['search'] == ''
-    redirect '/'
+    redirect url_for('/1')
   else
     @links = search_links(params['search'])
   end
   haml :index
 end
 
-get '/:page' do
+get '/:page/?' do
   page = params[:page]
   @links = get_links(page.to_i, @limit)
   haml :index

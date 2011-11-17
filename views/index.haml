@@ -15,9 +15,9 @@
   %div.paging
     -if @prev > 0
       %span.page
-        %a{:href=>"/#{@prev}"}
+        %a{:href=>"#{url_for '/'}#{@prev}"}
           <<
     -if @next != ''
       %span.page
-        %a{:href=>"/#{@next}"}
+        %a{:href=>"#{url_for '/'}#{@next}"}
           >>
