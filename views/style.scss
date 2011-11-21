@@ -13,6 +13,11 @@ a {
   &:hover{ text-decoration: none;}
   }
   
+.external {
+  font-size:.6em;
+  &:hover{ text-decoration: underline;}
+}
+
 h1 {
   line-height: 1.2em;
   font-size: 1.5em;
@@ -42,6 +47,7 @@ p {
 
 .page {
   background-color:#444444;
+  color:#FFFFFF;
   padding-left:.4em;
   padding-right:.4em;
   margin-right:.6em;
@@ -49,10 +55,10 @@ p {
 }
 
 .page a {
-  &:link { text-decoration: none; color:#FFFFFF;}
-  &:visited { text-decoration: none; color:#FFFFFF;}
-  &:active { text-decoration: none; color:#FFFFFF;}
-  &:hover{ text-decoration: none; color:#FFFFFF;}
+  &:link { text-decoration: none;}
+  &:visited { text-decoration: none;}
+  &:active { text-decoration: none;}
+  &:hover{ text-decoration: none;;}
   }
 
 .header {

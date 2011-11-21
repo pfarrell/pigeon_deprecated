@@ -1,6 +1,18 @@
 %div.nav{:align=>"right"}
   %form{:action=>"search", :method=>"post"}
+    -if @prev > 1
+      %a{:href=>"#{url_for '/1'}"}
+        %span.page
+          <<
+    -if @prev > 0
+      %a{:href=>"#{url_for '/'}#{@prev}"}
+        %span.page
+          <
     %span
       %input{:type=>"search", :name=>"search", :results=>"5"}
     %span
       %input{:type=>"submit", :value=>"search"}
+    -if @next != ''
+      %a{:href=>"#{url_for '/'}#{@next}"}
+        %span.page
+          >
