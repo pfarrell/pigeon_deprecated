@@ -7,6 +7,7 @@ class User
   include MongoMapper::Document
   key :uid, String
   key :name, String
+  key :nickname, String
   key :username, String
   timestamps!
 end

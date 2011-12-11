@@ -1,4 +1,5 @@
 config/config.rb
+config/config.yml
 reset.rb
 sites
 public/sites
