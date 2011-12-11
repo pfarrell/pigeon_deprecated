@@ -71,19 +71,27 @@ end
 get '/auth/:provider/callback' do
   auth = request.env["omniauth.auth"]
   user = User.find_by_uid(auth["uid"])
-  if user.nil? || user.username.nil?
-    puts auth.inspect
+  if user.nil?
     user = User.new( :uid => auth["uid"], 
       :nickname => auth["user_info"]["nickname"], 
       :name => auth["user_info"]["provider"] )
       user.save!
     session[:user_id] = user.uid
-    redirect url_for('/edit')
+    redirect url_for('/u/user')
   else
     session[:user_id] = user.uid
-    redirect url_for('/u/' + user.username + '/1')
+    redirect url_for('/u/' + user.username + '/files')
   end
 end
+
+get '/auth/failure' do
+    redirect url_for('/')
+end
+
+["/u/user", "/u/:user"].each do |path|
+  get path do
+    @user = User.find_by_uid(@current_user.uid)
+    haml :usermod
 
 get '/auth/failure' do
     redirect url_for('/')
