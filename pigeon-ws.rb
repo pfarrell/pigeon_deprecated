@@ -1,4 +1,4 @@
-%w(yaml omniauth sinatra haml sass helpers).each { |dependency| require dependency }
+%w(yaml omniauth omniauth-facebook sinatra haml sass helpers).each { |dependency| require dependency }
 gem 'emk-sinatra-url-for'
 require 'sinatra/url_for'
 
@@ -57,9 +57,6 @@ get '/style.css' do
 end
 
 ["/sign_in/?", "/signin/?", "/log_in/?", "/login/?", "/sign_up/?", "/signup/?"].each do |path|
-  get path do
-    redirect url_for('/auth/twitter')
-  end
 end
 
 # either /log_out, /logout, /sign_out, or /signout will end the session and log the user out
@@ -93,7 +90,6 @@ end
 
 get '/u/:user' do
   @streams = Stream.where(:uid=>@current_user.uid).all
-  puts @streams.inspect
   if @streams.nil?
     @streams = []
   end

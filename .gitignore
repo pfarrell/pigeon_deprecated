@@ -4,3 +4,4 @@ sites
 public/sites
 public/index.html
 .sass-cache
+Gemfile.lock
