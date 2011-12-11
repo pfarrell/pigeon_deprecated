@@ -1,7 +1,7 @@
 %div.nav{:align=>"right"}
   %form{:action=>"search", :method=>"post"}
     -if @prev > 0
-      %a{:href=>"#{url_for '/'}#{@prev}"}
+      %a{:href=>"#{@prev}"}
         %span.page
           <
     %span
@@ -9,6 +9,6 @@
     %span
       %input{:type=>"submit", :value=>"?"}
     -if @next != ''
-      %a{:href=>"#{url_for '/'}#{@next}"}
+      %a{:href=>"#{@next}"}
         %span.page
           >

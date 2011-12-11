@@ -1,0 +1,28 @@
+%div.main.container
+  %div.row
+    %div.twelvecol
+      %form{:method=>'post', :action=>"'/'+ #{url_for("#{@current_user["username"]}")}"}
+        %p
+          %label{:for=>'username'} 
+            Username (will be the name in your urls)
+        %p
+          %input{:type=>'textbox', :name=>'username', :value=>"#{@current_user["username"]}"}
+        -if !@streams.nil?
+          %p
+            Streams
+          -@streams.each do |s|
+            %div{:style=>"margin-left:1em;"}
+              %a{:href=>"#{url_for('/u/' + @current_user.username + '/stream/' + s.name)}", :title=>"#{s.type}"}
+                #{s.name}
+        %p
+          %a{:href=>"#{url_for ('/u/' + @current_user.username + '/stream')}"}
+            Add Stream
+        %p
+          %input{:type=>'submit', :id=>'submit', :value=>'  Save  '}
+    %div.paging
+      %a{:href=>"#{url_for '/u/' + @current_user.username + '/1'}"}
+        %span.page
+          Stream
+
+
+

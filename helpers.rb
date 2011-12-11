@@ -3,8 +3,32 @@
 MongoMapper.connection = Mongo::Connection.new('localhost', 27017, :pool_size => 5, :timout => 5);
 MongoMapper.database = 'pigeon'
 
+class User 
+  include MongoMapper::Document
+  key :uid, String
+  key :name, String
+  key :username, String
+  timestamps!
+end
+
+class Credentials
+  include MongoMapper::Document
+  key :username, String
+  key :password, String
+end
+
+class Stream
+  include MongoMapper::Document
+  key :uid, String
+  key :name, String
+  key :type, String
+  key :credentials, Credentials
+  timestamps!
+end
+
 class Link
   include MongoMapper::Document
+  key :uid, String
   key :local_url, String
   key :remote_url, String
   key :thumb_url, String
@@ -25,17 +49,19 @@ def mkdir!(directory)
   end
 end
 
-def process!(email)
+def process!(user, email)
   begin
     links = {}
-    find_links!(email.body.decoded, links)
-    find_links!(email.body.decoded, links)
+
+    find_links(email.body.decoded, links)
+    
     email.body.parts.each do |part|
-      find_links!(part.decoded, links)
+      find_links(part.decoded, links)
     end
+    
     links.each do |key, val|
       if Link.find_by_remote_url(key).nil?
-        save_page(key, email)
+        save_page(user, key, email)
       end
     end
   ensure
@@ -43,7 +69,7 @@ def process!(email)
   end
 end
 
-def find_links!(part, links)
+def find_links(part, links)
   arr = part.split(/\s+/).find_all { |u| u =~ /^https?:/ }
   arr.each do |entry|
     if /www\.w3\.org/.match(entry).nil? \
@@ -54,7 +80,7 @@ def find_links!(part, links)
   end
 end
 
-def save_page(link, email) 
+def save_page(user, link, email) 
   mkdir!("public/sites")
   dir = String.random_alphanumeric()
   uri = URI.parse(link)
@@ -68,7 +94,7 @@ def save_page(link, email)
     file = file + '.html'
   end
 
-  system("wget -qnd -pHEKk --random-wait -P public/sites/" + dir + " " + link)
+  system("wget -qnd -pHEKk -nc --random-wait -P public/sites/" + dir + " " + link)
 
   Dir.foreach("public/sites/" + dir) do |entry|
     if File.fnmatch?(file + '*html', entry) 
@@ -81,25 +107,29 @@ def save_page(link, email)
     file = 'index.html'
   end
 
-  link = Link.new(:title=>email.subject, :thumb_url=> "sites/" + dir + "/favicon.ico", :remote_url=>link, :local_url=>"sites/" + dir + "/" + CGI.escapeHTML(file))
+  link = Link.new(:uid=>user.uid, :title=>email.subject, :thumb_url=> "sites/" + dir + "/favicon.ico", :remote_url=>link, :local_url=>"sites/" + dir + "/" + CGI.escapeHTML(file))
   link.save!
   system("curl -s http://localhost:4569 > public/index.html")
 end
 
-def search_links(search)
-  links = Link.sort(:updated_at.desc).all(:title => {:$regex => /#{search}/i})
+def search_links(user, search)
+  links = Link.where(:uid=>user.uid).sort(:updated_at.desc).all(:title => {:$regex => /#{search}/i})
   if links.nil?
     links = 'Confounded!!!'
   end
   links
 end
 
-def get_links(page, limit)
+def get_links(user, page, limit)
   @prev = page - 1
   @next = page + 1
   page -= 1
   offset = limit * page
-  Link.sort(:updated_at.desc).all(:limit=>limit, :offset=>offset)
+  Link.where(:uid=>user.uid).sort(:updated_at.desc).all(:limit=>limit, :offset=>offset)
+end
+
+def get_user(username) 
+  User.find_by_username(username)
 end
 
 def partial(template, *args)

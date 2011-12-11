@@ -1,0 +1,41 @@
+%div.main.container
+  %div.row
+    %div.twelvecol
+      %form{:method=>'post', :action=>"#{url_for('/u/' + @current_user.username + '/stream')}"}
+        %input{:type=>'hidden', :name=>'uid', :value=>"#{@current_user.uid}"}
+        -if !@stream.nil?
+          %input{:type=>'hidden', :name=>'streamid', :value=>"#{@stream._id}"}
+        %p
+          %label{:for=>'name'}
+            Name                                                       
+        %p
+          %input{:type=>'textbox', :name=>'name', :value=>"#{@stream.nil? ? '' : @stream.name}"}
+        %p
+          %label{:for=>'type'} 
+            Type
+        %p
+          %select{:name=>'type'}
+            %option{:value=>"gmail"}
+              Gmail
+            %option{:value=>"twitter"}
+              Twitter
+            %option{:value=>"facebook"}
+              Facebook
+            %option{:value=>"rss"}
+              RSS
+        %p
+          %label{:for=>'username'} 
+            Username
+        %p
+          %input{:type=>"textbox", :name=>"username", :value=>"#{@stream.nil? ? '' : @stream.credential.username}"}
+        %p
+          %label{:for=>'password'} 
+            Password
+        %p
+          %input{:type=>"password", :name=>"password"}
+        %p
+          %input{:type=>'submit', :id=>'submit', :value=>'  Save  '}
+
+
+
+  

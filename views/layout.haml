@@ -16,3 +16,24 @@
     %div.header
       - partial @nav
     =yield
+    %div.footer
+      %div.paging
+        -if @prev > 1
+          %a{:href=>"1"}
+            %span.page
+              <<
+        -if @prev > 0
+          %a{:href=>"#{@prev}"}
+            %span.page
+              <
+        -if @next != ''
+          %a{:href=>"#{@next}"}
+            %span.page
+              >
+        -if !@current_user.nil?
+          %a{:href=>"#{'/u/' + @current_user["username"]}"}
+            %span.page
+              Account
+          %a{:href=>"#{url_for '/logout'}"}
+            %span.page
+              Logout

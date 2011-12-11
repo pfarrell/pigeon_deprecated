@@ -1,29 +1,6 @@
 %div.container.main
-  %div#last
-  -prevdate = ''
-  -@links.each do |link|
-    -currdate = link.updated_at.strftime('%a %b %d, %Y')
-    -if currdate != prevdate
-      %div.datesec
-        =currdate
-    %div.link
-      -if !link.thumb_url.nil?
-        %img{:src=>"#{link.thumb_url}"}
-      %a{:href=>"#{link.local_url}", :title=>"#{link.remote_url}"}
-        #{link.title} 
-      %a{:href=>"#{link.remote_url}", :title=>"original page", :class=>'external'}
-        (www)
-    -prevdate = currdate
-  %div.paging
-    -if @prev > 1
-      %a{:href=>"#{url_for '/1'}"}
-        %span.page
-          <<
-    -if @prev > 0
-      %a{:href=>"#{url_for '/'}#{@prev}"}
-        %span.page
-          <
-    -if @next != ''
-      %a{:href=>"#{url_for '/'}#{@next}"}
-        %span.page
-          >
+  %div
+    %p
+      Tame your stream
+    %p
+      %a.signin-fb{:href=>"#{url_for('/auth/facebook')}"}

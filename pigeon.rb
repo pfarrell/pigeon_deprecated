@@ -1,11 +1,20 @@
-%w(yaml gmail mongo_mapper ./helpers).each { |dependency| require dependency }
+%w(yaml gmail mongo_mapper helpers).each { |dependency| require dependency }
 
-yml = YAML::load(File.open('config/config.rb'))
-
-gmail = Gmail.new(yml['gmail']['username'], yml['gmail']['password']) do |gmail|
-  inbox = gmail.inbox
-  inbox.emails(:unread).each do |email|
-    process!(email)
-  end
+def do_gmail(user, credentials)
+	gmail = Gmail.new(credentials.username, credentials.password) do |gmail|
+	  inbox = gmail.inbox
+	  inbox.emails(:unread).each do |email|
+	    process!(user, email)
+	  end
+	end
 end
 
+User.all().each do |user|
+  puts user.inspect
+  Stream.where(:uid=>user.uid).all().each do |stream|
+    puts stream.inspect
+    if stream.type == 'gmail'
+      do_gmail(user, stream.credentials)
+    end
+  end
+end
