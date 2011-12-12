@@ -1,0 +1,14 @@
+%div.main.container
+  %div.row
+    %div.twelvecol
+      %form{:method=>'post', :action=>"/u/user"}
+        %p
+          %label{:for=>'username'} 
+            Username (will be the name in your urls)
+        %p
+          %input{:type=>'textbox', :name=>'username', :value=>"#{@current_user["username"]}"}
+        %p
+          %input{:type=>'submit', :id=>'submit', :value=>'  Save  '}
+
+
+

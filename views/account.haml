@@ -14,15 +14,17 @@
             %div{:style=>"margin-left:1em;"}
               %a{:href=>"#{url_for('/u/' + @current_user.username + '/stream/' + s.name)}", :title=>"#{s.type}"}
                 #{s.name}
-        %p
-          %a{:href=>"#{url_for('/u/' + @current_user.username + '/stream')}"}
-            Add Stream
+        -if !@current_user.username.nil?
+          %p
+            %a{:href=>"#{url_for('/u/' + @current_user.username + '/stream')}"}
+              Add Stream
         %p
           %input{:type=>'submit', :id=>'submit', :value=>'  Save  '}
-    %div.paging
-      %a{:href=>"#{url_for('/u/' + @current_user.username + '/1')}"}
-        %span.page
-          Stream
+    -if !@current_user.username.nil?
+      %div.paging
+        %a{:href=>"#{url_for('/u/' + @current_user.username + '/1')}"}
+          %span.page
+            Stream
 
 
 

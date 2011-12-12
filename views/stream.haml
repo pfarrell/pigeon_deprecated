@@ -27,7 +27,7 @@
           %label{:for=>'username'} 
             Username
         %p
-          %input{:type=>"textbox", :name=>"username", :value=>"#{@stream.nil? ? '' : @stream.credential.username}"}
+          %input{:type=>"textbox", :name=>"username", :value=>"#{@stream.nil? ? '' : @stream.credentials.username}"}
         %p
           %label{:for=>'password'} 
             Password

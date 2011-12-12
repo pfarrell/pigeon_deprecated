@@ -30,7 +30,7 @@
           %a{:href=>"#{@next}"}
             %span.page
               >
-        -if !@current_user.nil?
+        -if !@current_user.nil? && !@current_user.username.nil?
           %a{:href=>"#{'/u/' + @current_user["username"]}"}
             %span.page
               Account

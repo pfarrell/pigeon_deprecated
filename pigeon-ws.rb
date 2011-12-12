@@ -1,4 +1,4 @@
-%w(yaml omniauth omniauth-facebook sinatra haml sass helpers).each { |dependency| require dependency }
+%w(yaml omniauth sinatra haml sass helpers).each { |dependency| require dependency }
 gem 'emk-sinatra-url-for'
 require 'sinatra/url_for'
 
@@ -45,7 +45,7 @@ get '/' do
     haml :index
   elsif
     @current_user.username.nil?
-    redirect url_for('/edit')
+    redirect url_for('/u/user')
   else
     redirect url_for('/u/' + @current_user.username + '/1')
   end
@@ -72,15 +72,16 @@ get '/auth/:provider/callback' do
   auth = request.env["omniauth.auth"]
   user = User.find_by_uid(auth["uid"])
   if user.nil?
+    puts auth.inspect
     user = User.new( :uid => auth["uid"], 
       :nickname => auth["user_info"]["nickname"], 
-      :name => auth["user_info"]["provider"] )
+      :name => auth["user_info"]["provider"])
       user.save!
     session[:user_id] = user.uid
     redirect url_for('/u/user')
   else
     session[:user_id] = user.uid
-    redirect url_for('/u/' + user.username + '/files')
+    redirect url_for('/u/' + user.username)
   end
 end
 
@@ -88,11 +89,18 @@ get '/auth/failure' do
     redirect url_for('/')
 end
 
+get '/u/user' do
+  haml :new_account
+end
+
+post '/u/user' do
+  @current_user.username = params["username"]
+  @current_user.save
+  redirect url_for('/u/' + @current_user.username)
+end
+
 get '/u/:user' do
   @streams = Stream.where(:uid=>@current_user.uid).all
-  if @streams.nil?
-    @streams = []
-  end
   haml :account
 end
 
