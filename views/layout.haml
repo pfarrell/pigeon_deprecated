@@ -31,7 +31,7 @@
             %span.page
               >
         -if !@current_user.nil? && !@current_user.username.nil?
-          %a{:href=>"#{'/u/' + @current_user["username"]}"}
+          %a{:href=>"#{url_for('/u/' + @current_user["username"])}"}
             %span.page
               Account
           %a{:href=>"#{url_for '/logout'}"}
