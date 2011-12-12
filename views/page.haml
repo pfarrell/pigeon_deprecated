@@ -11,6 +11,6 @@
         %img{:src=>"#{link.thumb_url}"}
       %a{:href=>"#{url_for('/' + link.local_url)}", :title=>"#{link.remote_url}"}
         #{link.title} 
-      %a{:href=>"/#{link.remote_url}", :title=>"original page", :class=>'external'}
+      %a{:href=>"#{link.remote_url}", :title=>"original page", :class=>'external'}
         (www)
     -prevdate = currdate
