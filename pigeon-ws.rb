@@ -88,15 +88,6 @@ get '/auth/failure' do
     redirect url_for('/')
 end
 
-["/u/user", "/u/:user"].each do |path|
-  get path do
-    @user = User.find_by_uid(@current_user.uid)
-    haml :usermod
-
-get '/auth/failure' do
-    redirect url_for('/')
-end
-
 get '/u/:user' do
   @streams = Stream.where(:uid=>@current_user.uid).all
   if @streams.nil?
@@ -108,7 +99,7 @@ end
 post '/u/:user' do
   @current_user.username = params["username"]
   @current_user.save
-  redirect url_for('/edit')
+  redirect url_for('/u/' + @current_user.username)
 end
 
 get '/u/:user/stream' do
