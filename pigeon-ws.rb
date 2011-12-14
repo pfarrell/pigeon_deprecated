@@ -30,13 +30,16 @@ end
 
 before do
   request.env['PATH_INFO'] = '/' if request.env['PATH_INFO'].empty?
+  if !@error.nil?
+    @error = ''
+  end
   @style = 'style.css'
   @time = Time.now
   @nav = :nav
   @authed = current_user ? :authed : :unauthed
   @title = 'Pigeon'
   @limit = 5
-  @prev = 0
+  @prev = -1
   @next = ''
 end
 
@@ -45,9 +48,9 @@ get '/' do
     haml :index
   elsif
     @current_user.username.nil?
-    redirect url_for('/u/user')
+    redirect url_for('/user')
   else
-    redirect url_for('/u/' + @current_user.username + '/1')
+    redirect url_for('/u/' + @current_user.username + '/0')
   end
 end
 
@@ -78,7 +81,7 @@ get '/auth/:provider/callback' do
       :name => auth["user_info"]["provider"])
       user.save!
     session[:user_id] = user.uid
-    redirect url_for('/u/user')
+    redirect url_for('/user')
   else
     session[:user_id] = user.uid
     redirect url_for('/u/' + user.username)
@@ -86,40 +89,49 @@ get '/auth/:provider/callback' do
 end
 
 get '/auth/failure' do
-    redirect url_for('/')
+    redirect url_for('/u/')
 end
 
-get '/u/user' do
+get '/u/user/?' do
   haml :new_account
 end
 
-post '/u/user' do
+post '/u/user/?' do
   @current_user.username = params["username"]
   @current_user.save
   redirect url_for('/u/' + @current_user.username)
 end
 
 get '/u/:user' do
+  protected(params[:user])
   @streams = Stream.where(:uid=>@current_user.uid).all
   haml :account
 end
 
-post '/u/:user' do
+get '/u/:user/' do
+  redirect url_for('/u/' + params[:user] + '/0')
+end
+
+post '/u/:user/?' do
+  protected(params[:user])
   @current_user.username = params["username"]
   @current_user.save
   redirect url_for('/u/' + @current_user.username)
 end
 
 get '/u/:user/stream' do
+  protected(params[:user])
   haml :stream
 end
 
 get '/u/:user/stream/:name' do
+  protected(params[:user])
   @stream = Stream.find_by_name(params[:name])
   haml :stream
 end
 
 post '/u/:user/stream' do
+  protected(params[:user])
   if params[:streamid].nil?
     credentials = Credentials.new(:username=>params["username"], :password=>params["password"]) 
     credentials.save
@@ -137,14 +149,14 @@ end
 
 post '/u/:user/search' do
   if params['search'] == ''
-    redirect url_for('/u/' + params[:user] + '/1')
+    redirect url_for('/u/' + params[:user] + '/0')
   else
     @links = search_links(get_user(params[:user]), params['search'])
   end
   haml :index
 end
 
-get '/u/:user/:page' do
+get '/u/:user/:page/?' do
   @links = get_links(get_user(params[:user]), params[:page].to_i, @limit)
   haml :page
 end

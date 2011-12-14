@@ -1,7 +1,7 @@
 %div.main.container
   %div.row
     %div.twelvecol
-      %form{:method=>'post', :action=>"'/'+ #{url_for("#{@current_user["username"]}")}"}
+      %form{:method=>'post', :action=>"'/u/'+ #{url_for("#{@current_user["username"]}")}"}
         %p
           %label{:for=>'username'} 
             Username (will be the name in your urls)
@@ -22,7 +22,7 @@
           %input{:type=>'submit', :id=>'submit', :value=>'  Save  '}
     -if !@current_user.username.nil?
       %div.paging
-        %a{:href=>"#{url_for('/u/' + @current_user.username + '/1')}"}
+        %a{:href=>"#{url_for('/u/' + @current_user.username + '/0')}"}
           %span.page
             Stream
 

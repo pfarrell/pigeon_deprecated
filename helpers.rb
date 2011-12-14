@@ -125,8 +125,9 @@ end
 def get_links(user, page, limit)
   @prev = page - 1
   @next = page + 1
-  page -= 1
+  #page -= 1
   offset = limit * page
+  puts page.to_s + ':' + limit.to_s + ':' + offset.to_s
   Link.where(:uid=>user.uid).sort(:updated_at.desc).all(:limit=>limit, :offset=>offset)
 end
 

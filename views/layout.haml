@@ -15,14 +15,18 @@
   %body
     %div.header
       - partial @nav
+    -if @error.nil? && @error != ''
+      %div.error
+        %span
+          =@error
     =yield
     %div.footer
       %div.paging
-        -if @prev > 1
+        -if @prev > 0
           %a{:href=>"1"}
             %span.page
               <<
-        -if @prev > 0
+        -if @prev > -1
           %a{:href=>"#{@prev}"}
             %span.page
               <
