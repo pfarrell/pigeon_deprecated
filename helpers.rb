@@ -51,6 +51,16 @@ def mkdir!(directory)
   end
 end
 
+def process_part(part, links) 
+  if part.multipart?
+    part.part.each do |p|
+      process(p, links)
+    end
+  else
+    find_links(part.decoded, links)
+  end
+end
+
 def process!(user, email)
   begin
     links = {}
@@ -58,7 +68,7 @@ def process!(user, email)
     find_links(email.body.decoded, links)
     
     email.body.parts.each do |part|
-      find_links(part.decoded, links)
+      process_part(part, links)
     end
     
     links.each do |key, val|
