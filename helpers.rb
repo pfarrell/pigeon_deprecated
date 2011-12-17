@@ -25,6 +25,7 @@ class Stream
   key :name, String
   key :type, String
   key :credentials, Credentials
+  key :signal, Boolean
   timestamps!
 end
 
@@ -35,6 +36,7 @@ class Link
   key :remote_url, String
   key :thumb_url, String
   key :title, String
+  key :signal, Boolean
   timestamps!
 end
 
@@ -51,38 +53,44 @@ def mkdir!(directory)
   end
 end
 
-def process_part(part, links) 
+def process_part(part) 
+  links = Hash.new
   if part.multipart?
     part.part.each do |p|
-      process(p, links)
+      process_part(p).each do |key, vall|
+        links[key] = vall
+      end
     end
   else
-    find_links(part.decoded, links)
+    find_links(part.decoded).each do |key, val|
+      links[key] = val
+    end
   end
+
+  links
 end
 
-def process!(user, email)
+def extract_links(email)
+  links = Hash.new
   begin
-    links = {}
-
-    find_links(email.body.decoded, links)
-    
-    email.body.parts.each do |part|
-      process_part(part, links)
+    find_links(email.body.decoded).each do |key, val|
+      links[key] = val
     end
     
-    links.each do |key, val|
-      if Link.find_by_remote_url(key).nil?
-        save_page(user, key, email)
+    email.body.parts.each do |part|
+      process_part(part).each do |key, val|
+        links[key] = val
       end
     end
   ensure
-    #email.mark(:unread)
+    email.mark(:unread)
   end
+  links
 end
 
-def find_links(part, links)
-  arr = part.split(/\s+/).find_all { |u| u =~ /^https?:/ }
+def find_links(text)
+  links = Hash.new
+  arr = text.split(/\s+/).find_all { |u| u =~ /^https?:/ }
   arr.each do |entry|
     if /www\.w3\.org/.match(entry).nil? \
       and /schemas\.microsoft/.match(entry).nil? \
@@ -90,6 +98,8 @@ def find_links(part, links)
       links[entry] = entry
     end
   end
+
+  links
 end
 
 def save_page(user, link, email) 
@@ -137,7 +147,6 @@ def get_links(user, page, limit)
   @next = page + 1
   #page -= 1
   offset = limit * page
-  puts page.to_s + ':' + limit.to_s + ':' + offset.to_s
   Link.where(:uid=>user.uid).sort(:updated_at.desc).all(:limit=>limit, :offset=>offset)
 end
 

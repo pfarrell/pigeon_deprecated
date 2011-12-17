@@ -1,20 +1,16 @@
 %w(yaml gmail mongo_mapper helpers).each { |dependency| require dependency }
 
-def process(part, links) 
-  if part.multipart?
-    part.part.each do |p|
-      process(p, links)
-    end
-  else
-    find_links(part.decoded, links)
-  end
-end
-
 def do_gmail(user, credentials)
 	gmail = Gmail.new(credentials.username, credentials.password) do |gmail|
+    puts 'inbox'
 	  inbox = gmail.inbox
+    puts 'each'
 	  inbox.emails(:unread).each do |email|
-	    process!(user, email)
+	    extract_links(email).each do |key, val|
+       if Link.find_by_remote_url(key).nil?
+          save_page(user, key, email)
+        end
+      end
 	  end
 	end
 end
