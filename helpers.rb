@@ -130,7 +130,7 @@ def save_page(user, link, email)
     file = file + '.html'
   end
 
-  system("wget -qnd -pHEKk -nc --random-wait -P public/sites/" + dir + " " + link)
+  system("wget -qnd -pHEKk -nc --random-wait --timeout=60 -P public/sites/" + dir + " " + link)
 
   Dir.foreach("public/sites/" + dir) do |entry|
     if File.fnmatch?(file + '*html', entry) 

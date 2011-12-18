@@ -43,7 +43,7 @@ before do
   @next = ''
 end
 
-get '/?' do 
+get '/' do 
   if @current_user.nil?
     haml :index
   elsif
