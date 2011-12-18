@@ -1,5 +1,6 @@
 %div.nav{:align=>"right"}
-  %form{:action=>"search", :method=>"post"}
+-if @next != ''
+  %form{:action=>"#{url_for('/u/' + params["user"] + '/search')}", :method=>"post"}
     -if @prev > -1
       %a{:href=>"#{@prev}"}
         %span.page
@@ -8,7 +9,17 @@
       %input{:type=>"search", :name=>"search", :results=>"5"}
     %span
       %input{:type=>"submit", :value=>"?"}
-    -if @next != ''
       %a{:href=>"#{@next}"}
         %span.page
           >
+-elsif !@search.nil?
+  %form{:action=>"#{url_for('/u/' + params["user"] + '/search')}", :method=>"post"}
+    %a{:href=>"#{url_for('/u/' + params["user"] + '/')}"}
+      %span.page
+        <
+    %span
+      %input{:type=>"search", :name=>"search", :results=>"5"}
+    %span
+      %input{:type=>"submit", :value=>"?"}
+
+

@@ -75,7 +75,6 @@ get '/auth/:provider/callback' do
   auth = request.env["omniauth.auth"]
   user = User.find_by_uid(auth["uid"])
   if user.nil?
-    puts auth.inspect
     user = User.new( :uid => auth["uid"], 
       :nickname => auth["user_info"]["nickname"], 
       :name => auth["user_info"]["provider"])
@@ -153,7 +152,8 @@ post '/u/:user/search' do
   else
     @links = search_links(get_user(params[:user]), params['search'])
   end
-  haml :index
+  @search = params['search']
+  haml :page
 end
 
 get '/u/:user/:page/?' do

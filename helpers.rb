@@ -149,7 +149,7 @@ def save_page(user, link, email)
 end
 
 def search_links(user, search)
-  links = Link.where(:uid=>user.uid).sort(:updated_at.desc).all(:title => {:$regex => /#{search}/i})
+  links = Link.where(:uid=>user.uid).sort(:date.desc).all(:title => {:$regex => /#{search}/i})
   if links.nil?
     links = 'Confounded!!!'
   end
