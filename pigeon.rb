@@ -5,7 +5,11 @@ def do_gmail(user, credentials)
 	  gmail.inbox.emails(:unread).each do |email|
 	    extract_links(email).each do |key, val|
        if Link.find_by_remote_url(key).nil?
-          save_page(user, key, email)
+         begin
+           save_page(user, key, email)
+         rescue
+           email.mark(:unread)
+         end
         end
       end
 	  end
