@@ -2,7 +2,7 @@
   %div#last
   -prevdate = ''
   -@links.each do |link|
-    -currdate = link.updated_at.strftime('%a %b %d, %Y')
+    -currdate = link.date.strftime('%a %b %d, %Y')
     -if currdate != prevdate
       %div.datesec
         =currdate

@@ -37,6 +37,7 @@ class Link
   key :thumb_url, String
   key :title, String
   key :signal, Boolean
+  key :date, DateTime
   timestamps!
 end
 
@@ -102,10 +103,23 @@ def find_links(text)
   links
 end
 
+def random_dir(base, size=16)
+  if base.nil? || base == ''
+    base = '.'
+  end
+  
+  dir = String.random_alphanumeric(size)
+  while test ?d, base + '/' + dir
+    dir = String.random_alphanumeric(size)
+  end
+  base + '/' + dir
+end
+
 def save_page(user, link, email) 
   mkdir!("public/sites")
-  dir = String.random_alphanumeric()
   uri = URI.parse(link)
+  dir = uri.host
+
   file = link.split('/').last
 
   if link.match(/\/$/)
@@ -129,7 +143,7 @@ def save_page(user, link, email)
     file = 'index.html'
   end
 
-  link = Link.new(:uid=>user.uid, :title=>email.subject, :thumb_url=> "sites/" + dir + "/favicon.ico", :remote_url=>link, :local_url=>"sites/" + dir + "/" + CGI.escapeHTML(file))
+  link = Link.new(:uid=>user.uid, :title=>email.subject, :date=>email.date, :thumb_url=> "sites/" + dir + "/favicon.ico", :remote_url=>link, :local_url=>"sites/" + dir + "/" + CGI.escapeHTML(file))
   link.save!
   system("curl -s http://localhost:4569 > public/index.html")
 end
@@ -147,7 +161,7 @@ def get_links(user, page, limit)
   @next = page + 1
   #page -= 1
   offset = limit * page
-  Link.where(:uid=>user.uid).sort(:updated_at.desc).all(:limit=>limit, :offset=>offset)
+  Link.where(:uid=>user.uid).sort(:date.desc).all(:limit=>limit, :offset=>offset)
 end
 
 def get_user(username) 
