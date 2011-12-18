@@ -1,6 +1,6 @@
 %div.nav{:align=>"right"}
   %form{:action=>"search", :method=>"post"}
-    -if @prev > 0
+    -if @prev > -1
       %a{:href=>"#{@prev}"}
         %span.page
           <
