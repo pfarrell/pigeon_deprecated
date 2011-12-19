@@ -148,6 +148,14 @@ def save_page(user, link, email)
   system("curl -s http://localhost:4569 > public/index.html")
 end
 
+def search_all_links(search)
+  links = Link.sort(:date.desc).all(:title => {:$regex => /#{search}/i})
+  if links.nil?
+    links = 'Confounded!!!'
+  end
+  links
+end
+
 def search_links(user, search)
   links = Link.where(:uid=>user.uid).sort(:date.desc).all(:title => {:$regex => /#{search}/i})
   if links.nil?

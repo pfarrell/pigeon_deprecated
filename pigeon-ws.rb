@@ -91,6 +91,20 @@ get '/auth/failure' do
     redirect url_for('/u/')
 end
 
+get 'search' do
+  redirect url_for('/')
+end
+
+post '/search' do
+  if params['search'] == ''
+    redirect url_for('/')
+  else
+    @links = search_all_links(params['search'])
+  end
+  @search = params['search']
+  haml :page
+end
+
 get '/u/user/?' do
   haml :new_account
 end
