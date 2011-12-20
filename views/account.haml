@@ -7,19 +7,14 @@
             Username (will be the name in your urls)
         %p
           %input{:type=>'textbox', :name=>'username', :value=>"#{@current_user["username"]}"}
-        -if !@streams.nil?
-          %p
-            Streams
-          -@streams.each do |s|
-            %div{:style=>"margin-left:1em;"}
-              %a{:href=>"#{url_for('/u/' + @current_user.username + '/stream/' + s.name)}", :title=>"#{s.type}"}
-                #{s.name}
-        -if !@current_user.username.nil?
-          %p
-            %a{:href=>"#{url_for('/u/' + @current_user.username + '/stream')}"}
-              Add Stream
         %p
-          %input{:type=>'submit', :id=>'submit', :value=>'  Save  '}
+          %a{:href=>"#{url_for('/auth/facebook')}"}
+            FaceBook
+        %p
+          %a{:href=>"#{url_for('/auth/twitter')}"}
+            Twitter
+
+
     -if !@current_user.username.nil?
       %div.paging
         %a{:href=>"#{url_for('/u/' + @current_user.username + '/0')}"}
