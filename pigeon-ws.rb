@@ -1,4 +1,4 @@
-%w(yaml omniauth omniauth-facebook sinatra haml sass helpers json).each { |dependency| require dependency }
+%w(yaml omniauth omniauth-facebook omniauth-twitter sinatra haml sass helpers).each { |dependency| require dependency }
 gem 'emk-sinatra-url-for'
 require 'sinatra/url_for'
 
@@ -12,7 +12,10 @@ $yml = YAML.load_file 'config/config.yml'
 
 use Rack::Session::Cookie
 use OmniAuth::Builder do
+puts $yml["twitter"]["api_key"]
+puts $yml["twitter"]["secret_key"]
     provider :facebook, $yml["facebook"]["app_id"], $yml["facebook"]["app_secret"], {:client_options => {:ssl => {:ca_path => '/etc/ssl/certs'}}}
+    provider :twitter, $yml["twitter"]["api_key"], $yml["twitter"]["secret_key"]
 end
 
 helpers do
@@ -72,18 +75,29 @@ end
 
 get '/auth/:provider/callback' do
   auth = request.env["omniauth.auth"]
-  user = User.find_by_uid(auth["uid"])
-  if user.nil?
-    user = User.new( :uid => auth["uid"], 
-      :nickname => auth["info"]["nickname"], 
-      :name => auth["provider"])
-      user.save!
-    session[:user_id] = user.uid
-    redirect url_for('/u/user')
+  if @current_user.nil?
+    user = User.find_by_uid(auth["uid"])
+    if user.nil?
+      user = User.new( :uid => auth["uid"], 
+        :nickname => auth["info"]["nickname"], 
+        :name => auth["provider"])
+        user.save!
+      session[:user_id] = user.uid
+      redirect url_for('/u/user')
+    else
+      session[:user_id] = user.uid
+    end
   else
-    session[:user_id] = user.uid
-    redirect url_for('/u/' + user.username)
+    user = @current_user
   end
+
+  stream = Stream.find_by_token(auth["credentials"]["token"])
+  if stream.nil?
+    stream = Stream.new(:uid=>user.uid, :name=>auth["provider"], :type=>auth["provider"], :token=>auth["credentials"]["token"])
+    stream.save!
+  end
+
+  redirect url_for('/u/' + user.username)
 end
 
 get '/auth/failure' do
