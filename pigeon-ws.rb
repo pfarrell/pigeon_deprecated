@@ -1,4 +1,4 @@
-%w(yaml omniauth omniauth-facebook omniauth-twitter sinatra haml sass helpers).each { |dependency| require dependency }
+%w(yaml omniauth omniauth-facebook omniauth-twitter omniauth-google sinatra haml sass helpers).each { |dependency| require dependency }
 gem 'emk-sinatra-url-for'
 require 'sinatra/url_for'
 
@@ -16,6 +16,8 @@ puts $yml["twitter"]["api_key"]
 puts $yml["twitter"]["secret_key"]
     provider :facebook, $yml["facebook"]["app_id"], $yml["facebook"]["app_secret"], {:client_options => {:ssl => {:ca_path => '/etc/ssl/certs'}}}
     provider :twitter, $yml["twitter"]["api_key"], $yml["twitter"]["secret_key"]
+    provider :google, $yml["google"]["key"], $yml["google"]["secret"]
+
 end
 
 helpers do
