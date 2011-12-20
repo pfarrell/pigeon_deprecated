@@ -1,13 +1,17 @@
 source "http://rubygems.org"
 
 gem "sinatra"
-gem "mongo_mapper" 
+gem "mongo_mapper"
 gem "haml"
 gem "sass"
 gem "json"
 gem "shotgun"
 gem "pony"
 gem "ruby-gmail"
-gem "omniauth", "0.2.6"
-gem "i18n", "~>0.5.0"
+gem "omniauth"
+gem "omniauth-facebook"
+gem "bson_ext"
+gem "i18n"
 gem "mime"
+
+

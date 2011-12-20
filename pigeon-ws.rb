@@ -1,4 +1,4 @@
-%w(yaml omniauth sinatra haml sass helpers).each { |dependency| require dependency }
+%w(yaml omniauth omniauth-facebook sinatra haml sass helpers).each { |dependency| require dependency }
 gem 'emk-sinatra-url-for'
 require 'sinatra/url_for'
 
@@ -46,8 +46,7 @@ end
 get '/' do 
   if @current_user.nil?
     haml :index
-  elsif
-    @current_user.username.nil?
+  elsif @current_user.username.nil?
     redirect url_for('/user')
   else
     redirect url_for('/u/' + @current_user.username + '/0')
@@ -76,11 +75,11 @@ get '/auth/:provider/callback' do
   user = User.find_by_uid(auth["uid"])
   if user.nil?
     user = User.new( :uid => auth["uid"], 
-      :nickname => auth["user_info"]["nickname"], 
-      :name => auth["user_info"]["provider"])
+      :nickname => auth["info"]["nickname"], 
+      :name => auth["provider"])
       user.save!
     session[:user_id] = user.uid
-    redirect url_for('/user')
+    redirect url_for('/u/user')
   else
     session[:user_id] = user.uid
     redirect url_for('/u/' + user.username)
