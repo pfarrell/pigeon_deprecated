@@ -13,8 +13,9 @@
         %p
           %a{:href=>"#{url_for('/auth/twitter')}"}
             Twitter
-
-
+        %p
+          %a{:href=>"#{url_for('/auth/google_oauth2')}"}
+            Google
     -if !@current_user.username.nil?
       %div.paging
         %a{:href=>"#{url_for('/u/' + @current_user.username + '/0')}"}

@@ -20,7 +20,7 @@ User.all().each do |user|
   puts user.inspect
   Stream.where(:uid=>user.uid).all().each do |stream|
     puts stream.inspect
-    if stream.type == 'gmail'
+    if stream.type == 'google_oauth2'
       do_gmail(user, stream.credentials)
     end
   end
