@@ -1,4 +1,4 @@
-%w(yaml omniauth omniauth-facebook omniauth-twitter omniauth-google sinatra haml sass helpers).each { |dependency| require dependency }
+%w(yaml omniauth omniauth-facebook omniauth-twitter omniauth-google-oauth2 sinatra haml sass helpers).each { |dependency| require dependency }
 gem 'emk-sinatra-url-for'
 require 'sinatra/url_for'
 
@@ -12,11 +12,9 @@ $yml = YAML.load_file 'config/config.yml'
 
 use Rack::Session::Cookie
 use OmniAuth::Builder do
-puts $yml["twitter"]["api_key"]
-puts $yml["twitter"]["secret_key"]
     provider :facebook, $yml["facebook"]["app_id"], $yml["facebook"]["app_secret"], {:client_options => {:ssl => {:ca_path => '/etc/ssl/certs'}}}
     provider :twitter, $yml["twitter"]["api_key"], $yml["twitter"]["secret_key"]
-    provider :google, $yml["google"]["key"], $yml["google"]["secret"]
+    provider :google_oauth2, $yml["google"]["key"], $yml["google"]["secret"]
 
 end
 
@@ -77,6 +75,8 @@ end
 
 get '/auth/:provider/callback' do
   auth = request.env["omniauth.auth"]
+  puts auth.inspect
+  puts auth["info"]["email"]
   if @current_user.nil?
     user = User.find_by_uid(auth["uid"])
     if user.nil?
