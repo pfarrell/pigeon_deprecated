@@ -38,6 +38,7 @@ class Link
   key :title, String
   key :signal, Boolean
   key :date, DateTime
+  key :rating, Integer
   timestamps!
 end
 

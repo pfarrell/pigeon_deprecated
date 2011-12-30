@@ -1,4 +1,4 @@
-%w(yaml omniauth omniauth-facebook sinatra haml sass helpers).each { |dependency| require dependency }
+%w(yaml omniauth omniauth-facebook sinatra haml sass helpers json).each { |dependency| require dependency }
 gem 'emk-sinatra-url-for'
 require 'sinatra/url_for'
 
@@ -131,6 +131,23 @@ post '/u/:user/?' do
   redirect url_for('/u/' + @current_user.username)
 end
 
+post '/u/:user/rating' do
+  content_type :json
+  rating = 3
+  link = Link.find_by_id(params[:widget_id])
+  if params[:fetch].nil?
+    matches = /star_([0-5])/.match params[:clicked_on]
+    link.rating = matches[1]
+    link.save
+  end
+
+  if !link.nil?  && !link.rating.nil?
+    rating = link.rating
+  end
+
+  {:rating=>rating}.to_json
+end
+
 get '/u/:user/stream' do
   protected(params[:user])
   haml :stream
@@ -171,6 +188,7 @@ end
 
 get '/u/:user/:page/?' do
   @links = get_links(get_user(params[:user]), params[:page].to_i, @limit)
+  @user = params[:user]
   haml :page
 end
 

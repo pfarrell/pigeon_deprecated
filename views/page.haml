@@ -7,10 +7,68 @@
       %div.datesec
         =currdate
     %div.link
-      -if !link.thumb_url.nil?
-        %img{:src=>"#{link.thumb_url}"}
       %a{:href=>"#{url_for('/' + link.local_url)}", :title=>"#{link.remote_url}"}
         #{link.title} 
       %a{:href=>"#{link.remote_url}", :title=>"original page", :class=>'external'}
         (www)
+      %div.rate_widget{:id=>"#{link.id}"}
+        %div.star_1.ratings_stars
+        %div.star_2.ratings_stars
+        %div.star_3.ratings_stars
+        %div.star_4.ratings_stars
+        %div.star_5.ratings_stars
     -prevdate = currdate
+  :javascript
+    $('.ratings_stars').hover(
+      function() {
+        $(this).prevAll().andSelf().addClass('ratings_over');
+        $(this).prevAll().andSelf().removeClass('ratings_vote');
+      },
+      function() {
+        $(this).prevAll().andSelf().removeClass('ratings_over');
+        set_votes($(this).parent());
+      }
+    );
+    $('.rate_widget').each(function(i) {
+      var widget = this;
+      var out_data = {
+        widget_id : $(widget).attr('id'),
+        fetch: 1
+      };
+      $.post(
+        "#{url_for('/u/' + @user + '/rating')}",
+        out_data,
+        function(INFO) {
+          $(widget).data('fsr', INFO);
+          set_votes(widget);
+        },
+        'json'
+      );
+    });
+    $('.ratings_stars').bind('click', function() {
+      var star = this;
+      var widget = $(this).parent();
+
+      var clicked_data = {
+        clicked_on : $(star).attr('class'),
+        widget_id : widget.attr('id')
+      };
+      $.post(
+        "#{url_for('/u/' + @user + '/rating')}",
+        clicked_data,
+        function(INFO) {
+          widget.data('fsr', INFO);
+          set_votes(widget);
+        },
+        'json'
+      );
+    });
+    function set_votes(widget){
+      var rating = $(widget).data('fsr').rating;
+      $(widget).find('.star_' + rating).prevAll().andSelf().addClass('ratings_vote');
+      $(widget).find('.star_' + rating).nextAll().removeClass('ratings_vote');
+    }
+
+
+  
+
