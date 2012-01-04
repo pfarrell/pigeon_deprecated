@@ -1,8 +1,8 @@
 %w(yaml gmail mongo_mapper helpers).each { |dependency| require dependency }
 
 def do_gmail(user, credentials)
-	gmail = Gmail.new(credentials.username, credentials.password) do |gmail|
-	  gmail.inbox.emails(:unread).each do |email|
+	gmail = Gmail.new(credentials.username, credentials.password)do |gmail|
+	  gmail.inbox.emails(:read).each do |email|
 	    extract_links(email).each do |key, val|
        if Link.find_by_remote_url(key).nil?
          begin
@@ -15,6 +15,7 @@ def do_gmail(user, credentials)
 	  end
 	end
 end
+
 
 User.all().each do |user|
   puts user.inspect

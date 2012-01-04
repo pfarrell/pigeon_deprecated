@@ -37,11 +37,11 @@ class Link
   key :thumb_url, String
   key :title, String
   key :signal, Boolean
+  key :short_dir, String
   key :date, DateTime
   key :rating, Integer
   timestamps!
 end
-
 
 def String.random_alphanumeric(size=16)
   s = ""
@@ -116,10 +116,18 @@ def random_dir(base, size=16)
   base + '/' + dir
 end
 
+def short_dir(size=5)
+  dir = String.random_alphanumeric(size)
+  while !Link.find_by_shortdir(dir).nil?
+    dir = String.random_alphanumeric(size)
+  end
+  dir
+end
+
 def save_page(user, link, email) 
   mkdir!("public/sites")
   uri = URI.parse(link)
-  dir = uri.host
+  dir = short_dir() 
 
   file = link.split('/').last
 
@@ -144,7 +152,7 @@ def save_page(user, link, email)
     file = 'index.html'
   end
 
-  link = Link.new(:uid=>user.uid, :title=>email.subject, :date=>email.date, :thumb_url=> "sites/" + dir + "/favicon.ico", :remote_url=>link, :local_url=>"sites/" + dir + "/" + CGI.escapeHTML(file))
+  link = Link.new(:uid=>user.uid, :title=>email.subject, :date=>email.date, :short_dir=>dir,  :thumb_url=> "sites/" + dir + "/favicon.ico", :remote_url=>link, :local_url=>"sites/" + dir + "/" + CGI.escapeHTML(file))
   link.save!
   system("curl -s http://localhost:4569 > public/index.html")
 end
