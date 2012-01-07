@@ -19,7 +19,7 @@ class Credentials
   key :password, String
 end
 
-class Stream
+class Streams
   include MongoMapper::Document
   key :uid, String
   key :name, String
@@ -37,6 +37,7 @@ class Link
   key :thumb_url, String
   key :title, String
   key :signal, Boolean
+  key :downloaded, Boolean
   key :short_dir, String
   key :date, DateTime
   key :rating, Integer
@@ -124,14 +125,14 @@ def short_dir(size=5)
   dir
 end
 
-def save_page(user, link, email) 
+def save_link(link) 
   mkdir!("public/sites")
-  uri = URI.parse(link)
+  uri = URI.parse(link.remote_url)
   dir = short_dir() 
 
-  file = link.split('/').last
+  file = link.remote_url.split('/').last
 
-  if link.match(/\/$/)
+  if link.remote_url.match(/\/$/)
     file = 'index.html'
   end
 
@@ -139,7 +140,7 @@ def save_page(user, link, email)
     file = file + '.html'
   end
 
-  system("wget -qnd -pHEKk -nc --random-wait --timeout=60 -P public/sites/" + dir + " " + link)
+  system("wget -qnd -pHEKk -nc --random-wait --timeout=60 -P public/sites/" + dir + " " + link.remote_url)
 
   Dir.foreach("public/sites/" + dir) do |entry|
     if File.fnmatch?(file + '*html', entry) 
@@ -152,8 +153,13 @@ def save_page(user, link, email)
     file = 'index.html'
   end
 
-  link = Link.new(:uid=>user.uid, :title=>email.subject, :date=>email.date, :short_dir=>dir,  :thumb_url=> "sites/" + dir + "/favicon.ico", :remote_url=>link, :local_url=>"sites/" + dir + "/" + CGI.escapeHTML(file))
+  link.short_dir  = dir
+  link.thumb_url  = "sites/" + dir + "/favicon.ico" 
+  link.remote_url = link 
+  link.local_url  = "sites/" + dir + "/" + CGI.escapeHTML(file)
+  link.downloaded = true
   link.save!
+
   system("curl -s http://localhost:4569 > public/index.html")
 end
 
@@ -183,6 +189,11 @@ end
 
 def get_user(username) 
   User.find_by_username(username)
+end
+
+def get_streams(user)
+  puts self.methods
+  Streams.where(:uid=>user.uid).all
 end
 
 def partial(template, *args)

@@ -1,12 +1,12 @@
-%w(yaml gmail mongo_mapper helpers).each { |dependency| require dependency }
+%w(yaml gmail mongo_mapper ./helpers).each { |dependency| require dependency }
 
 def do_gmail(user, credentials)
 	gmail = Gmail.new(credentials.username, credentials.password)do |gmail|
-	  gmail.inbox.emails(:read).each do |email|
+	  gmail.inbox.emails(:unread).each do |email|
 	    extract_links(email).each do |key, val|
        if Link.find_by_remote_url(key).nil?
          begin
-           save_page(user, key, email)
+           Link.new(:uid=>user.uid, :title=>email.subject, :date=>email.date, :downloaded=>false, :remote_url=>key).save
          rescue
            email.mark(:unread)
          end
@@ -14,13 +14,15 @@ def do_gmail(user, credentials)
       end
 	  end
 	end
+
+  Link.where(:downloaded=>false).each do |link|
+    save_link(link)
+  end
 end
 
 
 User.all().each do |user|
-  puts user.inspect
-  Stream.where(:uid=>user.uid).all().each do |stream|
-    puts stream.inspect
+  Streams.where(:uid=>user.uid).all().each do |stream|
     if stream.type == 'gmail'
       do_gmail(user, stream.credentials)
     end

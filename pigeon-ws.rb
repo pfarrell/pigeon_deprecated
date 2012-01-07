@@ -1,8 +1,8 @@
-%w(yaml omniauth omniauth-facebook sinatra haml sass helpers json).each { |dependency| require dependency }
+%w(yaml omniauth omniauth-facebook sinatra haml sass ./helpers json).each { |dependency| require dependency }
 gem 'emk-sinatra-url-for'
 require 'sinatra/url_for'
 
-set :port, 4569
+set :port, 4567
 set :haml =>{:format => :html5}
 
 enable :sessions
@@ -116,7 +116,8 @@ end
 
 get '/u/:user' do
   protected(params[:user])
-  @streams = Stream.where(:uid=>@current_user.uid).all
+  @streams = get_streams(@current_user)
+  #@streams = Stream.where(:uid=>@current_user.uid).all
   haml :account
 end
 

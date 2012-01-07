@@ -1,6 +1,7 @@
 source "http://rubygems.org"
 
-gem "sinatra"
+gem "rack", "1.3.5"
+gem "sinatra", "1.3.1"
 gem "mongo_mapper"
 gem "haml"
 gem "sass"
@@ -13,5 +14,6 @@ gem "omniauth-facebook"
 gem "bson_ext"
 gem "i18n"
 gem "mime"
+gem "emk-sinatra-url-for"
 
 
