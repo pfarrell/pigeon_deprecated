@@ -151,7 +151,7 @@ end
 
 get '/u/:user/link' do
   # need validation of bookmarklet post
-  puts params[:url]
+  puts 'hello world'
 end
 
 get '/u/:user/stream' do
