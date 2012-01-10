@@ -21,7 +21,7 @@
         %p
           %input{:type=>'submit', :id=>'submit', :value=>'  Save  '}
         %p
-          %a.page{:href=>"javascript:(function(){if(window.myBookmarklet!==undefined){myBookmarklet();}else{document.body.appendChild(document.createElement('script')).src='http://patf.net/js/pbmk/pigeon-mk.js?';}})();"}
+          %a.page{:href=>"javascript:(function(){if(window.myBookmarklet!==undefined){myBookmarklet();}else{document.body.appendChild(document.createElement('script')).src='http://localhost:4567/u/" + @current_user.username + "/marklet.js?';}})();"}
             bookmarklet
     -if !@current_user.username.nil?
       %div.paging

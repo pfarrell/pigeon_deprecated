@@ -149,6 +149,12 @@ post '/u/:user/rating' do
   {:rating=>rating}.to_json
 end
 
+get '/u/:user/marklet.js' do
+  content_type 'text/javascript'
+  @user=params[:user]
+  coffee :marklet, :layout=>false
+end
+
 get '/u/:user/link' do
   # need validation of bookmarklet post
   puts params[:url]
