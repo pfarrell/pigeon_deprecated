@@ -150,14 +150,16 @@ post '/u/:user/rating' do
 end
 
 get '/u/:user/marklet.js' do
-  content_type 'text/javascript'
   @user=params[:user]
-  coffee :marklet, :layout=>false
+  haml :marklet, :layout=>false
 end
 
 get '/u/:user/link' do
   # need validation of bookmarklet post
-  puts params[:url]
+  user = get_user(params[:user])
+  if Link.find(:uid=>user.uid, :remote_url=>params[:url]).nil?
+    Link.new(:uid=>user.uid, :title=>'TODO::populate with page title', :date=>Time.new, :downloaded=>false, :remote_url=>params[:url]).save
+  end
 end
 
 get '/u/:user/stream' do

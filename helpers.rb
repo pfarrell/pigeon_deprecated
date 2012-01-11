@@ -155,7 +155,6 @@ def save_link(link)
 
   link.short_dir  = dir
   link.thumb_url  = "sites/" + dir + "/favicon.ico" 
-  link.remote_url = link 
   link.local_url  = "sites/" + dir + "/" + CGI.escapeHTML(file)
   link.downloaded = true
   link.save!
@@ -192,7 +191,6 @@ def get_user(username)
 end
 
 def get_streams(user)
-  puts self.methods
   Streams.where(:uid=>user.uid).all
 end
 
