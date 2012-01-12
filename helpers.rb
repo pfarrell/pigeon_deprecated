@@ -127,6 +127,13 @@ end
 
 def wget_filename(filename)
   retval = filename.split('/').last.gsub(/#.*/, "")
+
+  #special case to handle test.html? which wget 
+  #downloads as test.html
+  if retval.match(/html\?$/)
+    retval = retval.gsub(/\?$/, "")
+  end
+
   if filename.match(/\/$/)
     retval = 'index.html'
   elsif filename.match(/\.html/) || filename.match(/pdf$/) || filename.match(/jp[e]?g$/) || filename.match(/gif$/)
@@ -138,13 +145,17 @@ def wget_filename(filename)
 end
 
 def save_link(link) 
-  mkdir!("public/sites")
-  uri = URI.parse(link.remote_url)
+  mkdir!("public/sites")e
+  begin
+    uri = URI.parse(link.remote_url)
+  rescue
+    return
+  end
   dir = short_dir() 
 
   file = wget_filename(link.remote_url)
 
-  out = system("wget -qnd -pHEKk -nc --random-wait --timeout=60 -P public/sites/" + dir + " " + link.remote_url)
+  out = system("wget -qnd -pHEKk -nc --no-check-certificate --random-wait --timeout=60 -P public/sites/" + dir + " " + link.remote_url)
 
   link.short_dir  = dir
   link.thumb_url  = "sites/" + dir + "/favicon.ico" 
