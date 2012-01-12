@@ -126,11 +126,11 @@ def short_dir(size=5)
 end
 
 def wget_filename(filename)
-  retval = filename.split('/').last
+  retval = filename.split('/').last.gsub(/#.*/, "")
   if filename.match(/\/$/)
     retval = 'index.html'
-  elsif filename.match(/pdf$/) || filename.match(/jp[e]?g$/) || filename.match(/gif$/)
-    retval = retval
+  elsif filename.match(/\.html/) || filename.match(/pdf$/) || filename.match(/jp[e]?g$/) || filename.match(/gif$/)
+    retval = CGI.escape(retval)
   else
     retval = CGI.escape(retval + '.html')
   end
@@ -142,9 +142,9 @@ def save_link(link)
   uri = URI.parse(link.remote_url)
   dir = short_dir() 
 
-  file = wget_filename(link.remote_url.split('/').last)
+  file = wget_filename(link.remote_url)
 
-  system("wget -qnd -pHEKk -nc --random-wait --timeout=60 -P public/sites/" + dir + " " + link.remote_url)
+  out = system("wget -qnd -pHEKk -nc --random-wait --timeout=60 -P public/sites/" + dir + " " + link.remote_url)
 
   link.short_dir  = dir
   link.thumb_url  = "sites/" + dir + "/favicon.ico" 
@@ -176,7 +176,7 @@ def get_links(user, page, limit)
   @next = page + 1
   #page -= 1
   offset = limit * page
-  Link.where(:uid=>user.uid).sort(:date.desc).all(:limit=>limit, :offset=>offset)
+  Link.where(:uid=>user.uid, :downloaded=>true).sort(:date.desc).all(:limit=>limit, :offset=>offset)
 end
 
 def get_user(username) 
