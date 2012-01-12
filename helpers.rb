@@ -134,7 +134,7 @@ def wget_filename(filename)
     retval = retval.gsub(/\?$/, "")
   end
 
-  if filename.match(/\/$/)
+  if filename.match(/\/$/) || filename.match(/\/\?$/)
     retval = 'index.html'
   elsif filename.match(/\.html/) || filename.match(/pdf$/) || filename.match(/jp[e]?g$/) || filename.match(/gif$/)
     retval = CGI.escape(retval)
@@ -145,7 +145,7 @@ def wget_filename(filename)
 end
 
 def save_link(link) 
-  mkdir!("public/sites")e
+  mkdir!("public/sites")
   begin
     uri = URI.parse(link.remote_url)
   rescue
