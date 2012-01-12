@@ -196,6 +196,7 @@ post '/u/:user/search' do
   else
     @links = search_links(get_user(params[:user]), params['search'])
   end
+  @user = params[:user]
   @search = params['search']
   haml :page
 end
