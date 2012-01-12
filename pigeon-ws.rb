@@ -158,7 +158,7 @@ get '/u/:user/link' do
   # need validation of bookmarklet post
   user = get_user(params[:user])
   if Link.find(:uid=>user.uid, :remote_url=>params[:url]).nil?
-    Link.new(:uid=>user.uid, :title=>'TODO::populate with page title', :date=>Time.new, :downloaded=>false, :remote_url=>params[:url]).save
+    Link.new(:uid=>user.uid, :title=>params[:title], :date=>Time.new, :downloaded=>false, :remote_url=>params[:url]).save
   end
 end
 
