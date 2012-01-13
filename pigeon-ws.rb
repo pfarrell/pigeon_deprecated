@@ -41,6 +41,7 @@ before do
   @limit = 5
   @prev = -1
   @next = ''
+  @host = $yml["host"]
 end
 
 get '/' do 
