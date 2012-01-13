@@ -1,7 +1,7 @@
 %div.main.container
   %div.row
     %div.twelvecol
-      %form{:method=>'post', :action=>"/u/user"}
+      %form{:method=>'post', :action=>"#{url_for('/u/user')}"}
         %p
           %label{:for=>'username'} 
             Username (will be the name in your urls)
