@@ -38,6 +38,7 @@ class Link
   key :title, String
   key :signal, Boolean
   key :downloaded, Boolean
+  key :errored, Boolean
   key :short_dir, String
   key :date, DateTime
   key :rating, Integer
@@ -145,11 +146,20 @@ def wget_filename(filename)
 end
 
 def save_link(link) 
+  if link.remote_url.nil? || link.remote_url == ""
+    link.errored = true
+    link.downloaded = true
+    link.save! 
+    return nil
+  end
   mkdir!("public/sites")
   begin
     uri = URI.parse(link.remote_url)
   rescue
-    return
+    link.errored = true
+    link.downloaded = true
+    link.save!
+    return nil
   end
   dir = short_dir() 
 
@@ -187,7 +197,7 @@ def get_links(user, page, limit)
   @next = page + 1
   #page -= 1
   offset = limit * page
-  Link.where(:uid=>user.uid, :downloaded=>true).sort(:date.desc).all(:limit=>limit, :offset=>offset)
+  Link.where(:uid=>user.uid, :downloaded=>true, :errored=>nil).sort(:date.desc).all(:limit=>limit, :offset=>offset)
 end
 
 def get_user(username) 

@@ -21,7 +21,7 @@ helpers do
   end
 
   def protected(name)
-    if @current_user.nil? || @current_user.username != name
+    if current_user.nil? || current_user.username != name
       @error = "Security violation"
       redirect url_for('/')
     end
@@ -101,6 +101,7 @@ post '/search' do
   else
     @links = search_all_links(params['search'])
   end
+  @user = ''
   @search = params['search']
   haml :page
 end
@@ -170,7 +171,7 @@ end
 
 get '/u/:user/stream/:name' do
   protected(params[:user])
-  @stream = Stream.find_by_name(params[:name])
+  @stream = Streams.find_by_name(params[:name])
   haml :stream
 end
 
