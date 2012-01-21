@@ -209,8 +209,8 @@ def get_links(user, page, limit)
 end
 
 def get_page_contents(link)
-  doc = Loofah.document(File.read("public/" + link.local_url))
   begin
+    doc = Loofah.document(File.read("public/" + link.local_url))
     doc.scrub!(:whitewash)
     link.content = doc.content
     link.processed = true
