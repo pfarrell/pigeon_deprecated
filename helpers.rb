@@ -1,4 +1,4 @@
-%w(cgi mail uri mongo_mapper).each { |dependency| require dependency }
+%w(cgi mail uri mongo_mapper loofah htmlentities).each { |dependency| require dependency }
 
 MongoMapper.connection = Mongo::Connection.new('localhost', 27017, :pool_size => 5, :timout => 5);
 MongoMapper.database = 'pigeon'
@@ -34,10 +34,12 @@ class Link
   key :uid, String
   key :local_url, String
   key :remote_url, String
+  key :content, String
   key :thumb_url, String
   key :title, String
   key :signal, Boolean
   key :downloaded, Boolean
+  key :processed, Boolean
   key :errored, Boolean
   key :short_dir, String
   key :date, DateTime
@@ -145,6 +147,12 @@ def wget_filename(filename)
   retval
 end
 
+def new_link(user, remote_url, title, date) 
+  if Link.find(:uid=>user.uid, :remote_url=>remote_url.nil?)
+    Link.new(:uid=>user.uid, :title=>title, :date=>date, :downloaded=>false, :processed=>false,  :remote_url=>remote_url).save!
+  end
+end
+
 def save_link(link) 
   if link.remote_url.nil? || link.remote_url == ""
     link.errored = true
@@ -198,6 +206,22 @@ def get_links(user, page, limit)
   #page -= 1
   offset = limit * page
   Link.where(:uid=>user.uid, :downloaded=>true, :errored=>nil).sort(:date.desc).all(:limit=>limit, :offset=>offset)
+end
+
+def get_page_contents(link)
+  doc = Loofah.document(File.read("public/" + link.local_url))
+  begin
+    doc.scrub!(:whitewash)
+    link.content = doc.content
+    link.processed = true
+    link.content = HTMLEntities.new.decode(doc.text).squeeze(" \t").strip
+    link.save!
+  rescue
+    link.content = nil
+    link.processed = false
+    link.errored = true
+    link.save!
+  end
 end
 
 def get_user(username) 

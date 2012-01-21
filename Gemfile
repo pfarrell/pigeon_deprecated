@@ -15,5 +15,6 @@ gem "bson_ext"
 gem "i18n"
 gem "mime"
 gem "emk-sinatra-url-for"
-
+gem "loofah"
+gem "htmlentities"
 
