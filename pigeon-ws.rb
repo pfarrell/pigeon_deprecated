@@ -158,9 +158,7 @@ end
 get '/u/:user/link' do
   # need validation of bookmarklet post
   user = get_user(params[:user])
-  if Link.find(:uid=>user.uid, :remote_url=>params[:url]).nil?
-    Link.new(:uid=>user.uid, :title=>params[:title], :date=>Time.new, :downloaded=>false, :remote_url=>params[:url]).save
-  end
+  new_link(user, params[:url].nil?, params[:title], Time.new)
 end
 
 get '/u/:user/stream' do

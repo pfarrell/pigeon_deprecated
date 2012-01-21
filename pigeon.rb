@@ -6,7 +6,7 @@ def do_gmail(user, credentials)
 	    extract_links(email).each do |key, val|
        if Link.find_by_remote_url(key).nil?
          begin
-           Link.new(:uid=>user.uid, :title=>email.subject, :date=>email.date, :downloaded=>false, :remote_url=>key).save
+           new_link(user, key, email.subject, email.date)
          rescue
            email.mark(:unread)
          end
@@ -15,8 +15,12 @@ def do_gmail(user, credentials)
 	  end
 	end
 
-  Link.where(:downloaded=>false).each do |link|
+  Link.where(:downloaded=>false, :errored=>nil).each do |link|
     save_link(link)
+  end
+
+  Link.where(:processed=>false, :errored=>nil).each do |link|
+    get_page_contents(link)
   end
 end
 
