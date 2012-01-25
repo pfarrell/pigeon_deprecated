@@ -15,7 +15,7 @@ def do_gmail(user, credentials)
 	  end
 	end
 
-  Link.where(:downloaded=>false, :errored=>nil).each do |link|
+  Link.where(:downloaded=>false).each do |link|
     save_link(link)
   end
 

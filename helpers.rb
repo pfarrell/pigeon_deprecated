@@ -148,27 +148,35 @@ def wget_filename(filename)
 end
 
 def new_link(user, remote_url, title, date) 
-  if Link.find(:uid=>user.uid, :remote_url=>remote_url.nil?)
-    Link.new(:uid=>user.uid, :title=>title, :date=>date, :downloaded=>false, :processed=>false,  :remote_url=>remote_url).save!
+  puts remote_url
+  if !Link.find(:uid=>user.uid, :remote_url=>remote_url)
+    link = Link.new(:uid=>user.uid, :title=>title, :date=>date, :downloaded=>false, :processed=>false, :errored=>false, :remote_url=>remote_url)
+    link.save!
+    puts 'saved'
   end
 end
 
 def save_link(link) 
+  puts link.remote_url
   if link.remote_url.nil? || link.remote_url == ""
+    puts 'blank remote_url'
     link.errored = true
     link.downloaded = true
     link.save! 
     return nil
   end
   mkdir!("public/sites")
-  begin
-    uri = URI.parse(link.remote_url)
-  rescue
-    link.errored = true
-    link.downloaded = true
-    link.save!
-    return nil
-  end
+  #begin
+  #  uri = URI.parse(_url)
+  #rescue
+  #  puts 'bad url'
+  #  begin
+  #    uri = 
+  #  link.errored = true
+  #  link.downloaded = true
+  #  link.save!
+  #  return nil
+  #end
   dir = short_dir() 
 
   file = wget_filename(link.remote_url)
@@ -205,7 +213,7 @@ def get_links(user, page, limit)
   @next = page + 1
   #page -= 1
   offset = limit * page
-  Link.where(:uid=>user.uid, :downloaded=>true, :errored=>nil).sort(:date.desc).all(:limit=>limit, :offset=>offset)
+  Link.where(:uid=>user.uid, :downloaded=>true).sort(:date.desc).all(:limit=>limit, :offset=>offset)
 end
 
 def get_page_contents(link)
