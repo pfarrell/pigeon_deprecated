@@ -7,7 +7,8 @@ def do_gmail(user, credentials)
        if Link.find_by_remote_url(key).nil?
          begin
            new_link(user, key, email.subject, email.date)
-         rescue
+         rescue => e
+           puts e.message
            email.mark(:unread)
          end
         end

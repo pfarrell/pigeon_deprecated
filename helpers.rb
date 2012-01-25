@@ -150,7 +150,7 @@ end
 def new_link(user, remote_url, title, date) 
   puts remote_url
   if !Link.find(:uid=>user.uid, :remote_url=>remote_url)
-    link = Link.new(:uid=>user.uid, :title=>title, :date=>date, :downloaded=>false, :processed=>false, :errored=>false, :remote_url=>remote_url)
+    link = Link.new(:uid=>user.uid, :title=>title, :date=>date, :downloaded=>false, :processed=>false, :remote_url=>remote_url)
     link.save!
     puts 'saved'
   end
@@ -159,9 +159,7 @@ end
 def save_link(link) 
   puts link.remote_url
   if link.remote_url.nil? || link.remote_url == ""
-    puts 'blank remote_url'
-    link.errored = true
-    link.downloaded = true
+    link.errored = 'save_link: blank url'
     link.save! 
     return nil
   end
@@ -224,10 +222,13 @@ def get_page_contents(link)
     link.processed = true
     link.content = HTMLEntities.new.decode(doc.text).squeeze(" \t").strip
     link.save!
-  rescue
-    link.content = nil
-    link.processed = false
-    link.errored = true
+  rescue => e
+    link.content = nil                                
+    if (!e.nil? && !e.message.nil?)
+      link.errored = 'get_page_contents: ' + e.message 
+    else
+      link.errored = 'get_page_contents: unknown error'
+    end
     link.save!
   end
 end
