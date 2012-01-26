@@ -1,4 +1,4 @@
-%w(cgi mail uri mongo_mapper loofah htmlentities).each { |dependency| require dependency }
+%w(cgi uri mongo_mapper loofah htmlentities).each { |dependency| require dependency }
 
 MongoMapper.connection = Mongo::Connection.new('localhost', 27017, :pool_size => 5, :timout => 5);
 MongoMapper.database = 'pigeon'
