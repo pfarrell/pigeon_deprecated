@@ -202,7 +202,7 @@ def get_links(user, page, limit)
   @next = page + 1
   #page -= 1
   offset = limit * page
-  Link.where(:uid=>user.uid, :downloaded=>true).sort(:date.desc).all(:limit=>limit, :offset=>offset)
+  Link.where(:uid=>user.uid, :downloaded=>true).sort(:date.desc, :created_at.desc).all(:limit=>limit, :offset=>offset)
 end
 
 def get_page_contents!(link)
