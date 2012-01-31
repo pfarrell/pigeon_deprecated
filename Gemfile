@@ -17,4 +17,4 @@ gem "mime"
 gem "emk-sinatra-url-for"
 gem "loofah"
 gem "htmlentities"
-
+gem "redis"

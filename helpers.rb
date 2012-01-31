@@ -1,4 +1,4 @@
-%w(cgi uri mongo_mapper loofah htmlentities).each { |dependency| require dependency }
+%w(cgi uri mongo_mapper loofah htmlentities json).each { |dependency| require dependency }
 
 MongoMapper.connection = Mongo::Connection.new('localhost', 27017, :pool_size => 5, :timout => 5);
 MongoMapper.database = 'pigeon'
@@ -147,34 +147,25 @@ def wget_filename(filename)
   retval
 end
 
-def new_link(user, remote_url, title, date) 
-  puts remote_url
-  if !Link.find(:uid=>user.uid, :remote_url=>remote_url)
-    link = Link.new(:uid=>user.uid, :title=>title, :date=>date, :downloaded=>false, :processed=>false, :remote_url=>remote_url)
-    link.save!
-    puts 'saved'
-  end
+def enqueue_link(redis, user, remote_url, title, date) 
+  link = {}
+  link[:uid] = user.uid
+  link[:remote_url] = remote_url
+  link[:title] = title
+  link[:date] = date
+  redis.rpush('incoming:links', link.to_json)
 end
 
-def save_link(link) 
+def get_page!(link) 
   puts link.remote_url
   if link.remote_url.nil? || link.remote_url == ""
     link.errored = 'save_link: blank url'
     link.save! 
     return nil
   end
+
   mkdir!("public/sites")
-  #begin
-  #  uri = URI.parse(_url)
-  #rescue
-  #  puts 'bad url'
-  #  begin
-  #    uri = 
-  #  link.errored = true
-  #  link.downloaded = true
-  #  link.save!
-  #  return nil
-  #end
+
   dir = short_dir() 
 
   file = wget_filename(link.remote_url)
@@ -186,8 +177,8 @@ def save_link(link)
   link.local_url  = "sites/" + dir + "/" + CGI.escapeHTML(file)
   link.downloaded = true
   link.save!
-
   #system("curl -s http://localhost:4569 > public/index.html")
+  link
 end
 
 def search_all_links(search)
@@ -214,7 +205,7 @@ def get_links(user, page, limit)
   Link.where(:uid=>user.uid, :downloaded=>true).sort(:date.desc).all(:limit=>limit, :offset=>offset)
 end
 
-def get_page_contents(link)
+def get_page_contents!(link)
   begin
     doc = Loofah.document(File.read("public/" + link.local_url))
     doc.scrub!(:whitewash)
@@ -231,6 +222,7 @@ def get_page_contents(link)
     end
     link.save!
   end
+  link
 end
 
 def get_user(username) 

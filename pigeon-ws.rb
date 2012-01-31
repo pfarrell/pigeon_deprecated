@@ -1,4 +1,4 @@
-%w(yaml omniauth omniauth-facebook sinatra haml sass ./helpers json).each { |dependency| require dependency }
+%w(yaml omniauth omniauth-facebook sinatra haml sass ./helpers json redis).each { |dependency| require dependency }
 gem 'emk-sinatra-url-for'
 require 'sinatra/url_for'
 
@@ -9,6 +9,7 @@ enable :sessions
 enable :methodoverride
 
 $yml = YAML.load_file 'config/config.yml'
+$redis = Redis.new
 
 use Rack::Session::Cookie
 use OmniAuth::Builder do
@@ -159,7 +160,7 @@ end
 get '/u/:user/link' do
   # need validation of bookmarklet post
   user = get_user(params[:user])
-  new_link(user, params[:url], params[:title], Time.new)
+  enqueue_link($redis, user, params[:url], params[:title], Time.new)
 end
 
 get '/u/:user/stream' do
