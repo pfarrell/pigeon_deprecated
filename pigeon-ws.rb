@@ -43,6 +43,7 @@ before do
   @prev = -1
   @next = ''
   @host = $yml["host"]
+  @types = %w(Gmail Twitter Facebook RSS)
 end
 
 get '/' do 
@@ -120,7 +121,7 @@ end
 get '/u/:user' do
   protected(params[:user])
   @streams = get_streams(@current_user)
-  #@streams = Stream.where(:uid=>@current_user.uid).all
+  #@streams = Streams.where(:uid=>@current_user.uid).all
   haml :account
 end
 
@@ -165,28 +166,36 @@ end
 
 get '/u/:user/stream' do
   protected(params[:user])
+  @url = 'none'
+  @cred = 'block`'
   haml :stream
 end
 
 get '/u/:user/stream/:name' do
   protected(params[:user])
   @stream = Streams.find_by_name(params[:name])
+  @url = @stream.type == 'rss' ? 'block': 'none'
+  @cred = @stream.type == 'rss' ? 'none': 'block'
   haml :stream
 end
 
 post '/u/:user/stream' do
   protected(params[:user])
   if params[:streamid].nil?
-    credentials = Credentials.new(:username=>params["username"], :password=>params["password"]) 
-    credentials.save
-    stream = Stream.new(:uid=>@current_user.uid, :name=>params["name"], :type=>params["type"], :credentials=>credentials)
+    if params[:type] == 'rss'
+      stream = Streams.new(:uid=>@current_user.uid, :name=>params["name"], :type=>params["type"], :url=>params["url"])
+    else
+      stream = Streams.new(:uid=>@current_user.uid, :name=>params["name"], :type=>params["type"], :username=>params["username"], :password=>params["password"])
+    end
     stream.save
   else
-    stream = Stream.find_by_id(params[:streamid])
+    stream = Streams.find_by_id(params[:streamid])
     stream.name = params[:name]
     stream.type = params[:type]
-    stream.credentials.username = params[:username]
-    stream.credentials.password = params[:password]
+    stream.username = params[:username]
+    stream.password = params[:password]
+    stream.url = params[:url]
+    stream.save
   end
   redirect url_for('/u/' + @current_user.username)
 end

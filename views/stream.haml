@@ -15,27 +15,42 @@
             Type
         %p
           %select{:name=>'type'}
-            %option{:value=>"gmail"}
-              Gmail
-            %option{:value=>"twitter"}
-              Twitter
-            %option{:value=>"facebook"}
-              Facebook
-            %option{:value=>"rss"}
-              RSS
-        %p
+            - for type in @types
+              %option{:value=>type}
+                =type
+        %p.cred{:style=>"display:#{@cred}"}
           %label{:for=>'username'} 
             Username
-        %p
-          %input{:type=>"textbox", :name=>"username", :value=>"#{@stream.nil? ? '' : @stream.credentials.username}"}
-        %p
+        %p.cred{:style=>"display:#{@cred}"}
+          %input{:type=>"textbox", :name=>"username", :value=>"#{@stream.nil? ? '' : @stream.username}"}
+        %p.cred{:style=>"display:#{@cred}"}
           %label{:for=>'password'} 
             Password
-        %p
+        %p.cred{:style=>"display:#{@cred}"}
           %input{:type=>"password", :name=>"password"}
+        %p.url{:style=>"display:#{@url}"}
+          %label{:for=>'url'} 
+            URL
+        %p.url{:style=>"display:#{@url}"}
+          %input{:type=>"url", :name=>"url", :value=>"#{@stream.nil? ? '' : @stream.url}"}
         %p
           %input{:type=>'submit', :id=>'submit', :value=>'  Save  '}
-
-
-
+:javascript
+  $('select').change(function() {
+    setup_select(this);
+  });
+  function setup_select(obj) {
+    switch(obj.value.toLowerCase()) {
+      case 'gmail':
+      case 'twitter':
+      case 'facebook':
+        $('.url').hide();
+        $('.cred').show();
+      break;
+      case 'rss':
+        $('.url').show();
+        $('.cred').hide();
+      break;
+    }
+  }
   

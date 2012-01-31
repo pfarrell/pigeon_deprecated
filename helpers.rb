@@ -13,19 +13,26 @@ class User
   timestamps!
 end
 
-class Credentials
-  include MongoMapper::Document
-  key :username, String
-  key :password, String
-end
-
 class Streams
   include MongoMapper::Document
   key :uid, String
   key :name, String
   key :type, String
-  key :credentials, Credentials
+  key :url, String
+  key :username, String
+  key :password, String
   key :signal, Boolean
+  timestamps!
+end
+
+class Captured
+  include MongoMapper::Document
+  key :remote_url, String
+  key :content, String
+  key :title, String
+  key :errored, String
+  key :short_dir, String
+  key :date, DateTime
   timestamps!
 end
 
