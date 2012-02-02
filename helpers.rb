@@ -1,4 +1,4 @@
-%w(cgi uri mongo_mapper loofah htmlentities json).each { |dependency| require dependency }
+%w(cgi uri mongo_mapper loofah htmlentities json rss/1.0 rss/2.0 open-uri).each { |dependency| require dependency }
 
 MongoMapper.connection = Mongo::Connection.new('localhost', 27017, :pool_size => 5, :timout => 5);
 MongoMapper.database = 'pigeon'
@@ -29,7 +29,8 @@ class Captured
   include MongoMapper::Document
   key :remote_url, String
   key :content, String
-  key :title, String
+  key :stream_id, String
+  key :feed, String
   key :errored, String
   key :short_dir, String
   key :date, DateTime
@@ -154,7 +155,7 @@ def wget_filename(filename)
   retval
 end
 
-def enqueue_link(redis, user, remote_url, title, date) 
+def enqueue_user_link(redis, user, remote_url, title, date) 
   link = {}
   link[:uid] = user.uid
   link[:remote_url] = remote_url
@@ -162,6 +163,18 @@ def enqueue_link(redis, user, remote_url, title, date)
   link[:date] = date
   redis.rpush('incoming:links', link.to_json)
 end
+
+def enqueue_rss_link(redis, stream, remote_url, title, date)
+  if Captured.find_by_remote_url(remote_url).nil?
+    capture = {}
+    capture[:stream_id] = stream._id
+    capture[:remote_url] = remote_url
+    capture[:title] = title
+    capture[:date] = date
+    redis.rpush('incoming:captures', capture.to_json)
+  end
+end
+  
 
 def get_page!(link) 
   puts link.remote_url
@@ -239,6 +252,12 @@ end
 def get_streams(user)
   Streams.where(:uid=>user.uid).all
 end
+
+def get_rss(url)
+  content = ""
+  open(url) do |s| content = s.read end
+  RSS::Parser.parse(content, false)
+end  
 
 def partial(template, *args)
   options = args.last.is_a?(Hash) ? args.pop : { }

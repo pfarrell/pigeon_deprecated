@@ -6,7 +6,7 @@ def do_gmail(redis, user, username, password)
 	    extract_links(email).each do |key, val|
        if Link.find_by_remote_url(key).nil?
          begin
-           enqueue_link(redis, user, key, email.subject, email.date)
+           enqueue_user_link(redis, user, key, email.subject, email.date)
          rescue => e
            puts e.message
            email.mark(:unread)
@@ -17,11 +17,11 @@ def do_gmail(redis, user, username, password)
 	end
 end
 
-def do_rss(redis, url)
-  content = ""
-  open(url) do |s| content = s.read end
-  rss = RSS::Parser.parse(content, false)
-  puts rss.inspect
+def do_rss(redis, stream)
+  rss = get_rss(stream.url)
+  rss.items.each do |item|
+    enqueue_rss_link(redis, stream, item.link, item.title, Time.new)
+  end
 end
 
 redis = Redis.new
@@ -31,7 +31,7 @@ User.all().each do |user|
     if stream.type.downcase == 'gmail'
       do_gmail(redis, user, stream.username, stream.password)
     elsif stream.type.downcase == 'rss'
-      do_rss(redis, stream.url) 
+      do_rss(redis, stream) 
     end
   end
 end

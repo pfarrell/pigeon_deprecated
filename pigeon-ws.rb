@@ -182,8 +182,9 @@ end
 post '/u/:user/stream' do
   protected(params[:user])
   if params[:streamid].nil?
-    if params[:type] == 'rss'
-      stream = Streams.new(:uid=>@current_user.uid, :name=>params["name"], :type=>params["type"], :url=>params["url"])
+    if params[:type].downcase == 'rss'
+      rss = get_rss(params[:url])
+      stream = Streams.new(:uid=>@current_user.uid, :name=>rss.channel.title, :type=>params["type"], :url=>params["url"])
     else
       stream = Streams.new(:uid=>@current_user.uid, :name=>params["name"], :type=>params["type"], :username=>params["username"], :password=>params["password"])
     end
