@@ -139,15 +139,15 @@ end
 post '/u/:user/rating' do
   content_type :json
   rating = 3
-  link = Link.find_by_id(params[:widget_id])
+  userlink = Userlink.find_by_id(params[:widget_id])
   if params[:fetch].nil?
     matches = /star_([0-5])/.match params[:clicked_on]
-    link.rating = matches[1]
-    link.save
+    userlink.rating = matches[1]
+    userlink.save
   end
 
-  if !link.nil?  && !link.rating.nil?
-    rating = link.rating
+  if !userlink.nil?  && !userlink.rating.nil?
+    rating = userlink.rating
   end
 
   {:rating=>rating}.to_json

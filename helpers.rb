@@ -13,6 +13,14 @@ class User
   timestamps!
 end
 
+class Userlink
+  include MongoMapper::Document
+  key :uid, String
+  key :linkid, String
+  key :rating, Integer
+  timestamps!
+end
+
 class Streams
   include MongoMapper::Document
   key :uid, String
@@ -25,33 +33,18 @@ class Streams
   timestamps!
 end
 
-class Captured
-  include MongoMapper::Document
-  key :remote_url, String
-  key :content, String
-  key :stream_id, String
-  key :feed, String
-  key :errored, String
-  key :short_dir, String
-  key :date, DateTime
-  timestamps!
-end
-
 class Link
   include MongoMapper::Document
-  key :uid, String
   key :local_url, String
   key :remote_url, String
   key :content, String
   key :thumb_url, String
   key :title, String
-  key :signal, Boolean
   key :downloaded, Boolean
   key :processed, Boolean
-  key :errored, Boolean
+  key :errored, String
   key :short_dir, String
   key :date, DateTime
-  key :rating, Integer
   timestamps!
 end
 
@@ -155,29 +148,18 @@ def wget_filename(filename)
   retval
 end
 
-def enqueue_user_link(redis, user, remote_url, title, date) 
+def enqueue_link(redis, user, remote_url, title, date) 
   link = {}
-  link[:uid] = user.uid
+  if !user.nil?
+    link[:uid] = user.uid
+  end
   link[:remote_url] = remote_url
   link[:title] = title
   link[:date] = date
   redis.rpush('incoming:links', link.to_json)
 end
 
-def enqueue_rss_link(redis, stream, remote_url, title, date)
-  if Captured.find_by_remote_url(remote_url).nil?
-    capture = {}
-    capture[:stream_id] = stream._id
-    capture[:remote_url] = remote_url
-    capture[:title] = title
-    capture[:date] = date
-    redis.rpush('incoming:captures', capture.to_json)
-  end
-end
-  
-
 def get_page!(link) 
-  puts link.remote_url
   if link.remote_url.nil? || link.remote_url == ""
     link.errored = 'save_link: blank url'
     link.save! 
@@ -209,20 +191,15 @@ def search_all_links(search)
   links
 end
 
-def search_links(user, search)
-  links = Link.where(:uid=>user.uid).sort(:date.desc).all(:title => {:$regex => /#{search}/i})
-  if links.nil?
-    links = 'Confounded!!!'
-  end
-  links
-end
-
 def get_links(user, page, limit)
   @prev = page - 1
   @next = page + 1
   #page -= 1
   offset = limit * page
-  Link.where(:uid=>user.uid, :downloaded=>true).sort(:date.desc, :created_at.desc).all(:limit=>limit, :offset=>offset)
+  userlinks = Userlink.where(:uid=>user.uid).sort(:created_at.desc).all(:limit=>limit, :offset=>offset)
+  query = []
+  userlinks.each {|l| query.push(l.linkid)}
+  Link.find(query)
 end
 
 def get_page_contents!(link)

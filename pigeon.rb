@@ -1,7 +1,7 @@
 %w(yaml gmail mongo_mapper redis rss/1.0 rss/2.0 open-uri ./helpers).each { |dependency| require dependency }
 
-def do_gmail(redis, user, username, password)
-	gmail = Gmail.new(username, password)do |gmail|
+def do_gmail(redis, user, stream)
+	gmail = Gmail.new(stream.username, stream.password)do |gmail|
 	  gmail.inbox.emails(:unread).each do |email|
 	    extract_links(email).each do |key, val|
        if Link.find_by_remote_url(key).nil?
@@ -29,7 +29,7 @@ redis = Redis.new
 User.all().each do |user|
   Streams.where(:uid=>user.uid).each do |stream|
     if stream.type.downcase == 'gmail'
-      do_gmail(redis, user, stream.username, stream.password)
+      do_gmail(redis, user, stream)
     elsif stream.type.downcase == 'rss'
       do_rss(redis, stream) 
     end
