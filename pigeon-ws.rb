@@ -161,7 +161,7 @@ end
 get '/u/:user/link' do
   # need validation of bookmarklet post
   user = get_user(params[:user])
-  enqueue_link($redis, user, params[:url], params[:title], Time.new)
+  enqueue_link($redis, nil, user, params[:url], params[:title], Time.new)
 end
 
 get '/u/:user/stream' do

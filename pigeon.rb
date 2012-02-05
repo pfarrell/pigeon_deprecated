@@ -3,14 +3,12 @@
 def do_gmail(redis, user, stream)
 	gmail = Gmail.new(stream.username, stream.password)do |gmail|
 	  gmail.inbox.emails(:unread).each do |email|
-	    extract_links(email).each do |key, val|
-       if Link.find_by_remote_url(key).nil?
-         begin
-           enqueue_user_link(redis, user, key, email.subject, email.date)
-         rescue => e
-           puts e.message
-           email.mark(:unread)
-         end
+	    extract_links(email).each do |url, val|
+        begin
+          enqueue_link(redis, stream, user, url, email.subject, email.date)
+        rescue => e
+          puts e.message
+          email.mark(:unread)
         end
       end
 	  end
@@ -20,7 +18,7 @@ end
 def do_rss(redis, stream)
   rss = get_rss(stream.url)
   rss.items.each do |item|
-    enqueue_rss_link(redis, stream, item.link, item.title, Time.new)
+    enqueue_link(redis, stream, nil, item.link, item.title, Time.new)
   end
 end
 
@@ -38,17 +36,18 @@ end
 
 while(redis.llen('incoming:links') > 0)
   hash = JSON.parse(redis.lpop('incoming:links'))
-
-  if !hash[:uid].nil?
-    if !Link.find(:uid=>hash['uid'], :remote_url=>hash['remote_url'])
-      link = Link.new(:uid=>hash['uid'], :title=>hash['title'], :date=>hash['date'], :downloaded=>false, :processed=>false, :remote_url=>hash['remote_url'])
-      link.save!
-    end
-
-    link = get_page!(link)
-
+  puts hash['remote_url']
+  link = nil
+  if Link.where(:remote_url=>hash['remote_url']).count == 0
+    link = Link.new(:title=>hash['title'], :date=>hash['date'], :downloaded=>false, :processed=>false, :remote_url=>hash['remote_url'])
     link = get_page_contents!(link)
-  else
-    #generic link
+    link.save!
+  end
+
+  if !link.nil? && !hash['uid'].nil?
+    puts 'creating userlink'
+    link = get_page!(link)
+    userlink = Userlink.new(:uid=>hash['uid'], :link_id=>link.id, :date=>hash['date'])
+    userlink.save!
   end
 end

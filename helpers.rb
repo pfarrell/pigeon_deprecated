@@ -16,8 +16,9 @@ end
 class Userlink
   include MongoMapper::Document
   key :uid, String
-  key :linkid, String
+  key :link_id, String
   key :rating, Integer
+  key :date, DateTime
   timestamps!
 end
 
@@ -35,6 +36,7 @@ end
 
 class Link
   include MongoMapper::Document
+  key :stream_id, String
   key :local_url, String
   key :remote_url, String
   key :content, String
@@ -148,10 +150,13 @@ def wget_filename(filename)
   retval
 end
 
-def enqueue_link(redis, user, remote_url, title, date) 
+def enqueue_link(redis, stream, user, remote_url, title, date) 
   link = {}
   if !user.nil?
     link[:uid] = user.uid
+  end
+  if !stream.nil?
+    link[:stream_id] = stream.id
   end
   link[:remote_url] = remote_url
   link[:title] = title
@@ -196,15 +201,15 @@ def get_links(user, page, limit)
   @next = page + 1
   #page -= 1
   offset = limit * page
-  userlinks = Userlink.where(:uid=>user.uid).sort(:created_at.desc).all(:limit=>limit, :offset=>offset)
+  userlinks = Userlink.where(:uid=>user.uid).sort(:date.desc).all(:limit=>limit, :offset=>offset)
   query = []
-  userlinks.each {|l| query.push(l.linkid)}
-  Link.find(query)
+  userlinks.each {|l| query.push(l.link_id)}
+  Link.sort(:date.desc).find(query)
 end
 
 def get_page_contents!(link)
   begin
-    doc = Loofah.document(File.read("public/" + link.local_url))
+    doc = Loofah.document(get_html_doc(link.remote_url))
     doc.scrub!(:whitewash)
     link.content = doc.content
     link.processed = true
@@ -231,10 +236,14 @@ def get_streams(user)
 end
 
 def get_rss(url)
+  RSS::Parser.parse(get_html_doc(url), false)
+end  
+
+def get_html_doc(url)
   content = ""
   open(url) do |s| content = s.read end
-  RSS::Parser.parse(content, false)
-end  
+  content
+end
 
 def partial(template, *args)
   options = args.last.is_a?(Hash) ? args.pop : { }
