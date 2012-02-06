@@ -87,24 +87,11 @@ img {
 	height: auto;
 }
 
-.rate_widget {
-overflow:   visible;
-padding:    10px;
-width:      180px;
-height:     32px;
-}
-.ratings_stars {
-background: url('http://patf.net/images/star_empty.png') no-repeat;
-float:      left;
+.delete {
+background: url('http://patf.net/images/ecks.png') no-repeat;
 height:     28px;
 padding:    2px;
 width:      32px;
-}
-.ratings_vote {
-background: url('http://patf.net/images/star_full.png') no-repeat;
-}
-.ratings_over {
-background: url('http://patf.net/images/star_highlight.png') no-repeat;
 }
 
 /* Smaller screens */

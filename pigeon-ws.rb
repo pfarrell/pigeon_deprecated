@@ -136,21 +136,14 @@ post '/u/:user/?' do
   redirect url_for('/u/' + @current_user.username)
 end
 
-post '/u/:user/rating' do
+post '/u/:user/remove' do
   content_type :json
-  rating = 3
-  userlink = Userlink.find_by_id(params[:widget_id])
-  if params[:fetch].nil?
-    matches = /star_([0-5])/.match params[:clicked_on]
-    userlink.rating = matches[1]
-    userlink.save
-  end
-
-  if !userlink.nil?  && !userlink.rating.nil?
-    rating = userlink.rating
-  end
-
-  {:rating=>rating}.to_json
+  protected(params[:user])
+  userlink = Userlink.find_by_id(params[:obj_id])
+  puts userlink
+  userlink.deleted = true
+  puts 'saving'
+  userlink.save!
 end
 
 get '/u/:user/marklet.js' do

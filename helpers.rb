@@ -13,15 +13,6 @@ class User
   timestamps!
 end
 
-class Userlink
-  include MongoMapper::Document
-  key :uid, String
-  key :link_id, String
-  key :rating, Integer
-  key :date, DateTime
-  timestamps!
-end
-
 class Streams
   include MongoMapper::Document
   key :uid, String
@@ -47,6 +38,16 @@ class Link
   key :errored, String
   key :short_dir, String
   key :date, DateTime
+  timestamps!
+end
+
+class Userlink
+  include MongoMapper::Document
+  key :uid, String
+  key :link_id, String
+  key :deleted, Boolean
+  key :date, DateTime
+  key :link, Link
   timestamps!
 end
 
@@ -201,10 +202,12 @@ def get_links(user, page, limit)
   @next = page + 1
   #page -= 1
   offset = limit * page
-  userlinks = Userlink.where(:uid=>user.uid).sort(:date.desc).all(:limit=>limit, :offset=>offset)
-  query = []
-  userlinks.each {|l| query.push(l.link_id)}
-  Link.sort(:date.desc).find(query)
+  userlinks = Userlink.where(:uid=>user.uid, :deleted=>nil).sort(:date.desc).all(:limit=>limit, :offset=>offset)
+  userlinks.each do |ul|
+    ul.link = Link.find(ul.link_id)
+    puts ul.link
+  end
+  userlinks
 end
 
 def get_page_contents!(link)
