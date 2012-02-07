@@ -12,6 +12,10 @@
       %a{:href=>"#{@next}"}
         %span.page
           >
+    -if !current_user.nil?
+      %span.page#edit
+        Edit
+      
 -elsif !@search.nil? && !params["user"].nil?
   %form{:action=>"#{url_for('/u/' + params["user"] + '/search')}", :method=>"post"}
     %a{:href=>"#{url_for('/u/' + params["user"] + '/')}"}

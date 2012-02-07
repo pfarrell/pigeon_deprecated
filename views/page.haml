@@ -11,9 +11,22 @@
         #{ul.link.title} 
       %a{:href=>"#{ul.link.remote_url}", :title=>"original page", :class=>'external'}
         (www)
-      %img.delete{:id=>"#{ul.id}"}
+      -if !current_user.nil?
+        %img.hidden.delete{:id=>"#{ul.id}"}
     -prevdate = currdate
   :javascript
+    var editmode = false;
+    $('#edit').removeClass('hidden').bind('click', (function() {
+      if(!editmode) {
+        $('#edit').text('Pressed').addClass('page');
+        $('.delete').removeClass('hidden');
+      }else{
+        $('#edit').text('Edit').addClass('page');
+        $('.delete').addClass('hidden');
+      }
+      editmode = !editmode;
+    }));
+    
     $('.delete').bind('click', (function() {
       var obj = this;
       var out_data = {

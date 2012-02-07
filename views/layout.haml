@@ -20,7 +20,7 @@
         %span
           =@error
     =yield
-    %div.footer
+    %div.container.footer
       %div.paging
         -if @prev > 0
           %a{:href=>"0"}
@@ -41,3 +41,8 @@
           %a{:href=>"#{url_for '/logout'}"}
             %span.page
               Logout
+        -else
+          %div
+            %p
+              %a.signin-fb{:href=>"#{url_for('/auth/facebook')}"}
+

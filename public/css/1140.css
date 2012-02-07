@@ -94,6 +94,10 @@ padding:    2px;
 width:      32px;
 }
 
+.hidden {
+  display: none;
+}
+
 /* Smaller screens */
 
 @media only screen and (max-width: 1023px) {

@@ -52,7 +52,8 @@ get '/' do
   elsif @current_user.username.nil?
     redirect url_for('/user')
   else
-    redirect url_for('/u/' + @current_user.username + '/0')
+   # redirect url_for('/u/' + @current_user.username + '/0')
+   haml :index
   end
 end
 
