@@ -87,7 +87,12 @@ img {
 	height: auto;
 }
 
+#edit {
+  cursor: pointer;
+}
+
 .delete {
+  cursor: pointer;
 }
 
 .hidden {

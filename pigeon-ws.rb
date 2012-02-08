@@ -141,10 +141,16 @@ post '/u/:user/remove' do
   content_type :json
   protected(params[:user])
   userlink = Userlink.find_by_id(params[:obj_id])
-  puts userlink
   userlink.deleted = params[:mode] == 'normal' ? true : nil
-  puts userlink.inspect
   userlink.save!
+end
+
+post '/u/:user/download' do
+  content_type :json
+  protected(params[:user])
+  puts params.inspect
+  link = Link.find_by_id(params[:obj_id])
+  enqueue_link(Redis.new, nil, @current_user, link.remote_url, link.title, Time.new)
 end
 
 get '/u/:user/marklet.js' do
@@ -201,6 +207,13 @@ get '/u/:user/deleted/:page' do
   @user = params[:user]
   @mode='deleted'
   haml :page
+end
+
+get '/u/:user/raw/:page' do
+  protected(params[:user])
+  @links = get_raw_links(get_user(params[:user]), params[:page].to_i, @limit)
+  @user = params[:user]
+  haml :links
 end
 
 post '/u/:user/search' do

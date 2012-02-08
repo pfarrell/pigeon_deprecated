@@ -29,7 +29,7 @@ User.all().each do |user|
     if stream.type.downcase == 'gmail'
       do_gmail(redis, user, stream)
     elsif stream.type.downcase == 'rss'
-      do_rss(redis, stream) 
+      #do_rss(redis, stream) 
     end
   end
 end
@@ -39,12 +39,14 @@ while(redis.llen('incoming:links') > 0)
 
   link = Link.where(:remote_url=>hash['remote_url']).first
   if link.nil?
+    puts 'creating: ' + link.remote_url
     link = Link.new(:title=>hash['title'], :date=>hash['date'], :downloaded=>false, :processed=>false, :remote_url=>hash['remote_url'])
     link = get_page_contents!(link)
     link.save!
   end
   
   if !link.nil? && !hash['uid'].nil?
+    puts 'downloading: ' + link.remote_url
     link = get_page!(link)
     userlink = Userlink.new(:uid=>hash['uid'], :link_id=>link.id, :date=>hash['date'])
     userlink.save!

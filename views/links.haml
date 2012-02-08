@@ -1,0 +1,34 @@
+%div.container.main
+  %div#last
+  -prevdate = ''
+  -@links.each do |l|
+    -currdate = l.date.strftime('%a %b %d, %Y')
+    -if currdate != prevdate
+      %div.datesec
+        =currdate
+    %div.link{:id=>"#{l.id}"}
+      %a{:href=>"#{l.remote_url}", :title=>"#{l.remote_url}", :target=>"_"}
+        #{l.title} 
+      -if !current_user.nil?
+        %span.page.download{:id=>"#{l.id}"}
+          DLOAD
+    -prevdate = currdate
+  :javascript
+    var editmode = false;
+    
+    $('.download').bind('click', (function() {
+      var obj = this;
+      var out_data = {
+        obj_id : $(obj).attr('id'),
+        fetch: 1
+      };
+      $.post(
+        "#{url_for('/u/' + @user + '/download')}",
+        out_data,
+        function(INFO) {
+          $(obj).data('fsr', INFO);
+          $(obj).parent().remove();
+        },
+        'json'
+      );
+    }));

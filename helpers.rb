@@ -223,6 +223,14 @@ def get_deleted_links(user, page, limit)
   userlinks
 end
 
+def get_raw_links(user, page, limit)
+  @prev = page - 1
+  @next = page + 1
+  #page -= 1
+  offset = limit * page
+  Link.sort(:date.desc).all(:limit=>limit, :offset=>offset)
+end
+
 def get_page_contents!(link)
   begin
     doc = Loofah.document(get_html_doc(link.remote_url))

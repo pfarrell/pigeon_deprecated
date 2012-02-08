@@ -35,6 +35,11 @@
           %a{:href=>"#{url_for('/u/' + @current_user.username + '/deleted/0')}"}
             %span.page
               Deleted Links
+      %p
+        %div.paging
+          %a{:href=>"#{url_for('/u/' + @current_user.username + '/raw/0')}"}
+            %span.page
+              Ignored Links
 
 
 
