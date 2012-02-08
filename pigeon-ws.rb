@@ -142,8 +142,8 @@ post '/u/:user/remove' do
   protected(params[:user])
   userlink = Userlink.find_by_id(params[:obj_id])
   puts userlink
-  userlink.deleted = true
-  puts 'saving'
+  userlink.deleted = params[:mode] == 'normal' ? true : nil
+  puts userlink.inspect
   userlink.save!
 end
 
@@ -195,6 +195,14 @@ post '/u/:user/stream' do
   redirect url_for('/u/' + @current_user.username)
 end
 
+get '/u/:user/deleted/:page' do
+  protected(params[:user])
+  @links = get_deleted_links(get_user(params[:user]), params[:page].to_i, @limit)
+  @user = params[:user]
+  @mode='deleted'
+  haml :page
+end
+
 post '/u/:user/search' do
   if params['search'] == ''
     redirect url_for('/u/' + params[:user] + '/0')
@@ -209,6 +217,7 @@ end
 get '/u/:user/:page/?' do
   @links = get_links(get_user(params[:user]), params[:page].to_i, @limit)
   @user = params[:user]
+  @mode='normal'
   haml :page
 end
 

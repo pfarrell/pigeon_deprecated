@@ -25,10 +25,16 @@
             Save To Pigeon
           <-- Drag this to your bookmarks for extra goodness
     -if !@current_user.username.nil?
-      %div.paging
-        %a{:href=>"#{url_for('/u/' + @current_user.username + '/0')}"}
-          %span.page
-            Stream
+      %p
+        %div.paging
+          %a{:href=>"#{url_for('/u/' + @current_user.username + '/0')}"}
+            %span.page
+              Stream
+      %p
+        %div.paging
+          %a{:href=>"#{url_for('/u/' + @current_user.username + '/deleted/0')}"}
+            %span.page
+              Deleted Links
 
 
 

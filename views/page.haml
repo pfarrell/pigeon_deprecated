@@ -12,7 +12,11 @@
       %a{:href=>"#{ul.link.remote_url}", :title=>"original page", :class=>'external'}
         (www)
       -if !current_user.nil?
-        %img.hidden.delete{:id=>"#{ul.id}"}
+        %span.page.hidden.delete{:id=>"#{ul.id}"}
+          -if @mode == 'normal'
+            DEL
+          -else
+            UNDEL
     -prevdate = currdate
   :javascript
     var editmode = false;
@@ -31,6 +35,7 @@
       var obj = this;
       var out_data = {
         obj_id : $(obj).attr('id'),
+        mode: '#{@mode}',
         fetch: 1
       };
       $.post(
