@@ -36,16 +36,15 @@ end
 
 while(redis.llen('incoming:links') > 0)
   hash = JSON.parse(redis.lpop('incoming:links'))
-  puts hash['remote_url']
-  link = nil
-  if Link.where(:remote_url=>hash['remote_url']).count == 0
+
+  link = Link.where(:remote_url=>hash['remote_url']).first
+  if link.nil?
     link = Link.new(:title=>hash['title'], :date=>hash['date'], :downloaded=>false, :processed=>false, :remote_url=>hash['remote_url'])
     link = get_page_contents!(link)
     link.save!
   end
-
+  
   if !link.nil? && !hash['uid'].nil?
-    puts 'creating userlink'
     link = get_page!(link)
     userlink = Userlink.new(:uid=>hash['uid'], :link_id=>link.id, :date=>hash['date'])
     userlink.save!
