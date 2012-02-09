@@ -47,9 +47,11 @@ while(redis.llen('incoming:links') > 0)
     puts 'link exists: ' + hash['remote_url']
   end
   
-  if !link.nil? && !hash['uid'].nil? && link.downloaded =='false'
-    puts 'downloading: ' + link.remote_url
-    link = get_page!(link)
+  if !link.nil? && !hash['uid'].nil? 
+    if link.downloaded =='false'
+      puts 'downloading: ' + link.remote_url
+      link = get_page!(link)
+    end
     userlink = Userlink.new(:uid=>hash['uid'], :link_id=>link.id, :date=>hash['date'])
     userlink.save!
   else
