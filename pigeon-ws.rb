@@ -230,6 +230,12 @@ get '/u/:user/raw/:page' do
   haml :links
 end
 
+get '/u/:user/rss' do
+  content_type 'application/rss+xml'
+  @links = get_links(get_user(params[:user]), 0, 25)
+  haml(:rss, :format => :xhtml, :escape_html => true, :layout => false)
+end
+
 post '/u/:user/search' do
   if params['search'] == ''
     redirect url_for('/u/' + params[:user] + '/0')
