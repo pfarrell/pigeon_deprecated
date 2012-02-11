@@ -218,7 +218,7 @@ post '/u/:user/raw/search' do
   end
   @user = params[:user]
   @search = params['search']
-  haml :page
+  haml :links
 end
 
 get '/u/:user/raw/:page' do

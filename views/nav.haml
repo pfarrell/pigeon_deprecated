@@ -1,6 +1,6 @@
 %div.nav{:align=>"right"}
 -if @next != ''
-  %form{:action=>"#{url_for('/u/' + params["user"] + '/search')}", :method=>"post"}
+  %form{:id=>"search_form", :action=>"#{url_for('/u/' + params["user"] + '/search')}", :method=>"post"}
     -if @prev > -1
       %a{:href=>"#{@prev}"}
         %span.page

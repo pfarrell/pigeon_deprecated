@@ -15,7 +15,10 @@
     -prevdate = currdate
   :javascript
     var editmode = false;
-    
+    $(document).ready(function() {
+      $('#search_form').attr("action", "#{url_for('/u/' + @user + '/raw/search')}")
+    });
+
     $('.download').bind('click', (function() {
       var obj = this;
       var out_data = {
