@@ -1,18 +1,19 @@
 %div.container.main
   %div#last
   -prevdate = ''
-  -@links.each do |ul|
-    -currdate = ul.link.date.strftime('%a %b %d, %Y')
+  -@links.each do |l|
+    -link = l.link unless l.link.nil?
+    -currdate = link.date.strftime('%a %b %d, %Y')
     -if currdate != prevdate
       %div.datesec
         =currdate
-    %div.link{:id=>"#{ul.id}"}
-      %a{:href=>"#{url_for('/' + ul.link.local_url)}", :title=>"#{ul.link.remote_url}"}
-        #{ul.link.title} 
-      %a{:href=>"#{ul.link.remote_url}", :title=>"original page", :class=>'external'}
+    %div.link{:id=>"#{l.id}"}
+      %a{:href=>"#{url_for('/' + link.local_url)}", :title=>"#{link.remote_url}"}
+        #{link.title} 
+      %a{:href=>"#{link.remote_url}", :title=>"original page", :class=>'external'}
         (www)
       -if !current_user.nil?
-        %span.page.hidden.delete{:id=>"#{ul.id}"}
+        %span.page.hidden.delete{:id=>"#{l.id}"}
           -if @mode == 'normal'
             DEL
           -else

@@ -84,6 +84,8 @@ if validate_pid("/tmp/pigeon.pid")
         puts 'new userlink'
         userlink = Userlink.new(:uid=>hash['uid'], :link_id=>link.id, :date=>hash['date'])
         userlink.save!
+        usercontent = Usercontent.new(:uid=>hash['uid'], :link_id=>link.id, :date=>hash['date'], :title=>link.title, :content=>link.content)
+        usercontent.save!
       else
       end
     end

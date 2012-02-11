@@ -44,10 +44,21 @@ end
 class Userlink
   include MongoMapper::Document
   key :uid, String
-  key :link_id, String
+  key :link_id, ObjectId
   key :deleted, Boolean
   key :date, DateTime
   key :link, Link
+  timestamps!
+end
+
+class Usercontent
+  include MongoMapper::Document
+  key :uid, String
+  key :link_id, ObjectId
+  key :title, String
+  key :content, String
+  key :link, Link
+  key :date, DateTime
   timestamps!
 end
 
@@ -189,12 +200,16 @@ def get_page!(link)
   link
 end
 
+def search_raw_links(search)
+  Link.sort(:date.desc).all(:content => {:$regex => /#{search}/i})
+end
+
+def search_user_links(user, search)
+  resolve_link_dependencies(Usercontent.sort(:date.desc).all(:content => {:$regex => /#{search}/i}))
+end
+
 def search_all_links(search)
-  links = Link.sort(:date.desc).all(:title => {:$regex => /#{search}/i})
-  if links.nil?
-    links = 'Confounded!!!'
-  end
-  links
+  resolve_link_dependencies(Usercontent.sort(:date.desc).all(:content=> {:$regex => /#{search}/i}))
 end
 
 def get_links(user, page, limit)
@@ -203,9 +218,12 @@ def get_links(user, page, limit)
   #page -= 1
   offset = limit * page
   userlinks = Userlink.where(:uid=>user.uid, :deleted=>nil).sort(:date.desc).all(:limit=>limit, :offset=>offset)
+  resolve_link_dependencies(userlinks)
+end
+
+def resolve_link_dependencies(userlinks)
   userlinks.each do |ul|
     ul.link = Link.find(ul.link_id)
-    puts ul.link
   end
   userlinks
 end

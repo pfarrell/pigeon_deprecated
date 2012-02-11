@@ -209,6 +209,18 @@ get '/u/:user/deleted/:page' do
   haml :page
 end
 
+post '/u/:user/raw/search' do
+  protected(params[:user])
+  if params['search'] == ''
+    redirect url_for('/u/' + params[:user] + '/0')
+  else
+    @links = search_raw_links(params['search'])
+  end
+  @user = params[:user]
+  @search = params['search']
+  haml :page
+end
+
 get '/u/:user/raw/:page' do
   protected(params[:user])
   @links = get_raw_links(get_user(params[:user]), params[:page].to_i, @limit)
@@ -220,7 +232,7 @@ post '/u/:user/search' do
   if params['search'] == ''
     redirect url_for('/u/' + params[:user] + '/0')
   else
-    @links = search_links(get_user(params[:user]), params['search'])
+    @links = search_user_links(get_user(params[:user]), params['search'])
   end
   @user = params[:user]
   @search = params['search']
