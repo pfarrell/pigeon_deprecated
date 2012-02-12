@@ -281,6 +281,14 @@ def get_rss(url)
   RSS::Parser.parse(get_html_doc(url), false)
 end  
 
+def get_stats(user)
+  retval = {} 
+  retval["User Links"] = Userlink.where(:uid=>user.uid).count.to_s
+  retval["System Links"] = Link.count
+
+  retval
+end
+
 def get_html_doc(url)
   content = ""
   open(url) do |s| content = s.read end

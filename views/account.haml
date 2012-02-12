@@ -40,6 +40,16 @@
           %a{:href=>"#{url_for('/u/' + @current_user.username + '/raw/0')}"}
             %span.page
               Ignored Links
+      %p
+        %table
+          -@stats.each do |key, val|
+            %tr
+              %td
+                =key
+              %td
+                =val
+
+
 
 
 

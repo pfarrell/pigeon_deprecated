@@ -123,6 +123,8 @@ get '/u/:user' do
   protected(params[:user])
   @streams = get_streams(@current_user)
   #@streams = Streams.where(:uid=>@current_user.uid).all
+  @stats = get_stats(@current_user)
+  puts @stats.inspect
   haml :account
 end
 
