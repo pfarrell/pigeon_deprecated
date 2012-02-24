@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'sinatra'
-require 'pigeon-ws'
+require './pigeon-ws'
 
 set :run, false
 
