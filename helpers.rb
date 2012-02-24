@@ -1,4 +1,4 @@
-%w(cgi uri mongo_mapper loofah htmlentities json rss/1.0 rss/2.0 open-uri).each { |dependency| require dependency }
+%w(cgi uri mongo_mapper loofah htmlentities json simple-rss open-uri).each { |dependency| require dependency }
 
 MongoMapper.connection = Mongo::Connection.new('localhost', 27017, :pool_size => 5, :timout => 5);
 MongoMapper.database = 'pigeon'
@@ -278,7 +278,7 @@ def get_streams(user)
 end
 
 def get_rss(url)
-  RSS::Parser.parse(get_html_doc(url), false)
+  SimpleRSS.parse(get_html_doc(url))
 end  
 
 def get_stats(user)

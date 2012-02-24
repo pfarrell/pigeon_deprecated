@@ -1,6 +1,7 @@
 %w(yaml gmail mongo_mapper redis rss/1.0 rss/2.0 open-uri ./helpers).each { |dependency| require dependency }
 
 def do_gmail(redis, user, stream)
+  puts 'do gmail'
 	gmail = Gmail.new(stream.username, stream.password)do |gmail|
 	  gmail.inbox.emails(:unread).each do |email|
 	    extract_links(email).each do |url, val|
@@ -16,10 +17,11 @@ def do_gmail(redis, user, stream)
 end
 
 def do_rss(redis, stream)
+  puts 'do_rss'
   puts stream.url
   rss = get_rss(stream.url)
-  rss.items.each do |item|
-    enqueue_link(redis, stream, nil, item.link, item.title, Time.new)
+  rss.entries.each do |entry|
+    enqueue_link(redis, stream, nil, entry.link, entry.title, Time.new)
   end
 end
 
@@ -49,6 +51,7 @@ if validate_pid("/tmp/pigeon.pid")
 
   while(true)
     iter = iter + 1
+    puts 'iterating'
     User.all().each do |user|
       Streams.where(:uid=>user.uid).each do |stream|
         if stream.type.downcase == 'gmail'

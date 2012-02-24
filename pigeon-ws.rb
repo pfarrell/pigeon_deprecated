@@ -186,7 +186,7 @@ post '/u/:user/stream' do
   if params[:streamid].nil?
     if params[:type].downcase == 'rss'
       rss = get_rss(params[:url])
-      stream = Streams.new(:uid=>@current_user.uid, :name=>rss.channel.title, :type=>params["type"], :url=>params["url"])
+      stream = Streams.new(:uid=>@current_user.uid, :name=>rss.feed.title, :type=>params["type"], :url=>params["url"])
     else
       stream = Streams.new(:uid=>@current_user.uid, :name=>params["name"], :type=>params["type"], :username=>params["username"], :password=>params["password"])
     end
