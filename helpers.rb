@@ -168,7 +168,7 @@ def enqueue_link(redis, stream, user, remote_url, title, date)
     link[:uid] = user.uid
   end
   if !stream.nil?
-    link[:stream_id] = stream.id
+    link[:stream_id] = stream.id.to_s
   end
   link[:remote_url] = remote_url
   link[:title] = title
@@ -217,7 +217,7 @@ def get_links(user, page, limit)
   @next = page + 1
   #page -= 1
   offset = limit * page
-  userlinks = Userlink.where(:uid=>user.uid, :deleted=>nil).sort(:date.desc).all(:limit=>limit, :offset=>offset)
+  userlinks = Userlink.where(:uid=>user.uid, :deleted=>nil).sort(:updated_at.desc).all(:limit=>limit, :offset=>offset)
   resolve_link_dependencies(userlinks)
 end
 
@@ -247,6 +247,15 @@ def get_raw_links(user, page, limit)
   #page -= 1
   offset = limit * page
   Link.sort(:date.desc).all(:limit=>limit, :offset=>offset)
+end
+
+def get_stream_links(stream_name, page, limit)
+  @prev = page - 1
+  @next = page + 1
+  #page -= 1
+  offset = limit * page
+  stream = Streams.find_by_name(stream_name)
+  Link.sort(:date.desc).all(:stream_id=>stream.id.to_s, :limit=>limit, :offset=>offset)
 end
 
 def get_page_contents!(link)

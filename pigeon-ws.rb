@@ -173,6 +173,12 @@ get '/u/:user/stream' do
   haml :stream
 end
 
+get '/u/:user/stream/v/:name/:page' do
+  @links = get_stream_links(params[:name], params[:page].to_i, @limit)
+  @user = params[:user]
+  haml :links
+end
+
 get '/u/:user/stream/:name' do
   protected(params[:user])
   @stream = Streams.find_by_name(params[:name])

@@ -3,7 +3,7 @@
 def do_gmail(redis, user, stream)
   puts 'do gmail'
 	gmail = Gmail.new(stream.username, stream.password)do |gmail|
-	  gmail.inbox.emails(:unread).each do |email|
+	  gmail.inbox.emails(:read).each do |email|
 	    extract_links(email).each do |url, val|
         begin
           enqueue_link(redis, stream, user, url, email.subject, email.date)
@@ -69,22 +69,20 @@ if validate_pid("/tmp/pigeon.pid")
       link = Link.where(:remote_url=>hash['remote_url']).first
       if link.nil? 
         puts 'creating link'
-        link = Link.new(:title=>hash['title'], :date=>hash['date'], :downloaded=>false, :processed=>false, :remote_url=>hash['remote_url'])
+        puts hash['stream_id']
+        link = Link.new(:title=>hash['title'], :date=>hash['date'], :stream_id=>hash['stream_id'], :downloaded=>false, :processed=>false, :remote_url=>hash['remote_url'])
         link.save!
         link = get_page_contents!(link)
         link.save!
-        puts 'link: ' + link.inspect
       else
       end
       
       if !link.nil? && !hash['uid'].nil? 
-        puts 'adding to user'
         if !link.downloaded
           puts 'downloading'
           link = get_page!(link)
           puts 'downloaded: ' + link.inspect
         end
-        puts 'new userlink'
         userlink = Userlink.new(:uid=>hash['uid'], :link_id=>link.id, :date=>hash['date'])
         userlink.save!
         usercontent = Usercontent.new(:uid=>hash['uid'], :link_id=>link.id, :date=>hash['date'], :title=>link.title, :content=>link.content)
