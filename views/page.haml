@@ -2,50 +2,51 @@
   %div#last
   -prevdate = ''
   -@links.each do |l|
-    -link = l.link unless l.link.nil?
-    -currdate = link.date.strftime('%a %b %d, %Y')
-    -if currdate != prevdate
-      %div.datesec
-        =currdate
-    %div.link{:id=>"#{l.id}"}
-      %a{:href=>"#{url_for('/' + link.local_url)}", :title=>"#{link.remote_url}"}
-        #{link.title} 
-      %a{:href=>"#{link.remote_url}", :title=>"original page", :class=>'external'}
-        (www)
-      -if !current_user.nil?
-        %span.page.hidden.delete{:id=>"#{l.id}"}
-          -if @mode == 'normal'
-            DEL
-          -else
-            UNDEL
-    -prevdate = currdate
-  :javascript
-    var editmode = false;
-    $('#edit').removeClass('hidden').bind('click', (function() {
-      if(!editmode) {
-        $('#edit').text('Done').addClass('page');
-        $('.delete').removeClass('hidden');
-      }else{
-        $('#edit').text('Edit').addClass('page');
-        $('.delete').addClass('hidden');
-      }
-      editmode = !editmode;
-    }));
-    
-    $('.delete').bind('click', (function() {
-      var obj = this;
-      var out_data = {
-        obj_id : $(obj).attr('id'),
-        mode: '#{@mode}',
-        fetch: 1
-      };
-      $.post(
-        "#{url_for('/u/' + @user + '/remove')}",
-        out_data,
-        function(INFO) {
-          $(obj).data('fsr', INFO);
-          $(obj).parent().remove();
-        },
-        'json'
-      );
-    }));
+    %div.row
+      -link = l.link unless l.link.nil?
+      -currdate = link.date.strftime('%a %b %d, %Y')
+      -if currdate != prevdate
+        %div.twelvecol.last.datesec
+          =currdate
+      %div.twelvecol.last.link{:id=>"#{l.id}"}
+        %a{:href=>"#{url_for('/' + link.local_url)}", :title=>"#{link.remote_url}"}
+          #{link.title} 
+        %a{:href=>"#{link.remote_url}", :title=>"original page", :class=>'external'}
+          (www)
+        -if !current_user.nil?
+          %span.page.hidden.delete{:id=>"#{l.id}"}
+            -if @mode == 'normal'
+              DEL
+            -else
+              UNDEL
+      -prevdate = currdate
+:javascript
+  var editmode = false;
+  $('#edit').removeClass('hidden').bind('click', (function() {
+    if(!editmode) {
+      $('#edit').text('Done').addClass('page');
+      $('.delete').removeClass('hidden');
+    }else{
+      $('#edit').text('Edit').addClass('page');
+      $('.delete').addClass('hidden');
+    }
+    editmode = !editmode;
+  }));
+  
+  $('.delete').bind('click', (function() {
+    var obj = this;
+    var out_data = {
+      obj_id : $(obj).attr('id'),
+      mode: '#{@mode}',
+      fetch: 1
+    };
+    $.post(
+      "#{url_for('/u/' + @user + '/remove')}",
+      out_data,
+      function(INFO) {
+        $(obj).data('fsr', INFO);
+        $(obj).parent().remove();
+      },
+      'json'
+    );
+  }));
