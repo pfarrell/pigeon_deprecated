@@ -7,11 +7,11 @@
       %div.datesec
         =currdate
     %div.link{:id=>"#{l.id}"}
+      -if !current_user.nil?
+        %span.download{:id=>"#{l.id}"}
+          &darr;
       %a{:href=>"#{l.remote_url}", :title=>"#{l.remote_url}", :target=>"_"}
         #{l.title} 
-      -if !current_user.nil?
-        %span.page.download{:id=>"#{l.id}"}
-          DLOAD
     -prevdate = currdate
   :javascript
     var editmode = false;

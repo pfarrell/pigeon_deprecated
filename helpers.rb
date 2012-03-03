@@ -22,6 +22,7 @@ class Streams
   key :username, String
   key :password, String
   key :signal, Boolean
+  key :count, Integer
   timestamps!
 end
 
@@ -283,7 +284,11 @@ def get_user(username)
 end
 
 def get_streams(user)
-  Streams.where(:uid=>user.uid).all
+  streams = Streams.where(:uid=>user.uid).all
+  streams.each do |s|
+    s.count = Link.where(:stream_id=>s.id.to_s).count
+  end
+  streams
 end
 
 def get_rss(url)

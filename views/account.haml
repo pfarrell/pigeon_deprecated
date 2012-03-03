@@ -12,11 +12,11 @@
             Streams
           -@streams.each do |s|
             %div{:style=>"margin-left:1em;"}
+              %a{:href=>"#{url_for('/u/' + @current_user.username + '/stream/v/' + s.name + '/0')}", :title=>"#{s.type}"}
+                f
               %a{:href=>"#{url_for('/u/' + @current_user.username + '/stream/' + s.name)}", :title=>"#{s.type}"}
                 #{s.name}
-              \ - 
-              %a{:href=>"#{url_for('/u/' + @current_user.username + '/stream/v/' + s.name + '/0')}", :title=>"#{s.type}"}
-                feed
+              \ - #{s.count}
         -if !@current_user.username.nil?
           %p
             %a{:href=>"#{url_for('/u/' + @current_user.username + '/stream')}"}

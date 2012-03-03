@@ -9,16 +9,16 @@
         %div.twelvecol.last.datesec
           =currdate
       %div.twelvecol.last.link{:id=>"#{l.id}"}
-        %a{:href=>"#{url_for('/' + link.local_url)}", :title=>"#{link.remote_url}"}
-          #{link.title} 
-        %a{:href=>"#{link.remote_url}", :title=>"original page", :class=>'external'}
-          (www)
         -if !current_user.nil?
           %span.page.hidden.delete{:id=>"#{l.id}"}
             -if @mode == 'normal'
-              DEL
+              D
             -else
-              UNDEL
+              U
+        %a{:href=>"#{link.remote_url}", :title=>"original page", :class=>'external'}
+          W
+        %a{:href=>"#{url_for('/' + link.local_url)}", :title=>"#{link.remote_url}"}
+          #{link.title} 
       -prevdate = currdate
 :javascript
   var editmode = false;
