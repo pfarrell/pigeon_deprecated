@@ -3,7 +3,7 @@
 def do_gmail(redis, user, stream)
   puts 'do gmail'
 	gmail = Gmail.new(stream.username, stream.password)do |gmail|
-	  gmail.inbox.emails(:read).each do |email|
+	  gmail.inbox.emails(:unread).each do |email|
 	    extract_links(email).each do |url, val|
         begin
           enqueue_link(redis, stream, user, url, email.subject, email.date)
