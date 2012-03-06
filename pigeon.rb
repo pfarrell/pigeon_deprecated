@@ -1,4 +1,4 @@
-%w(yaml gmail mongo_mapper redis rss/1.0 rss/2.0 open-uri ./helpers).each { |dependency| require dependency }
+%w(yaml gmail mongo_mapper redis feedzirra open-uri ./helpers).each { |dependency| require dependency }
 
 def do_gmail(redis, user, stream)
   puts 'do gmail'
@@ -21,7 +21,7 @@ def do_rss(redis, stream)
   puts stream.url
   rss = get_rss(stream.url)
   rss.entries.each do |entry|
-    enqueue_link(redis, stream, nil, entry.link, entry.title, Time.new)
+    enqueue_link(redis, stream, nil, entry.url, entry.title, Time.new)
   end
 end
 
@@ -83,10 +83,6 @@ if validate_pid("/tmp/pigeon.pid")
           link = get_page!(link)
           puts 'downloaded: ' + link.inspect
         end
-        userlink = Userlink.new(:uid=>hash['uid'], :link_id=>link.id, :date=>hash['date'])
-        userlink.save!
-        usercontent = Usercontent.new(:uid=>hash['uid'], :link_id=>link.id, :date=>hash['date'], :title=>link.title, :content=>link.content)
-        usercontent.save!
       else
       end
     end

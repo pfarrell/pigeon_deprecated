@@ -1,4 +1,4 @@
-%w(cgi uri mongo_mapper loofah htmlentities json simple-rss open-uri).each { |dependency| require dependency }
+%w(cgi uri mongo_mapper loofah htmlentities json feedzirra open-uri).each { |dependency| require dependency }
 
 MongoMapper.connection = Mongo::Connection.new('localhost', 27017, :pool_size => 5, :timout => 5);
 MongoMapper.database = 'pigeon'
@@ -32,6 +32,8 @@ class Link
   key :local_url, String
   key :remote_url, String
   key :content, String
+  key :clean_content, String
+  key :raw_content, String
   key :thumb_url, String
   key :title, String
   key :downloaded, Boolean
@@ -49,17 +51,6 @@ class Userlink
   key :deleted, Boolean
   key :date, DateTime
   key :link, Link
-  timestamps!
-end
-
-class Usercontent
-  include MongoMapper::Document
-  key :uid, String
-  key :link_id, ObjectId
-  key :title, String
-  key :content, String
-  key :link, Link
-  key :date, DateTime
   timestamps!
 end
 
@@ -205,21 +196,12 @@ def search_raw_links(search)
   Link.sort(:date.desc).all(:content => {:$regex => /#{search}/i})
 end
 
-def search_user_links(user, search)
-  resolve_link_dependencies(Usercontent.sort(:date.desc).all(:content => {:$regex => /#{search}/i}))
-end
-
-def search_all_links(search)
-  resolve_link_dependencies(Usercontent.sort(:date.desc).all(:content=> {:$regex => /#{search}/i}))
-end
-
 def get_links(user, page, limit)
   @prev = page - 1
   @next = page + 1
   #page -= 1
   offset = limit * page
   userlinks = Userlink.where(:uid=>user.uid, :deleted=>nil).sort(:updated_at.desc).all(:limit=>limit, :offset=>offset)
-  resolve_link_dependencies(userlinks)
 end
 
 def resolve_link_dependencies(userlinks)
@@ -261,9 +243,11 @@ end
 
 def get_page_contents!(link)
   begin
-    doc = Loofah.document(get_html_doc(link.remote_url))
+    source = get_html_doc(link.remote_url)
+    doc = Loofah.document(source)
     doc.scrub!(:whitewash)
     link.content = doc.content
+    link.raw_content = source
     link.processed = true
     link.content = HTMLEntities.new.decode(doc.text).squeeze(" \t").strip
     link.save!
@@ -292,7 +276,7 @@ def get_streams(user)
 end
 
 def get_rss(url)
-  SimpleRSS.parse(get_html_doc(url))
+  Feedzirra::Feed.fetch_and_parse(url)
 end  
 
 def get_stats(user)
