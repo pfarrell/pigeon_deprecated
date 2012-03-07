@@ -17,7 +17,6 @@ def do_gmail(redis, user, stream)
 end
 
 def do_rss(redis, stream)
-  puts 'do_rss'
   puts stream.url
   rss = get_rss(stream.url)
   rss.entries.each do |entry|

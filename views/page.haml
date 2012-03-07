@@ -4,7 +4,7 @@
   -@links.each do |l|
     %div.row
       -link = l.link unless l.link.nil?
-      -currdate = link.updated_at.strftime('%a %b %d, %Y')
+      -currdate = l.date.strftime('%a %b %d, %Y')
       -if currdate != prevdate
         %div.twelvecol.last.datesec
           =currdate

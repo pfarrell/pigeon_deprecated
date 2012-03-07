@@ -201,12 +201,14 @@ def get_links(user, page, limit)
   @next = page + 1
   #page -= 1
   offset = limit * page
-  userlinks = Userlink.where(:uid=>user.uid, :deleted=>nil).sort(:updated_at.desc).all(:limit=>limit, :offset=>offset)
+  userlinks = Userlink.where(:uid=>user.uid, :deleted=>nil).sort(:date.desc).all(:limit=>limit, :offset=>offset)
+  resolve_link_dependencies(userlinks)
 end
 
 def resolve_link_dependencies(userlinks)
   userlinks.each do |ul|
     ul.link = Link.find(ul.link_id)
+    puts ul.link.nil?
   end
   userlinks
 end
@@ -253,6 +255,7 @@ def get_page_contents!(link)
     link.save!
   rescue => e
     link.content = nil                                
+    link.raw_content = nil
     if (!e.nil? && !e.message.nil?)
       link.errored = 'get_page_contents: ' + e.message 
     else
@@ -290,7 +293,9 @@ end
 def get_html_doc(url)
   content = ""
   open(url) do |s| content = s.read end
-  content
+  if !content.utf8?
+    content = content.asciify_utf8
+  end
 end
 
 def partial(template, *args)
