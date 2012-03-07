@@ -296,6 +296,7 @@ def get_html_doc(url)
   if !content.utf8?
     content = content.asciify_utf8
   end
+  content
 end
 
 def partial(template, *args)
