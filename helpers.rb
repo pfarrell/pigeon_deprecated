@@ -221,6 +221,7 @@ end
 def resolve_link_dependencies(userlinks)
   userlinks.each do |ul|
     ul.link = Link.find(ul.link_id)
+    puts ul.link.nil?
   end
   userlinks
 end
@@ -304,7 +305,10 @@ end
 
 def get_html_doc(url)
   content = ""
-  open(url, 'r', :read_timeout=>15) do |s| content = s.read end
+  open(url) do |s| content = s.read end
+  if !content.utf8?
+    content = content.asciify_utf8
+  end
   content
   #if !content.utf8?
   #  content = content.asciify_utf8
