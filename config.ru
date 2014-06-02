@@ -1,7 +1,9 @@
 require 'rubygems'
 require 'sinatra'
-require './pigeon-ws'
 
-set :run, false
+set :environment, ENV['RACK_ENV'].to_sym
+disable :run, :reload
+
+require './pigeon-ws'
 
 run Sinatra::Application
