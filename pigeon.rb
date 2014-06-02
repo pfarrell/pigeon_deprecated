@@ -19,9 +19,13 @@ end
 def do_rss(redis, stream)
   puts 'do_rss'
   puts stream.url
-  rss = get_rss(stream.url)
-  rss.entries.each do |entry|
-    enqueue_link(redis, stream, nil, entry.url, entry.title, Time.new)
+  begin
+    rss = get_rss(stream.url)
+    rss.entries.each do |entry|
+      enqueue_link(redis, stream, nil, entry.url, entry.title, Time.new)
+    end
+  rescue => e
+    puts stream.url + ': ' + e.message 
   end
 end
 
@@ -45,6 +49,7 @@ end
 def generate_pid(file_name, process_id)
   File.open(file_name, 'w+') {|f| f.write($$) }
 end
+
 if validate_pid("/tmp/pigeon.pid")
   iter = -1
   redis = Redis.new
@@ -83,9 +88,11 @@ if validate_pid("/tmp/pigeon.pid")
           link = get_page!(link)
           puts 'downloaded: ' + link.inspect
         end
+        userlink = Userlink.new(:uid=>hash['uid'], :link_id=>link.id, :date=>hash['date'])
+        userlink.save!
       else
       end
     end
-    sleep(15)
+    #sleep(15)
   end
 end
