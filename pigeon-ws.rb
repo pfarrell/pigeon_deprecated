@@ -2,7 +2,7 @@
 gem 'emk-sinatra-url-for'
 require 'sinatra/url_for'
 
-set :port, 4567
+set :port, 4568
 set :haml =>{:format => :html5}
 
 enable :sessions
@@ -102,7 +102,7 @@ post '/search' do
   if params['search'] == ''
     redirect url_for('/')
   else
-    @links = search_all_links(params['search'])
+    @links = search_raw_links(params['search'])
   end
   @user = ''
   @search = params['search']
@@ -124,7 +124,6 @@ get '/u/:user' do
   @streams = get_streams(@current_user)
   #@streams = Streams.where(:uid=>@current_user.uid).all
   @stats = get_stats(@current_user)
-  puts @stats.inspect
   haml :account
 end
 
@@ -150,7 +149,6 @@ end
 post '/u/:user/download' do
   content_type :json
   protected(params[:user])
-  puts params.inspect
   link = Link.find_by_id(params[:obj_id])
   enqueue_link(Redis.new, nil, @current_user, link.remote_url, link.title, Time.new)
 end
@@ -192,7 +190,7 @@ post '/u/:user/stream' do
   if params[:streamid].nil?
     if params[:type].downcase == 'rss'
       rss = get_rss(params[:url])
-      stream = Streams.new(:uid=>@current_user.uid, :name=>feed.title, :type=>params["type"], :url=>params["url"])
+      stream = Streams.new(:uid=>@current_user.uid, :name=>rss.title, :type=>params["type"], :url=>params["url"])
     else
       stream = Streams.new(:uid=>@current_user.uid, :name=>params["name"], :type=>params["type"], :username=>params["username"], :password=>params["password"])
     end
@@ -253,7 +251,7 @@ post '/u/:user/search' do
   haml :page
 end
 
-get '/u/:user/:page/?' do
+get '/u/:user/:page' do
   @links = get_links(get_user(params[:user]), params[:page].to_i, @limit)
   @user = params[:user]
   @mode='normal'
