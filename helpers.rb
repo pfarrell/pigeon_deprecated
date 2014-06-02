@@ -1,6 +1,6 @@
 %w(cgi uri mongo_mapper loofah htmlentities json feedzirra open-uri).each { |dependency| require dependency }
 
-MongoMapper.connection = Mongo::Connection.new('localhost', 27017, :pool_size => 5, :timout => 5);
+MongoMapper.connection = Mongo::Connection.new('localhost', 27017, :pool_size => 5);
 MongoMapper.database = 'pigeon'
 
 class User 
@@ -41,6 +41,7 @@ class Link
   key :errored, String
   key :short_dir, String
   key :date, DateTime
+  key :link, String
   timestamps!
 end
 
@@ -96,7 +97,7 @@ def extract_links(email)
       end
     end
   ensure
-    email.mark(:unread)
+    #email.mark(:unread)
   end
   links
 end
@@ -196,12 +197,25 @@ def search_raw_links(search)
   Link.sort(:date.desc).all(:content => {:$regex => /#{search}/i})
 end
 
+def search_user_links(user, search)
+  retval = []
+  Link.sort(:date.desc).all(:content => {:$regex => /#{search}/i}).each do |l|
+    ul = Userlink.where(:link_id=>l.id).first
+    if(!ul.nil?)
+      ul.link = l
+      retval.push(ul)
+    end
+  retval
+  end
+end
+
 def get_links(user, page, limit)
   @prev = page - 1
   @next = page + 1
   #page -= 1
   offset = limit * page
-  userlinks = Userlink.where(:uid=>user.uid, :deleted=>nil).sort(:updated_at.desc).all(:limit=>limit, :offset=>offset)
+  userlinks = Userlink.where(:uid=>user.uid, :deleted=>nil).sort(:date.desc).all(:limit=>limit, :offset=>offset)
+  resolve_link_dependencies(userlinks)
 end
 
 def resolve_link_dependencies(userlinks)
@@ -253,6 +267,7 @@ def get_page_contents!(link)
     link.save!
   rescue => e
     link.content = nil                                
+    link.raw_content = nil
     if (!e.nil? && !e.message.nil?)
       link.errored = 'get_page_contents: ' + e.message 
     else
@@ -289,8 +304,11 @@ end
 
 def get_html_doc(url)
   content = ""
-  open(url) do |s| content = s.read end
+  open(url, 'r', :read_timeout=>15) do |s| content = s.read end
   content
+  #if !content.utf8?
+  #  content = content.asciify_utf8
+  #end
 end
 
 def partial(template, *args)
