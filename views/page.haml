@@ -3,8 +3,8 @@
   -prevdate = ''
   -@links.each do |l|
     %div.row
-      -link = l.link unless l.link.nil?
-      -currdate = link.updated_at.strftime('%a %b %d, %Y')
+      -l = l.link unless l.link.nil?
+      -currdate = l.date.strftime('%a %b %d, %Y')
       -if currdate != prevdate
         %div.twelvecol.last.datesec
           =currdate
@@ -15,10 +15,18 @@
               D
             -else
               U
-        %a{:href=>"#{link.remote_url}", :title=>"original page", :class=>'external'}
-          W
-        %a{:href=>"#{url_for('/' + link.local_url)}", :title=>"#{link.remote_url}"}
-          #{link.title} 
+          
+        -if !l.local_url.nil?
+          %a{:href=>"#{l.remote_url}", :title=>"original page", :class=>'external'}
+            ⌂ 
+          %a{:href=>"#{url_for('/' + l.local_url)}", :title=>"#{l.remote_url}"}
+            -if l.title.nil? || l.title == ""
+              [No Title]
+            -else
+              #{l.title} 
+        -else
+          %a{:href=>"#{l.remote_url}", :title=>"original page", :class=>'external'}
+            #{l.title} 
       -prevdate = currdate
 :javascript
   var editmode = false;
