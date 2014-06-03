@@ -1,4 +1,4 @@
-%w(byebug yaml omniauth omniauth-facebook sinatra haml sass ./helpers json redis).each { |dependency| require dependency }
+%w(yaml omniauth omniauth-facebook sinatra haml sass ./helpers json redis).each { |dependency| require dependency }
 gem 'emk-sinatra-url-for'
 require 'sinatra/url_for'
 
@@ -12,7 +12,6 @@ $redis = Redis.new
 
 use Rack::Session::Cookie
 use OmniAuth::Builder do
-    byebug
     provider :facebook, ENV["PIGEON_FB_APP_ID"], ENV["PIGEON_FB_SECRET"], {:client_options => {:ssl => {:ca_path => '/etc/ssl/certs'}}}
 end
 
