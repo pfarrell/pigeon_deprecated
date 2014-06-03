@@ -284,7 +284,6 @@ def get_user(username)
 end
 
 def get_streams(user)
-  byebug
   streams = Streams.where(:uid=>user.uid).all
   streams.each do |s|
     s.count = Link.where(:stream_id=>s.id.to_s).count
