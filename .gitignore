@@ -3,7 +3,6 @@ config/config.yml
 public/sites
 public/index.html
 .sass-cache
-Gemfile.lock
 log
 nohup.out
 vendor
