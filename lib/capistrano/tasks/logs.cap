@@ -1,0 +1,15 @@
+def execute_interactively(command)
+  cmd = "ssh #{host} -p 10022 -t 'cd #{deploy_to}/current && #{command}'"
+  puts cmd
+  exec cmd
+end
+
+namespace :logs do
+  desc "tail production logs"
+  task :tail_logs do
+    on roles(:app) do
+      execute_interactively "tail -f /var/log/nginx/error.log"
+    end 
+  end
+end
+
