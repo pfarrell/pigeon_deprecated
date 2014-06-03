@@ -3,6 +3,7 @@ lock '3.2.1'
 
 set :application, 'pigeon'
 set :repo_url, 'git@github.com:pfarrell/pigeon.git'
+set :user, 'pfarrell'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
@@ -27,7 +28,7 @@ set :pty, true
 # set :linked_files, %w{config/database.yml}
 
 # Default value for linked_dirs is []
-set :linked_dirs, %w{log tmp}
+set :linked_dirs, %w{log tmp public/sites}
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
