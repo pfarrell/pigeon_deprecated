@@ -1,4 +1,4 @@
-%w(yaml omniauth omniauth-facebook sinatra haml sass ./helpers json redis).each { |dependency| require dependency }
+%w(byebug yaml omniauth omniauth-facebook sinatra haml sass ./helpers json redis).each { |dependency| require dependency }
 gem 'emk-sinatra-url-for'
 require 'sinatra/url_for'
 
@@ -8,12 +8,12 @@ set :haml =>{:format => :html5}
 enable :sessions
 enable :methodoverride
 
-$yml = YAML.load_file 'config/config.yml'
 $redis = Redis.new
 
 use Rack::Session::Cookie
 use OmniAuth::Builder do
-    provider :facebook, $yml["facebook"]["app_id"], $yml["facebook"]["app_secret"], {:client_options => {:ssl => {:ca_path => '/etc/ssl/certs'}}}
+    byebug
+    provider :facebook, ENV["PIGEON_FB_APP_ID"], ENV["PIGEON_FB_SECRET"], {:client_options => {:ssl => {:ca_path => '/etc/ssl/certs'}}}
 end
 
 helpers do
@@ -42,7 +42,7 @@ before do
   @limit = 5
   @prev = -1
   @next = ''
-  @host = $yml["host"]
+  @host = ENV["PIGEON_HOST"]
   @types = %w(Gmail Twitter Facebook RSS)
 end
 
@@ -121,9 +121,9 @@ end
 
 get '/u/:user' do
   protected(params[:user])
-  @streams = get_streams(@current_user)
+  @streams = @streams || get_streams(@current_user)
   #@streams = Streams.where(:uid=>@current_user.uid).all
-  @stats = get_stats(@current_user)
+  @stats = @stats || get_stats(@current_user)
   haml :account
 end
 

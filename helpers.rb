@@ -1,4 +1,4 @@
-%w(cgi uri mongo_mapper loofah htmlentities json feedzirra open-uri).each { |dependency| require dependency }
+%w(byebug cgi uri mongo_mapper loofah htmlentities json open-uri).each { |dependency| require dependency }
 
 MongoMapper.connection = Mongo::Connection.new('localhost', 27017, :pool_size => 5);
 MongoMapper.database = 'pigeon'
@@ -284,6 +284,7 @@ def get_user(username)
 end
 
 def get_streams(user)
+  byebug
   streams = Streams.where(:uid=>user.uid).all
   streams.each do |s|
     s.count = Link.where(:stream_id=>s.id.to_s).count
@@ -292,7 +293,7 @@ def get_streams(user)
 end
 
 def get_rss(url)
-  Feedzirra::Feed.fetch_and_parse(url)
+  #Feedjira::Feed.fetch_and_parse(url)
 end  
 
 def get_stats(user)
