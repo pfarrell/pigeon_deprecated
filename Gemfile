@@ -15,9 +15,10 @@ gem "bson_ext"
 gem "i18n"
 gem "mime"
 gem "emk-sinatra-url-for"
-gem "loofah"
 gem "htmlentities"
 gem "redis"
 gem 'capistrano', '~> 3.2.0'
 gem 'capistrano-bundler', '~> 1.1.2'
 gem 'passenger'
+gem 'feedzirra', '~> 0.7.1'
+
