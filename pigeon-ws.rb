@@ -153,6 +153,7 @@ post '/u/:user/download' do
 end
 
 get '/u/:user/marklet.js' do
+  content_type "application/javascript"
   @user=params[:user]
   haml :marklet, :layout=>false
 end
