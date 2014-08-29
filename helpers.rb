@@ -1,4 +1,4 @@
-%w(cgi uri mongo_mapper loofah htmlentities json open-uri).each { |dependency| require dependency }
+%w(cgi uri mongo_mapper loofah htmlentities feedzirra json open-uri).each { |dependency| require dependency }
 
 MongoMapper.connection = Mongo::Connection.new('localhost', 27017, :pool_size => 5);
 MongoMapper.database = 'pigeon'
@@ -155,7 +155,7 @@ def wget_filename(filename)
   retval
 end
 
-def enqueue_link(redis, stream, user, remote_url, title, date) 
+def enqueue_link(redis, stream, user, remote_url, title, date, front=false) 
   link = {}
   if !user.nil?
     link[:uid] = user.uid
@@ -166,7 +166,11 @@ def enqueue_link(redis, stream, user, remote_url, title, date)
   link[:remote_url] = remote_url
   link[:title] = title
   link[:date] = date
-  redis.rpush('incoming:links', link.to_json)
+  if(front)
+    redis.lpush('incoming:links', link.to_json)
+  else
+    redis.rpush('incoming:links', link.to_json)
+  end
 end
 
 def get_page!(link) 
@@ -292,7 +296,11 @@ def get_streams(user)
 end
 
 def get_rss(url)
-  #Feedjira::Feed.fetch_and_parse(url)
+  ret = nil
+  Timeout::timeout(20) do
+    ret = Feedzirra::Feed.fetch_and_parse(url)
+  end
+  ret
 end  
 
 def get_stats(user)

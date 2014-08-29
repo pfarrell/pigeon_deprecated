@@ -149,7 +149,7 @@ post '/u/:user/download' do
   content_type :json
   protected(params[:user])
   link = Link.find_by_id(params[:obj_id])
-  enqueue_link(Redis.new, nil, @current_user, link.remote_url, link.title, Time.new)
+  enqueue_link(Redis.new, nil, @current_user, link.remote_url, link.title, Time.new, true)
 end
 
 get '/u/:user/marklet.js' do
@@ -161,7 +161,7 @@ end
 get '/u/:user/link' do
   # need validation of bookmarklet post
   user = get_user(params[:user])
-  enqueue_link($redis, nil, user, params[:url], params[:title], Time.new)
+  enqueue_link($redis, nil, user, params[:url], params[:title], Time.new, true)
 end
 
 get '/u/:user/stream' do
