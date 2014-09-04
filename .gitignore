@@ -1,8 +1,4 @@
-config/config.rb
-config/config.yml
 public/sites
 public/index.html
-.sass-cache
 log
-nohup.out
 vendor
