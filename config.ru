@@ -1,9 +1,9 @@
-require 'rubygems'
-require 'sinatra'
+$: << File.expand_path('../', __FILE__)
 
-set :environment, ENV['RACK_ENV'].to_sym
+require 'app'
+
+set :environment, ENV['RACK_ENV'].to_sym || 'development'
 disable :run, :reload
 
-require './pigeon-ws'
 
-run Sinatra::Application
+run Pigeon.new
