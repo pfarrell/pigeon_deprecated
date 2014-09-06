@@ -1,5 +1,6 @@
-.bundle/config
 public/sites
 public/index.html
 log
+.bundle
+.bundle/config
 vendor
