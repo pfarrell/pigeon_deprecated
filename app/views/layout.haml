@@ -6,17 +6,23 @@
     %meta{:charset => "utf-8"}
     %meta{:name => "viewport", :content=>"width=device-width, initial-scale=1, maximum-scale=1"}
     %meta{:name=>"apple-mobile-web-app-capable", :content=>"yes"}
-    %script{:type => "text/javascript", :src => "http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"}
+    %script{:type => "text/javascript", :src => "http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"}
+    %script{:src=>"//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"}
     %link{:rel => "stylesheet", :href => "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css", :type => "text/css"}
     %link{:rel => "stylesheet", :href => "http://fonts.googleapis.com/css?family=Cabin", :type => "text/css", :media => "all"}
     %link{:rel => "stylesheet", :href => "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css", :type => "text/css"}
-    %link{:rel => "stylesheet", :href => "#{url_for '/blue.monday/jplayer.blue.monday.css'}", :type => "text/css" }
-    %link{:rel => "stylesheet", :href => "#{url_for '/css/default.css'}", :type => "text/css", :media => "screen" }
     <!--%script{type: "text/javascript", src: "#{url_for "/js/masonry-horizontal.js"}"}-->
   %body
-    %div.navbar.navbar-default.navbar-fixed-top
+    %header.navbar.navbar-static-top{role:"banner"}
       %div.container
         %div.navbar-header
+          %button{class:"navbar-toggle", type:"button",data:{toggle:"collapse",target:".pg-navbar-collapse"}}
+            %span.sr-only
+              Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+        %nav.collapse.navbar-collapse.pg-navbar-collapse{role:"navigation"}
           %form.navbar-form.navbar-left{id: "search", action: "#{url_for("/search")}", method: "GET"}
             .form-group
               %input.form-control{type: "TEXT", id: "q", name: "q", autofocus: true}
@@ -30,53 +36,3 @@
             %a{href:"http://patf.net"}
               patf
             joint
-:javascript
-  $('.item').hover(
-    function(){
-      $(this).foggy();
-      $(this .title).show();
-    }, 
-    function(){
-      $(this).foggy(false);
-      $(this .title).hide();
-    }
-  );
-  $('#reload').bind('click', function() {
-    document.title = 'Random Albums';
-    if(!endsWith(document.location.toString(), "#{@host}" + '/')){
-      history.pushState(null, "#{@title}", '/');
-    }
-    reload();
-    clearInterval();
-    setInterval(function() {
-      reload();
-    }, 15000);
-  });
-  function set_content(content) {
-    $('#content').html(content.data('fsr'));
-  }
-  function reload() {
-    $('#content').each(function(i) {
-      var content = $('#content');
-      $.post(
-        "#{url_for('/')}",
-        '{}',
-        function(INFO) {
-          content.data('fsr', INFO);
-          set_content(content);
-        },
-        'html'
-      );
-    });
-  }
-  function endsWith(str, suffix) {
-    return str.indexOf(suffix, str.length - suffix.length) !== -1;
-  }
-  $('#q').autocomplete({
-    serviceUrl: '#{url_for "/livesearch"}',
-    paramName: 'q',
-    minChars: 1,
-    lookupLimit: 50,
-    autoSelectFirst: true,
-  });
-

@@ -1,0 +1,16 @@
+%form{method: "POST", action:"#{url_for("/source/#{model.id}")}"}
+  .input-group.input-group-lg
+    %span.input-group-addon
+      Type
+    %span.form-control
+      =model.type
+  .input-group.input-group-lg
+    %span.input-group-addon
+      Name
+    %input.form-control{type:"text", name:"name", value:"#{model.name}"}
+  .input-group.input-group-lg
+    %span.input-group-addon
+      Url
+    %input.form-control{type:"text", name:"url", value:"#{model.url}"}
+  .submit
+    %input.btn.btn-default.btn-lg{type:"Submit", value:"Save"}

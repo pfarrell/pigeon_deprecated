@@ -1,0 +1,14 @@
+%form{method: "POST", action:"#{url_for("/source/new")}"}
+  %select{name:"type"}
+    %option{value:"rss_feed"}
+      Rss Feed
+  .input-group.input-group-lg
+    %span.input-group-addon
+      Name
+    %input.form-control{type:"text",name:"name"}
+  .input-group.input-group-lg
+    %span.input-group-addon
+      URL
+    %input.form-control{type:"text",name:"url"}
+  .submit
+    %input.btn.btn-default.btn-lg{type:"Submit", value:"Save"}
