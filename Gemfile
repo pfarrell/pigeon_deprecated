@@ -2,6 +2,7 @@ source "http://rubygems.org"
 
 gem "sinatra"
 gem "sinatra-contrib"
+gem 'emk-sinatra-url-for'
 gem "haml"
 gem "json"
 gem "elasticsearch-model"

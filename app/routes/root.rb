@@ -1,5 +1,5 @@
 class Pigeon < Sinatra::Application
   get "/" do
-    "Hello"
+    haml :index
   end
 end
