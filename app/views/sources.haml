@@ -1,3 +1,4 @@
 -sources.each do |source|
-  %a{href:"#{url_for("/source/#{source.id}")}"}
-    =source.name
+  .source
+    %a{href:"#{url_for("/source/#{source.id}")}"}
+      =source.title

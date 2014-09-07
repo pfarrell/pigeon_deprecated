@@ -1,9 +1,9 @@
 Sequel.migration do
   change do
-    create_table(:articles) do
+    create_table(:articles_links) do
       primary_key :id
-      String :title
-      Fixnum :source_id
+      Fixnum :article_id
+      Fixnum :link_id
       DateTime :created_at
       DateTime :updated_at
     end

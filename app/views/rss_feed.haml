@@ -6,11 +6,14 @@
       =model.type
   .input-group.input-group-lg
     %span.input-group-addon
-      Name
-    %input.form-control{type:"text", name:"name", value:"#{model.name}"}
+      Title
+    %input.form-control{type:"text", name:"name", value:"#{model.title}"}
   .input-group.input-group-lg
     %span.input-group-addon
       Url
     %input.form-control{type:"text", name:"url", value:"#{model.url}"}
   .submit
     %input.btn.btn-default.btn-lg{type:"Submit", value:"Save"}
+.articles
+  %a{href:"#{url_for("/source/#{model.id}/current")}"}
+    =model.title

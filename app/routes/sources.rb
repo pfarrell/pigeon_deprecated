@@ -1,3 +1,5 @@
+require 'rss'
+
 class Pigeon < Sinatra::Application
   get "/sources" do
     haml :sources, locals: {sources: Source.all}
@@ -8,12 +10,16 @@ class Pigeon < Sinatra::Application
   end
 
   get "/source/:id" do
-    haml :rss_feed, locals: {model: RssFeed[params[:id].to_i]}
+    haml :rss_feed, locals: { model: RssFeed[params[:id].to_i] }
+  end
+
+  get "/source/:id/current" do
+    haml :articles, locals: { articles: RssFeed[params[:id].to_i].articles }
   end
 
   post "/source/new" do
     feed = RssFeed.new
-    feed.name = params[:name]
+    feed.title = params[:title]
     feed.url  = params[:url]
     feed.type = params[:type]
     feed.save
@@ -22,7 +28,7 @@ class Pigeon < Sinatra::Application
 
   post "/source/:id" do
     feed = RssFeed[params[:id].to_i]
-    feed.name = params[:name]
+    feed.title= params[:title]
     feed.url = params[:url]
     feed.save_changes
     haml :rss_feed, locals: {model: feed}

@@ -11,5 +11,6 @@ Sequel::Model.plugin :timestamps
 Sequel::Model.plugin :json_serializer
 
 require_relative 'models/article'
+require_relative 'models/link'
 require_relative 'models/source'
 require_relative 'models/rss_feed'
