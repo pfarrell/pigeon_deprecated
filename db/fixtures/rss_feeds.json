@@ -86,7 +86,7 @@
 { "name" : "Alex's Blog", "url" : "http://alexjbantz.wordpress.com/feed/"}
 { "name" : "FiveThirtyEightFiveThirtyEight | Features", "url" : "http://fivethirtyeight.com/features/feed/"}
 { "name" : "PhraseologyProject.com Phrases", "url" : "http://feeds.feedburner.com/phraseologyproject?format=xml"}
-{ "name" : "\nLamer News\n", "url" : "http://lamernews.com/rss"}
+{ "name" : "Lamer News", "url" : "http://lamernews.com/rss"}
 { "name" : "programming", "url" : "http://www.reddit.com/r/programming/.rss"}
 { "name" : "Ask a Mathematician / Ask a Physicist", "url" : "http://www.askamathematician.com/feed/"}
 { "name" : "Google Poetics", "url" : "http://www.googlepoetics.com/rss"}

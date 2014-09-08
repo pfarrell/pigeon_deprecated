@@ -4,7 +4,7 @@ require 'logger'
 DB = Sequel.connect(
   "mysql2://#{ENV["PIGEON_DB_USER"]}:#{ENV["PIGEON_DB_PASS"]}@#{ENV["PIGEON_DB_HOST"]}/#{ENV["PIGEON_DB_NAME"]}",
   logger: $console)
-DB.sql_log_level = :debug
+DB.loggers << Logger.new($stdout)
 DB.extension(:pagination)
 
 Sequel::Model.plugin :timestamps
