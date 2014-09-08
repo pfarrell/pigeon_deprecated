@@ -1,4 +1,4 @@
-{ "name":"Hacker News", "url":"http://news.ycombinator.com/rss"}
+{ "name":"Hacker News", "url":"https://news.ycombinator.com/rss"}
 { "name" : "PandoDaily", "url" : "http://pandodaily.com/feed/"}
 { "name" : "The Old New Thing", "url" : "http://blogs.msdn.com/b/oldnewthing/rss.aspx"}
 { "name" : "Coding Horror", "url" : "http://feeds.feedburner.com/codinghorror"}
@@ -37,7 +37,7 @@
 { "name" : "pfarrell's Activity", "url" : "https://github.com/pfarrell.atom"}
 { "name" : "MeFi Music", "url" : "http://feeds.feedburner.com/mefi/Music?format=xml"}
 { "name" : "MetaFilter", "url" : "http://feeds.feedburner.com/Metafilter"}
-{ "name" : "I, Cringley", "url" : "http://feeds.feedburner.com/ICringely?format=xml"}
+{ "name" : "I, Cringley", "url" : "http://www.cringely.com/feed/"}
 { "name" : "Letters of Note", "url" : "http://feeds.feedburner.com/LettersOfNote?format=xml"}
 { "name" : "Gödel's Lost Letter and P=NP", "url" : "http://rjlipton.wordpress.com/feed/"}
 { "name" : "John Graham-Cumming", "url" : "http://blog.jgc.org/feeds/posts/default"}

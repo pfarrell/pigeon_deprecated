@@ -7,19 +7,9 @@ class RssFeed < Source
     open(url) do |rss|
       feed = RSS::Parser.parse(rss)
       if block_given?
-        feed.items.each do |item|
-          a = Article.new(title: item.title)
-          a.links << Link.new(type: "content", url: item.link)
-          a.links << Link.new(type: "comments", url: item.comments)
-          yield a
-        end
+        feed.items.each{|item| yield Article.parse(item, feed) }
       else
-        feed.items.map do |item| 
-          a = Article.new(title: item.title)
-          a.links << Link.new(type: "content", url: item.link)
-          a.links << Link.new(type: "comments", url: item.comments)
-          a
-        end
+        feed.items.map{|item| Article.parse(item, feed) }
       end
     end
   end
