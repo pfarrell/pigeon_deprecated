@@ -1,3 +1,7 @@
+.new
+  %a{href:"#{url_for("/source/new")}"}
+    New Source
+%hr
 -sources.each do |source|
   .source
     %a{href:"#{url_for("/source/#{source.id}")}"}

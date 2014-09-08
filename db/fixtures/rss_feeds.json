@@ -1,0 +1,94 @@
+{ "name":"Hacker News", "url":"http://news.ycombinator.com/rss"}
+{ "name" : "PandoDaily", "url" : "http://pandodaily.com/feed/"}
+{ "name" : "The Old New Thing", "url" : "http://blogs.msdn.com/b/oldnewthing/rss.aspx"}
+{ "name" : "Coding Horror", "url" : "http://feeds.feedburner.com/codinghorror"}
+{ "name" : "Signal vs. Noise", "url" : "http://feeds.feedburner.com/37signals/beMH"}
+{ "name" : "Rob Conery", "url" : "http://feeds.feedburner.com/wekeroad/EeKc"}
+{ "name" : "John Resig", "url" : "http://feeds.feedburner.com/JohnResig"}
+{ "name" : "Scott Hanselman", "url" : "http://feeds.feedburner.com/ScottHanselman"}
+{ "name" : "CNN.com", "url" : "http://rss.cnn.com/rss/cnn_topstories.rss"}
+{ "name" : "IndyStar - Top Stories", "url" : "http://feeds.feedblitz.com/indystar/todaystopstories", "username" : "", "password" : ""}
+{ "name" : "BBC News - Home", "url" : "http://feeds.bbci.co.uk/news/rss.xml"}
+{ "name" : "BBC News - Science & Environment", "url" : "http://feeds.bbci.co.uk/news/science_and_environment/rss.xml"}
+{ "name" : "BBC News - Technology", "url" : "http://feeds.bbci.co.uk/news/technology/rss.xml"}
+{ "name" : "TechCrunch", "url" : "http://feeds.feedburner.com/TechCrunch/"}
+{ "name" : "TechCrunch » Fundings & Exits", "url" : "http://feeds.feedburner.com/TechCrunch/fundings-exits"}
+{ "name" : "ReadWriteWeb", "url" : "http://feeds.feedburner.com/readwriteweb"}
+{ "name" : "reddit: Technology", "url" : "http://www.reddit.com/r/technology/.rss", "username" : ""}
+{ "name" : "reddit: the front page of the internet", "url" : "http://www.reddit.com/.rss"}
+{ "name" : "Tumblr: timfarrellnyc", "url" : "http://timfarrellnyc.tumblr.com/rss", "username" : ""}
+{ "name" : "dzone.com: latest front page", "url" : "http://feeds.dzone.com/dzone/frontpage?format=xml"}
+{ "name" : "Technology", "url" : "http://www.good.is/rss/category/technology"}
+{ "name" : "design mind on GOOD", "url" : "http://www.good.is/rss/series/design-mind-on-good"}
+{ "name" : "pop smART", "url" : "http://www.good.is/rss/series/pop-smart"}
+{ "name" : "Design", "url" : "http://www.good.is/rss/category/art-and-design"}
+{ "name" : "Lifestyle", "url" : "http://www.good.is/rss/category/lifestyle"}
+{ "name" : "Lambda the Ultimate - Programming Languages Weblog", "url" : "http://lambda-the-ultimate.org/rss.xml"}
+{ "name" : "High Scalability", "url" : "http://feeds.feedburner.com/HighScalability?format=xml"}
+{ "name" : "Programming in the 21st Century", "url" : "http://prog21.dadgum.com/atom.xml"}
+{ "name" : "DailyJS", "url" : "http://feeds.feedburner.com/dailyjs?format=xml"}
+{ "name" : "Tom Preston-Werner", "url" : "http://feeds.feedburner.com/tom-preston-werner?format=xml"}
+{ "name" : "Signal vs. Noise", "url" : "http://feeds.feedburner.com/37signals/beMH"}
+{ "name" : "Dilbert Daily Strip", "url" : "http://feed.dilbert.com/dilbert/daily_strip?format=xml"}
+{ "name" : "Penny Arcade", "url" : "http://penny-arcade.com/feed"}
+{ "name" : "Saturday Morning Breakfast Cereal (updated daily)", "url" : "http://feeds.feedburner.com/smbc-comics/PvLb?format=xml"}
+{ "name" : "xkcd.com", "url" : "http://xkcd.com/atom.xml"}
+{ "name" : "erjjones's Activity", "url" : "https://github.com/erjjones.atom"}
+{ "name" : "pfarrell's Activity", "url" : "https://github.com/pfarrell.atom"}
+{ "name" : "MeFi Music", "url" : "http://feeds.feedburner.com/mefi/Music?format=xml"}
+{ "name" : "MetaFilter", "url" : "http://feeds.feedburner.com/Metafilter"}
+{ "name" : "I, Cringley", "url" : "http://feeds.feedburner.com/ICringely?format=xml"}
+{ "name" : "Letters of Note", "url" : "http://feeds.feedburner.com/LettersOfNote?format=xml"}
+{ "name" : "Gödel's Lost Letter and P=NP", "url" : "http://rjlipton.wordpress.com/feed/"}
+{ "name" : "John Graham-Cumming", "url" : "http://blog.jgc.org/feeds/posts/default"}
+{ "name" : "Data Mining: Text Mining", "url" : "http://feeds.feedburner.com/DataMining"}
+{ "name" : "Nir and Far", "url" : "http://feeds.feedburner.com/NirAndFar"}
+{ "name" : "Daring Fireball", "url" : "http://daringfireball.net/index.xml"}
+{ "name" : "Beta List", "url" : "http://feeds.feedburner.com/betalist?format=xml"}
+{ "name" : "Stevey's Blog Rants", "url" : "http://steve-yegge.blogspot.com/atom.xml"}
+{ "name" : "Jef Claes", "url" : "http://feeds.feedburner.com/DiaryOfAnetDeveloperByJefClaes"}
+{ "name" : "The GitHub Blog", "url" : "https://github.com/blog.atom"}
+{ "name" : "The Endeavour", "url" : "http://feeds.feedburner.com/TheEndeavour?format=xml"}
+{ "name" : "profserious", "url" : "http://blog.prof.so/feeds/posts/default"}
+{ "name" : "Computational Complexity", "url" : "http://blog.computationalcomplexity.org/feeds/posts/default"}
+{ "name" : "Daniel Lemire's blog", "url" : "http://feeds.feedburner.com/daniel-lemire/atom"}
+{ "name" : "Communications of the ACM: Data / Storage And Retrieval", "url" : "http://cacm.acm.org/browse-by-subject/data-storage-and-retrieval.rss"}
+{ "name" : "Communications of the ACM: Artificial Intelligence", "url" : "http://cacm.acm.org/browse-by-subject/artificial-intelligence.rss"}
+{ "name" : "Communications of the ACM: Search", "url" : "http://cacm.acm.org/browse-by-subject/search.rss"}
+{ "name" : "Communications of the ACM: Theory", "url" : "http://cacm.acm.org/browse-by-subject/theory.rss"}
+{ "name" : "Communications of the ACM: Human Computer Interaction", "url" : "http://cacm.acm.org/browse-by-subject/human-computer-interaction.rss"}
+{ "name" : "Alan Winfield's Web Log", "url" : "http://alanwinfield.blogspot.com/feeds/posts/default"}
+{ "name" : "Communications of the ACM: blog@CACM", "url" : "http://cacm.acm.org/blogs/blog-cacm.rss", "username" : "", "password" : ""}
+{ "name" : "Google Research", "url" : "http://feeds.feedburner.com/blogspot/gJZg", "username" : "", "password" : ""}
+{ "name" : "Machine Learning (Theory)", "url" : "http://feeds2.feedburner.com/MachineLearningtheory"}
+{ "name" : "Embedded in Academia", "url" : "http://feeds.feedburner.com/EmbeddedInAcademia"}
+{ "name" : "What's new", "url" : "http://terrytao.wordpress.com/feed/"}
+{ "name" : "tombone's blog", "url" : "http://quantombone.blogspot.com/feeds/posts/default"}
+{ "name" : "Computer Science: Theory and Application", "url" : "http://www.reddit.com/r/compsci/.rss"}
+{ "name" : "Papers in Computer Science", "url" : "http://www.reddit.com/r/compscipapers/.rss"}
+{ "name" : "Machine Learning", "url" : "http://www.reddit.com/r/machinelearning/.rss"}
+{ "name" : "Semantic Web: Triples all the way down", "url" : "http://www.reddit.com/r/semanticweb/.rss"}
+{ "name" : "Machine Learning", "url" : "http://www.reddit.com/r/machinelearning/.rss"}
+{ "name" : "MetaOptimize Q+A - machine learning", "url" : "http://metaoptimize.com/qa/feeds/rss/", "username" : "", "password" : ""}
+{ "name" : "No Free Hunch", "url" : "http://blog.kaggle.com/feed/"}
+{ "name" : "Reverse Engineering", "url" : "http://www.reddit.com/r/reverseengineering/.rss"}
+{ "name" : "Types", "url" : "http://www.reddit.com/r/types/.rss"}
+{ "name" : "Matt Might's blog", "url" : "http://matt.might.net/articles/feed.rss"}
+{ "name" : "natural language processing blog", "url" : "http://nlpers.blogspot.com/feeds/posts/default"}
+{ "name" : "Math ∩ Programming", "url" : "http://jeremykun.wordpress.com/feed/"}
+{ "name" : "The Naive Optimist", "url" : "http://ryanleecarson.tumblr.com/rss"}
+{ "name" : "ProgrammableWeb", "url" : "http://feeds.feedburner.com/ProgrammableWeb"}
+{ "name" : "Ray Wenderlich", "url" : "http://feeds.feedburner.com/RayWenderlich?format=xml"}
+{ "name" : "thoughts from the red planet", "url" : "http://feeds.feedburner.com/thoughtsfromtheredplanet?format=xml"}
+{ "name" : "Simply Statistics", "url" : "http://simplystatistics.org/feed/"}
+{ "name" : "igvita.com", "url" : "http://feeds.igvita.com/igvita"}
+{ "name" : "The Netflix Tech Blog", "url" : "http://techblog.netflix.com/rss.xml"}
+{ "name" : "Alex's Blog", "url" : "http://alexjbantz.wordpress.com/feed/"}
+{ "name" : "FiveThirtyEightFiveThirtyEight | Features", "url" : "http://fivethirtyeight.com/features/feed/"}
+{ "name" : "PhraseologyProject.com Phrases", "url" : "http://feeds.feedburner.com/phraseologyproject?format=xml"}
+{ "name" : "\nLamer News\n", "url" : "http://lamernews.com/rss"}
+{ "name" : "programming", "url" : "http://www.reddit.com/r/programming/.rss"}
+{ "name" : "Ask a Mathematician / Ask a Physicist", "url" : "http://www.askamathematician.com/feed/"}
+{ "name" : "Google Poetics", "url" : "http://www.googlepoetics.com/rss"}
+{ "name" : "Vox -  All", "url" : "http://www.vox.com/rss/index.xml"}
+{ "name" : "Gabriel Weinberg's Blog", "url" : "http://www.gabrielweinberg.com/blog/atom.xml"}
