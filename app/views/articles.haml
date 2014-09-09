@@ -2,7 +2,7 @@
   .input-group.input-group-lg
     %span.input-group-addon
       =i+1
-    %a.form-control{href:"#{article.content.first.url}", title:"#{article.title}"}
+    %a.form-control{href:"#{article.source_urls["content"]}", title:"#{article.title}"}
       =article.title
 
 
