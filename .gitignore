@@ -3,4 +3,5 @@ public/index.html
 log
 .bundle
 .bundle/config
+.rspec
 vendor
