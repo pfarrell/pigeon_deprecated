@@ -1,4 +1,7 @@
 %div.container.main
-  %div
-    %p
-      Tame your stream
+  .link     
+    %a{href: "#{url_for("/sources")}"}
+      Sources
+  .link     
+    %a{href: "#{url_for("/source/new")}"}
+      New Source

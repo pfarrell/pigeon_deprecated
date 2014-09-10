@@ -1,0 +1,7 @@
+.item { 
+  width: 25%; 
+  background-color: orange;
+  padding: 1em;
+  margin: .2em;
+  border-radius:5px;
+}

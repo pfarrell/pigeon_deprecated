@@ -1,8 +1,22 @@
--articles.each_with_index do |article, i|
-  .input-group.input-group-lg
-    %span.input-group-addon
-      =i+1
-    %a.form-control{href:"#{article.source_urls["content"]}", title:"#{article.title}"}
-      =article.title
-
-
+%h4
+  %a{href: "#{url_for("/sources")}"}
+    sources
+  >
+  %a{href: "#{url_for("/source/#{feed.id}")}"}
+    =feed.title
+%hr
+#articles
+  -articles.each do |article|
+    %a{href:"#{article.source_urls["content"]}", title:"#{article.title}"}
+      .item
+        #{article.title} (#{article.date.strftime("%Y-%m-%d")})
+:javascript
+  $(window).load(function()
+    {
+      var container = document.querySelector('#articles');
+      var msnry = new Masonry( container, {
+          // options
+            columnWidth: 100,
+              itemSelector: '.item'
+      });
+    });

@@ -14,7 +14,8 @@ class Pigeon < Sinatra::Application
   end
 
   get "/source/:id/current" do
-    haml :articles, locals: { articles: RssFeed[params[:id].to_i].articles }
+    feed = RssFeed[params[:id]]
+    haml :articles, locals: { articles: feed.articles, feed: feed }
   end
 
   post "/source/new" do

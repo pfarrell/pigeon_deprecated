@@ -1,12 +1,12 @@
 require 'byebug'
+require 'date'
+
 class Article < Sequel::Model
   many_to_one :source
   many_to_many :links
 
   def source_urls
     ret = Hash[links.collect{|link| [link.type, link.url]}]
-    puts ret.inspect
-    ret
   end
 
   def self.parse(item, feed) 
@@ -22,15 +22,14 @@ class Article < Sequel::Model
   end
     
   def self.from_rss(item)
-    puts item.title
-    article = self.new(title: item.title)
+    article = self.new(title: item.title, date: item.pubDate || DateTime.now)
     article.links << Link.new(type: "content", url: "#{item.link}")
     article.links << Link.new(type: "comments", url: "#{item.comments}")
     article
   end
 
   def self.from_atom(item)
-    article = self.new(title: item.title.content)
+    article = self.new(title: item.title.content, date: item.published || DateTime.now)
     article.links << Link.new(type: "content", url: "#{item.id.content}")
     article
   end
