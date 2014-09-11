@@ -1,3 +1,7 @@
+body {
+  background: #3D3D3D;
+}
+
 .item { 
   width: 25%; 
   background-color: orange;
