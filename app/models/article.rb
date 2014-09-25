@@ -29,7 +29,7 @@ class Article < Sequel::Model
   end
 
   def self.from_atom(item)
-    article = self.new(title: item.title.content, date: item.published || DateTime.now)
+    article = self.new(title: item.title.content, date: item.published.to_s || DateTime.now)
     article.links << Link.new(type: "content", url: "#{item.id.content}")
     article
   end

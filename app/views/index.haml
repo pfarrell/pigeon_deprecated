@@ -1,7 +1,20 @@
-%div.container.main
+#sources
+  -sources.sort_by{|source| source.title}.each do |source|
+    %a{href:"#{url_for("/source/#{source.id}/current")}"}
+      .item
+        =source.title
+%hr
+.new
   .link     
     %a{href: "#{url_for("/sources")}"}
       Sources
-  .link     
-    %a{href: "#{url_for("/source/new")}"}
-      New Source
+:javascript
+  $(window).load(function()
+    {
+      var container = document.querySelector('#sources');
+      var msnry = new Masonry( container, {
+          // options
+            columnWidth: 100,
+              itemSelector: '.item'
+      });
+    });
