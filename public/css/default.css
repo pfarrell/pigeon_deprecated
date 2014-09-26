@@ -4,8 +4,16 @@ body {
 
 .item { 
   width: 25%; 
-  background-color: orange;
+  background-color: #f0f0f0;
   padding: 1em;
   margin: .2em;
   border-radius:5px;
+}
+
+.btn-hover {
+  font-weight: normal;
+  color: #333333;
+  cursor: pointer;
+  background-color: inherit;
+  border-color: transparent;
 }

@@ -13,7 +13,7 @@
       %form{action: "#{url_for("/article/new")}", method: "POST"}
         %input{type:"Hidden", name:"source_id", value:"#{feed.id}"}  
         %input{type:"Hidden", name:"url", value:"#{article.source_urls["content"]}"}  
-        %input.btn{type:"Submit", value:"Save"}
+        %input.btn.btn-hover.btn-sm{type:"Submit", value:"Save"}
 :javascript
   $(window).load(function()
     {
