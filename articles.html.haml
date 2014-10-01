@@ -10,7 +10,7 @@
     .item
       %a{href:"#{article.source_urls["content"]}", title:"#{article.title}"}
         #{article.title} (#{article.date.strftime("%Y-%m-%d")})
-      %form{action: "#{url_for("/article/new")}", method: "POST"}
+      %form{action: "#{url_for("/article/new.json")}", method: "POST"}
         %input{type:"Hidden", name:"source_id", value:"#{feed.id}"}  
         %input{type:"Hidden", name:"url", value:"#{article.source_urls["content"]}"}  
         %input.btn.btn-hover.btn-sm{type:"Submit", value:"Save"}

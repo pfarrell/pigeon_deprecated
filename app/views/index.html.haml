@@ -1,5 +1,6 @@
 #sources
-  -sources.sort_by{|source| source.title}.each do |source|
+  -byebug
+  -sources.sort_by{|source| source.title || "" }.each do |source|
     %a{href:"#{url_for("/source/#{source.id}/current")}"}
       .item
         =source.title

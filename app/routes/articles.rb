@@ -3,6 +3,9 @@ class Pigeon < Sinatra::Application
     link = Link.new
     link.url = params[:url]
     link.save
-    "saved"
+    respond_to do |wants|
+      wants.html { "saved" }
+      wants.json { link.to_json }
+    end
   end
 end
