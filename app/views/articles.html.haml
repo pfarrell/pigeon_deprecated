@@ -9,7 +9,7 @@
   -articles.each do |article|
     .item
       %a{href:"#{article.source_urls["content"]}", title:"#{article.title}"}
-        #{article.title} (#{article.date.strftime("%Y-%m-%d")})
+        #{article.title}
       %form{action: "#{url_for("/article/new.json")}", method: "POST"}
         %input{type:"Hidden", name:"source_id", value:"#{feed.id}"}  
         %input{type:"Hidden", name:"url", value:"#{article.source_urls["content"]}"}  

@@ -1,4 +1,3 @@
-require 'byebug'
 require 'date'
 
 class Article < Sequel::Model
@@ -16,7 +15,7 @@ class Article < Sequel::Model
   end
     
   def self.from_rss(item)
-    article = self.new(title: item.title, date: item.pubDate || DateTime.now)
+    article = self.new(title: item.title)#, date: item.pubDate || DateTime.now)
     article.links << Link.new(type: "content", url: "#{item.link}")
     article.links << Link.new(type: "comments", url: "#{item.comments}")
     article
