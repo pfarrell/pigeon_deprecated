@@ -8,6 +8,7 @@ gem "mysql2"
 gem "haml"
 gem 'capistrano', '~> 3.2.0'
 gem 'capistrano-bundler', '~> 1.1.2'
+gem 'capistrano-bower'
 gem 'rspec'
 gem 'simple-rss'
 gem 'sinatra-respond_to'

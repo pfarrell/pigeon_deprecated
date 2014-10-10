@@ -1,5 +1,6 @@
 public/sites
 public/index.html
+public/libs
 log
 .bundle
 .bundle/config

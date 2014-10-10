@@ -5,13 +5,13 @@
       #{@title}
     %meta{:charset => "utf-8"}
     %meta{:name => "viewport", :content=>"width=device-width, initial-scale=1"}
-    %script{:type => "text/javascript", :src => "#{url_for("/js/jquery.min.js")}"}
-    %script{:type => "text/javascript", :src=>"#{url_for("/js/bootstrap.min.js")}"}
-    %script{:type => "text/javascript", :src=>"#{url_for("/js/masonry.pkgd.js")}"}
     %link{:rel => "stylesheet", :href => "#{url_for("/css/default.css")}", :type => "text/css"}
-    %link{:rel => "stylesheet", :href => "#{url_for("/css/jquery-ui.css")}", :type => "text/css"}
     %link{:rel => "stylesheet", :href => "http://fonts.googleapis.com/css?family=Cabin", :type => "text/css", :media => "all"}
-    %link{:rel => "stylesheet", :href => "#{url_for("/css/bootstrap.min.css")}", :type => "text/css"}
+    %link{:rel => "stylesheet", :href => "#{url_for("/libs/jquery-ui/themes/base/core.css")}", :type => "text/css"}
+    %script{:type => "text/javascript", :src => "#{url_for('/libs/jquery/dist/jquery.min.js')}"}
+    %script{:type => "text/javascript", :src => "#{url_for '/libs/bootstrap/dist/js/bootstrap.min.js'}"}
+    %script{type: "text/javascript", src: "#{url_for "/libs/masonry/dist/masonry.pkgd.js"}"}
+    %script{:type => "text/javascript", :src => "#{url_for '/libs/bootstrap/dist/js/bootstrap.min.js'}"}
   %body
     %nav.navbar.navbar-default{role: "navigation"}
       .navbar-header
