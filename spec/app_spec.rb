@@ -19,6 +19,12 @@ describe 'Pigeon' do
     expect(last_response.body).to match(/Pigeon/)
   end
 
+  it "has a /source/:id/current route" do
+    get "/source/1/current"
+    expect(last_response).to be_ok
+    expect(last_response.body).to match(/Pigeon/)
+  end
+
   it "has a route for a single source" do
     get "/source/1"
     expect(last_response).to be_ok
