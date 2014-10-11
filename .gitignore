@@ -6,3 +6,4 @@ log
 .bundle/config
 .rspec
 vendor
+coverage

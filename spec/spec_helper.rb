@@ -1,3 +1,18 @@
+require 'simplecov'
+require 'test/unit'
+require 'rack/test'
+
+ENV['RACK_ENV'] = 'test'
+
+SimpleCov.start do
+  add_filter "/vendor/"
+  add_filter "/spec/"
+end
+
+module RSpecMixin
+  include Rack::Test::Methods
+  def app() Pigeon end
+end
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
@@ -11,7 +26,7 @@ RSpec.configure do |config|
   begin
     config.filter_run :focus
     config.run_all_when_everything_filtered = true
-    config.disable_monkey_patching!
+    #config.disable_monkey_patching!
     #config.warnings = true
     if config.files_to_run.one?
       config.default_formatter = 'doc'
@@ -19,6 +34,8 @@ RSpec.configure do |config|
     config.profile_examples = 10
     config.order = :random
     Kernel.srand config.seed
+
+    config.include RSpecMixin
   end
 end
 
