@@ -4,7 +4,7 @@ gem "sinatra"
 gem "sinatra-contrib"
 gem 'emk-sinatra-url-for'
 gem "sequel"
-gem "mysql2"
+gem "pg"
 gem "haml"
 gem 'capistrano', '~> 3.2.0'
 gem 'capistrano-bundler', '~> 1.1.2'
