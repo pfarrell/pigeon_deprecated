@@ -8,13 +8,3 @@
   .link     
     %a{href: "#{url_for("/sources")}"}
       Sources
-:javascript
-  $(window).load(function()
-    {
-      var container = document.querySelector('#sources');
-      var msnry = new Masonry( container, {
-          // options
-            columnWidth: 100,
-              itemSelector: '.item'
-      });
-    });

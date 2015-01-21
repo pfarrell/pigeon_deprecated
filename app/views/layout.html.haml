@@ -10,27 +10,31 @@
     %link{:rel => "stylesheet", :href => "#{url_for '/libs/bootstrap/dist/css/bootstrap.min.css'}", :type => "text/css"}
     %script{:type => "text/javascript", :src => "#{url_for('/libs/jquery/dist/jquery.min.js')}"}
     %script{:type => "text/javascript", :src => "#{url_for '/libs/bootstrap/dist/js/bootstrap.min.js'}"}
-    %script{type: "text/javascript", src: "#{url_for "/libs/masonry/dist/masonry.pkgd.js"}"}
   %body
-    %nav.navbar.navbar-default{role: "navigation"}
-      .navbar-header
-        %button.navbar-toggle{type:"button", data:{toggle: "collapse", target: "#navbar-collapse"}}
-          %span.sr-only
-            Toggle navigation
-          %span.icon-bar
-          %span.icon-bar
-          %span.icon-bar
-        %a.navbar-brand{href:"#{url_for("/")}"}
-          Pigeon
-      .collapse.navbar-collapse#navbar-collapse
-        %form.navbar-form.navbar-left{id: "search", action: "#{url_for("/search")}", method: "GET"}
-          .form-group
-            %input.form-control{type: "TEXT", id: "q", name: "q", autofocus: true}
-    .container#content
-      =yield
-      .row
-    .container#footer
-      A 
-      %a{href:"http://patf.net"}
-        patf
-      joint
+    %script{type: "text/x-handlebars"}
+      %nav.navbar.navbar-default{role: "navigation"}
+        .navbar-header
+          %button.navbar-toggle{type:"button", data:{toggle: "collapse", target: "#navbar-collapse"}}
+            %span.sr-only
+              Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{href:"#{url_for("/")}"}
+            Pigeon
+        .collapse.navbar-collapse#navbar-collapse
+          %form.navbar-form.navbar-left{id: "search", action: "#{url_for("/search")}", method: "GET"}
+            .form-group
+              %input.form-control{type: "TEXT", id: "q", name: "q", autofocus: true}
+      .container#content
+        {{outlet}}
+      .container#footer
+        A 
+        %a{href:"http://patf.net"}
+          patf
+        joint
+    %script{:type => "text/javascript", :src => "#{url_for('/libs/handlebars/handlebars.min.js')}"}
+    %script{:type => "text/javascript", :src => "#{url_for('/libs/ember/ember.js')}"}
+    %script{:type => "text/javascript", :src => "#{url_for('/libs/showdown/src/showdown.js')}"}
+    %script{:type => "text/javascript", :src => "#{url_for('/libs/moment/moment.js')}"}
+    %script{:type => "text/javascript", :src => "#{url_for('/js/app.js')}"}
