@@ -10,7 +10,11 @@ class Pigeon < Sinatra::Application
   end
 
   get "/source/:id" do
-    haml :rss_feed, locals: { model: RssFeed[params[:id].to_i] }
+    data = RssFeed[params[:id].to_i] 
+    respond_to do |wants|
+      wants.html { haml :rss_feed, locals: { model: data } }
+      wants.json { data.to_json }
+    end
   end
 
   get "/source/:id/current" do
