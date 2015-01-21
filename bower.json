@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "dependencies": {
     "masonry": "~3.1.5",
-    "bootstrap": "~3.3.0"
+    "bootstrap": "~3.3.0",
+    "ember": "~1.9.1"
   },
   "homepage": "https://github.com/pfarrell/pigeon",
   "authors": [
