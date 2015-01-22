@@ -1,94 +1,121 @@
-{ "name":"Hacker News", "url":"https://news.ycombinator.com/rss"}
-{ "name" : "PandoDaily", "url" : "http://pandodaily.com/feed/"}
-{ "name" : "The Old New Thing", "url" : "http://blogs.msdn.com/b/oldnewthing/rss.aspx"}
-{ "name" : "Coding Horror", "url" : "http://feeds.feedburner.com/codinghorror"}
-{ "name" : "Signal vs. Noise", "url" : "http://feeds.feedburner.com/37signals/beMH"}
-{ "name" : "Rob Conery", "url" : "http://feeds.feedburner.com/wekeroad/EeKc"}
-{ "name" : "John Resig", "url" : "http://feeds.feedburner.com/JohnResig"}
-{ "name" : "Scott Hanselman", "url" : "http://feeds.feedburner.com/ScottHanselman"}
-{ "name" : "CNN.com", "url" : "http://rss.cnn.com/rss/cnn_topstories.rss"}
-{ "name" : "IndyStar - Top Stories", "url" : "http://feeds.feedblitz.com/indystar/todaystopstories", "username" : "", "password" : ""}
-{ "name" : "BBC News - Home", "url" : "http://feeds.bbci.co.uk/news/rss.xml"}
-{ "name" : "BBC News - Science & Environment", "url" : "http://feeds.bbci.co.uk/news/science_and_environment/rss.xml"}
-{ "name" : "BBC News - Technology", "url" : "http://feeds.bbci.co.uk/news/technology/rss.xml"}
-{ "name" : "TechCrunch", "url" : "http://feeds.feedburner.com/TechCrunch/"}
-{ "name" : "TechCrunch » Fundings & Exits", "url" : "http://feeds.feedburner.com/TechCrunch/fundings-exits"}
-{ "name" : "ReadWriteWeb", "url" : "http://feeds.feedburner.com/readwriteweb"}
-{ "name" : "reddit: Technology", "url" : "http://www.reddit.com/r/technology/.rss", "username" : ""}
-{ "name" : "reddit: the front page of the internet", "url" : "http://www.reddit.com/.rss"}
-{ "name" : "Tumblr: timfarrellnyc", "url" : "http://timfarrellnyc.tumblr.com/rss", "username" : ""}
-{ "name" : "dzone.com: latest front page", "url" : "http://feeds.dzone.com/dzone/frontpage?format=xml"}
-{ "name" : "Technology", "url" : "http://www.good.is/rss/category/technology"}
-{ "name" : "design mind on GOOD", "url" : "http://www.good.is/rss/series/design-mind-on-good"}
-{ "name" : "pop smART", "url" : "http://www.good.is/rss/series/pop-smart"}
-{ "name" : "Design", "url" : "http://www.good.is/rss/category/art-and-design"}
-{ "name" : "Lifestyle", "url" : "http://www.good.is/rss/category/lifestyle"}
-{ "name" : "Lambda the Ultimate - Programming Languages Weblog", "url" : "http://lambda-the-ultimate.org/rss.xml"}
-{ "name" : "High Scalability", "url" : "http://feeds.feedburner.com/HighScalability?format=xml"}
-{ "name" : "Programming in the 21st Century", "url" : "http://prog21.dadgum.com/atom.xml"}
-{ "name" : "DailyJS", "url" : "http://feeds.feedburner.com/dailyjs?format=xml"}
-{ "name" : "Tom Preston-Werner", "url" : "http://feeds.feedburner.com/tom-preston-werner?format=xml"}
-{ "name" : "Signal vs. Noise", "url" : "http://feeds.feedburner.com/37signals/beMH"}
-{ "name" : "Dilbert Daily Strip", "url" : "http://feed.dilbert.com/dilbert/daily_strip?format=xml"}
-{ "name" : "Penny Arcade", "url" : "http://penny-arcade.com/feed"}
-{ "name" : "Saturday Morning Breakfast Cereal (updated daily)", "url" : "http://feeds.feedburner.com/smbc-comics/PvLb?format=xml"}
-{ "name" : "xkcd.com", "url" : "http://xkcd.com/atom.xml"}
-{ "name" : "erjjones's Activity", "url" : "https://github.com/erjjones.atom"}
-{ "name" : "pfarrell's Activity", "url" : "https://github.com/pfarrell.atom"}
-{ "name" : "MeFi Music", "url" : "http://feeds.feedburner.com/mefi/Music?format=xml"}
-{ "name" : "MetaFilter", "url" : "http://feeds.feedburner.com/Metafilter"}
-{ "name" : "I, Cringley", "url" : "http://www.cringely.com/feed/"}
-{ "name" : "Letters of Note", "url" : "http://feeds.feedburner.com/LettersOfNote?format=xml"}
-{ "name" : "Gödel's Lost Letter and P=NP", "url" : "http://rjlipton.wordpress.com/feed/"}
-{ "name" : "John Graham-Cumming", "url" : "http://blog.jgc.org/feeds/posts/default"}
-{ "name" : "Data Mining: Text Mining", "url" : "http://feeds.feedburner.com/DataMining"}
-{ "name" : "Nir and Far", "url" : "http://feeds.feedburner.com/NirAndFar"}
-{ "name" : "Daring Fireball", "url" : "http://daringfireball.net/index.xml"}
-{ "name" : "Beta List", "url" : "http://feeds.feedburner.com/betalist?format=xml"}
-{ "name" : "Stevey's Blog Rants", "url" : "http://steve-yegge.blogspot.com/atom.xml"}
-{ "name" : "Jef Claes", "url" : "http://feeds.feedburner.com/DiaryOfAnetDeveloperByJefClaes"}
-{ "name" : "The GitHub Blog", "url" : "https://github.com/blog.atom"}
-{ "name" : "The Endeavour", "url" : "http://feeds.feedburner.com/TheEndeavour?format=xml"}
-{ "name" : "profserious", "url" : "http://blog.prof.so/feeds/posts/default"}
-{ "name" : "Computational Complexity", "url" : "http://blog.computationalcomplexity.org/feeds/posts/default"}
-{ "name" : "Daniel Lemire's blog", "url" : "http://feeds.feedburner.com/daniel-lemire/atom"}
-{ "name" : "Communications of the ACM: Data / Storage And Retrieval", "url" : "http://cacm.acm.org/browse-by-subject/data-storage-and-retrieval.rss"}
-{ "name" : "Communications of the ACM: Artificial Intelligence", "url" : "http://cacm.acm.org/browse-by-subject/artificial-intelligence.rss"}
-{ "name" : "Communications of the ACM: Search", "url" : "http://cacm.acm.org/browse-by-subject/search.rss"}
-{ "name" : "Communications of the ACM: Theory", "url" : "http://cacm.acm.org/browse-by-subject/theory.rss"}
-{ "name" : "Communications of the ACM: Human Computer Interaction", "url" : "http://cacm.acm.org/browse-by-subject/human-computer-interaction.rss"}
-{ "name" : "Alan Winfield's Web Log", "url" : "http://alanwinfield.blogspot.com/feeds/posts/default"}
-{ "name" : "Communications of the ACM: blog@CACM", "url" : "http://cacm.acm.org/blogs/blog-cacm.rss", "username" : "", "password" : ""}
-{ "name" : "Google Research", "url" : "http://feeds.feedburner.com/blogspot/gJZg", "username" : "", "password" : ""}
-{ "name" : "Machine Learning (Theory)", "url" : "http://feeds2.feedburner.com/MachineLearningtheory"}
-{ "name" : "Embedded in Academia", "url" : "http://feeds.feedburner.com/EmbeddedInAcademia"}
-{ "name" : "What's new", "url" : "http://terrytao.wordpress.com/feed/"}
-{ "name" : "tombone's blog", "url" : "http://quantombone.blogspot.com/feeds/posts/default"}
-{ "name" : "Computer Science: Theory and Application", "url" : "http://www.reddit.com/r/compsci/.rss"}
-{ "name" : "Papers in Computer Science", "url" : "http://www.reddit.com/r/compscipapers/.rss"}
-{ "name" : "Machine Learning", "url" : "http://www.reddit.com/r/machinelearning/.rss"}
-{ "name" : "Semantic Web: Triples all the way down", "url" : "http://www.reddit.com/r/semanticweb/.rss"}
-{ "name" : "Machine Learning", "url" : "http://www.reddit.com/r/machinelearning/.rss"}
-{ "name" : "MetaOptimize Q+A - machine learning", "url" : "http://metaoptimize.com/qa/feeds/rss/", "username" : "", "password" : ""}
-{ "name" : "No Free Hunch", "url" : "http://blog.kaggle.com/feed/"}
-{ "name" : "Reverse Engineering", "url" : "http://www.reddit.com/r/reverseengineering/.rss"}
-{ "name" : "Types", "url" : "http://www.reddit.com/r/types/.rss"}
-{ "name" : "Matt Might's blog", "url" : "http://matt.might.net/articles/feed.rss"}
-{ "name" : "natural language processing blog", "url" : "http://nlpers.blogspot.com/feeds/posts/default"}
-{ "name" : "Math ∩ Programming", "url" : "http://jeremykun.wordpress.com/feed/"}
-{ "name" : "The Naive Optimist", "url" : "http://ryanleecarson.tumblr.com/rss"}
-{ "name" : "ProgrammableWeb", "url" : "http://feeds.feedburner.com/ProgrammableWeb"}
-{ "name" : "Ray Wenderlich", "url" : "http://feeds.feedburner.com/RayWenderlich?format=xml"}
-{ "name" : "thoughts from the red planet", "url" : "http://feeds.feedburner.com/thoughtsfromtheredplanet?format=xml"}
-{ "name" : "Simply Statistics", "url" : "http://simplystatistics.org/feed/"}
-{ "name" : "igvita.com", "url" : "http://feeds.igvita.com/igvita"}
-{ "name" : "The Netflix Tech Blog", "url" : "http://techblog.netflix.com/rss.xml"}
-{ "name" : "Alex's Blog", "url" : "http://alexjbantz.wordpress.com/feed/"}
-{ "name" : "FiveThirtyEightFiveThirtyEight | Features", "url" : "http://fivethirtyeight.com/features/feed/"}
-{ "name" : "PhraseologyProject.com Phrases", "url" : "http://feeds.feedburner.com/phraseologyproject?format=xml"}
-{ "name" : "Lamer News", "url" : "http://lamernews.com/rss"}
-{ "name" : "programming", "url" : "http://www.reddit.com/r/programming/.rss"}
-{ "name" : "Ask a Mathematician / Ask a Physicist", "url" : "http://www.askamathematician.com/feed/"}
-{ "name" : "Google Poetics", "url" : "http://www.googlepoetics.com/rss"}
-{ "name" : "Vox -  All", "url" : "http://www.vox.com/rss/index.xml"}
-{ "name" : "Gabriel Weinberg's Blog", "url" : "http://www.gabrielweinberg.com/blog/atom.xml"}
+{ "_id" : "4ee5855ded86073e9c000009", "name" : "gmail", "created_at" : "2011-12-12T04:38:53Z", "updated_at" : "2012-02-05T20:56:57Z", "url" : "", "username" : "pfbookmark", "uid" : "100002621607826", "type" : "Gmail", "credentials" : { "_id" : "4ee5855ded86073e9c000007", "username" : "pfbookmark", "password" : "greenowl1!@" }, "password" : "greenowl1!@", "signal" : true }
+{ "_id" : "4f2ee4e8ed860767a8000008", "name" : "Hacker News", "created_at" : "2012-02-05T20:22:00Z", "updated_at" : "2012-02-05T20:22:00Z", "url" : "http://news.ycombinator.com/rss", "uid" : "100002621607826", "type" : "RSS" }
+{ "_id" : "4f2f40faed86070b29000009", "name" : "PandoDaily", "created_at" : "2012-02-06T02:54:50Z", "updated_at" : "2012-02-06T02:54:50Z", "url" : "http://pandodaily.com/feed/", "uid" : "100002621607826", "type" : "RSS" }
+{ "_id" : "4f34135bed8607244e00028d", "name" : "The Old New Thing", "created_at" : "2012-02-09T18:41:31Z", "updated_at" : "2012-02-09T18:41:31Z", "url" : "http://blogs.msdn.com/b/oldnewthing/rss.aspx", "uid" : "100002621607826", "type" : "RSS" }
+{ "_id" : "4f341446ed8607244e00029c", "name" : "Coding Horror", "created_at" : "2012-02-09T18:45:26Z", "updated_at" : "2012-02-09T18:45:26Z", "url" : "http://feeds.feedburner.com/codinghorror", "uid" : "100002621607826", "type" : "RSS" }
+{ "_id" : "4f341466ed8607244e0002a7", "name" : "Signal vs. Noise", "created_at" : "2012-02-09T18:45:58Z", "updated_at" : "2012-02-09T18:45:58Z", "url" : "http://feeds.feedburner.com/37signals/beMH", "uid" : "100002621607826", "type" : "RSS" }
+{ "_id" : "4f341522ed8607244e0002bb", "name" : "Rob Conery", "created_at" : "2012-02-09T18:49:06Z", "updated_at" : "2012-02-09T18:49:06Z", "url" : "http://feeds.feedburner.com/wekeroad/EeKc", "uid" : "100002621607826", "type" : "RSS" }
+{ "_id" : "4f341569ed8607244e0002c8", "name" : "John Resig", "created_at" : "2012-02-09T18:50:17Z", "updated_at" : "2012-02-09T18:50:17Z", "url" : "http://feeds.feedburner.com/JohnResig", "uid" : "100002621607826", "type" : "RSS" }
+{ "_id" : "4f341581ed8607244e0002d6", "name" : "Scott Hanselman", "created_at" : "2012-02-09T18:50:41Z", "updated_at" : "2012-02-09T18:50:41Z", "url" : "http://feeds.feedburner.com/ScottHanselman", "uid" : "100002621607826", "type" : "RSS" }
+{ "_id" : "4f341eb4ed8607244e000416", "name" : "CNN.com", "created_at" : "2012-02-09T19:29:56Z", "updated_at" : "2012-02-09T19:29:56Z", "url" : "http://rss.cnn.com/rss/cnn_topstories.rss", "uid" : "100002621607826", "type" : "RSS" }
+{ "_id" : "4f341ecfed8607244e000426", "uid" : "100002621607826", "name" : "IndyStar - Top Stories", "type" : "RSS", "url" : "http://feeds.feedblitz.com/indystar/todaystopstories", "username" : "", "password" : "", "created_at" : "2012-02-09T19:30:23Z", "updated_at" : "2014-08-29T15:05:45.713Z" }
+{ "_id" : "4f341f0ced8607244e000449", "name" : "BBC News - Home", "created_at" : "2012-02-09T19:31:24Z", "updated_at" : "2012-02-09T19:31:24Z", "url" : "http://feeds.bbci.co.uk/news/rss.xml", "uid" : "100002621607826", "type" : "RSS" }
+{ "_id" : "4f341f1ded8607244e00045b", "name" : "BBC News - Science & Environment", "created_at" : "2012-02-09T19:31:41Z", "updated_at" : "2012-02-09T19:31:41Z", "url" : "http://feeds.bbci.co.uk/news/science_and_environment/rss.xml", "uid" : "100002621607826", "type" : "RSS" }
+{ "_id" : "4f341f2ced8607244e00046e", "name" : "BBC News - Technology", "created_at" : "2012-02-09T19:31:56Z", "updated_at" : "2012-02-09T19:31:56Z", "url" : "http://feeds.bbci.co.uk/news/technology/rss.xml", "uid" : "100002621607826", "type" : "RSS" }
+{ "_id" : "4f3420dded8607244e000483", "name" : "TechCrunch", "created_at" : "2012-02-09T19:39:09Z", "updated_at" : "2012-02-09T19:39:09Z", "url" : "http://feeds.feedburner.com/TechCrunch/", "uid" : "100002621607826", "type" : "RSS" }
+{ "_id" : "4f3420f2ed8607244e000498", "name" : "TechCrunch » Fundings & Exits", "created_at" : "2012-02-09T19:39:30Z", "updated_at" : "2012-02-09T19:39:30Z", "url" : "http://feeds.feedburner.com/TechCrunch/fundings-exits", "uid" : "100002621607826", "type" : "RSS" }
+{ "_id" : "4f342173ed8607244e0004ae", "name" : "ReadWriteWeb", "created_at" : "2012-02-09T19:41:39Z", "updated_at" : "2012-02-09T19:41:39Z", "url" : "http://feeds.feedburner.com/readwriteweb", "uid" : "100002621607826", "type" : "RSS" }
+{ "_id" : "4f34222ded8607244e0004c5", "name" : "reddit: Technology", "created_at" : "2012-02-09T19:44:45Z", "updated_at" : "2012-02-09T19:46:51Z", "url" : "http://www.reddit.com/r/technology/.rss", "username" : "", "uid" : "100002621607826", "type" : "RSS", "password" : "" }
+{ "_id" : "4f34229bed8607244e0004dd", "name" : "reddit: the front page of the internet", "created_at" : "2012-02-09T19:46:35Z", "updated_at" : "2012-02-09T19:46:35Z", "url" : "http://www.reddit.com/.rss", "uid" : "100002621607826", "type" : "RSS" }
+{ "_id" : "4f3428d3ed8607244e00054d", "name" : "Tumblr: timfarrellnyc", "created_at" : "2012-02-09T20:13:07Z", "updated_at" : "2012-02-09T20:16:45Z", "url" : "http://timfarrellnyc.tumblr.com/rss", "username" : "", "uid" : "100002621607826", "type" : "RSS", "password" : "" }
+{ "_id" : "4f3433c8ed860728ae00001b", "name" : "dzone.com: latest front page", "created_at" : "2012-02-09T20:59:52Z", "updated_at" : "2012-02-09T20:59:52Z", "url" : "http://feeds.dzone.com/dzone/frontpage?format=xml", "uid" : "100002621607826", "type" : "RSS" }
+{ "_id" : "4f34344fed860728ae000036", "name" : "Technology", "created_at" : "2012-02-09T21:02:07Z", "updated_at" : "2012-02-09T21:02:07Z", "url" : "http://www.good.is/rss/category/technology", "uid" : "100002621607826", "type" : "RSS" }
+{ "_id" : "4f3434beed860728ae000052", "name" : "design mind on GOOD", "created_at" : "2012-02-09T21:03:58Z", "updated_at" : "2012-02-09T21:03:58Z", "url" : "http://www.good.is/rss/series/design-mind-on-good", "uid" : "100002621607826", "type" : "RSS" }
+{ "_id" : "4f3434e5ed860728ae00006f", "name" : "pop smART", "created_at" : "2012-02-09T21:04:37Z", "updated_at" : "2012-02-09T21:04:37Z", "url" : "http://www.good.is/rss/series/pop-smart", "uid" : "100002621607826", "type" : "RSS" }
+{ "_id" : "4f343512ed860728ae00008d", "name" : "Design", "created_at" : "2012-02-09T21:05:22Z", "updated_at" : "2012-02-09T21:05:22Z", "url" : "http://www.good.is/rss/category/art-and-design", "uid" : "100002621607826", "type" : "RSS" }
+{ "_id" : "4f343526ed860728ae0000ac", "name" : "Lifestyle", "created_at" : "2012-02-09T21:05:42Z", "updated_at" : "2012-02-09T21:05:42Z", "url" : "http://www.good.is/rss/category/lifestyle", "uid" : "100002621607826", "type" : "RSS" }
+{ "_id" : "4f45398ced86072ccc0000e0", "name" : "Lambda the Ultimate - Programming Languages Weblog", "created_at" : "2012-02-22T18:53:00Z", "updated_at" : "2012-02-22T18:53:00Z", "url" : "http://lambda-the-ultimate.org/rss.xml", "uid" : "100002621607826", "type" : "RSS" }
+{ "_id" : "4f46a006ed86070b090000cf", "uid" : "100002621607826", "name" : "High Scalability", "type" : "RSS", "url" : "http://feeds.feedburner.com/HighScalability?format=xml", "created_at" : "2012-02-23T20:22:30Z", "updated_at" : "2012-02-23T20:22:30Z" }
+{ "_id" : "4f47f078ed86077d6a000004", "uid" : "100002621607826", "name" : "Programming in the 21st Century", "type" : "RSS", "url" : "http://prog21.dadgum.com/atom.xml", "created_at" : "2012-02-24T20:18:00Z", "updated_at" : "2012-02-24T20:18:00Z" }
+{ "_id" : "4f47f09aed86077d6a00002a", "uid" : "100002621607826", "name" : "DailyJS", "type" : "RSS", "url" : "http://feeds.feedburner.com/dailyjs?format=xml", "created_at" : "2012-02-24T20:18:34Z", "updated_at" : "2012-02-24T20:18:34Z" }
+{ "_id" : "4f47f0b0ed86077d6a00004e", "uid" : "100002621607826", "name" : "Tom Preston-Werner", "type" : "RSS", "url" : "http://feeds.feedburner.com/tom-preston-werner?format=xml", "created_at" : "2012-02-24T20:18:56Z", "updated_at" : "2012-02-24T20:18:56Z" }
+{ "_id" : "4f4fcb67ed86075636000046", "uid" : "100002621607826", "name" : "Signal vs. Noise", "type" : "RSS", "url" : "http://feeds.feedburner.com/37signals/beMH", "created_at" : "2012-03-01T19:17:59Z", "updated_at" : "2012-03-01T19:17:59Z" }
+{ "_id" : "4f4fcbc4ed8607563600006c", "uid" : "100002621607826", "name" : "Dilbert Daily Strip", "type" : "RSS", "url" : "http://feed.dilbert.com/dilbert/daily_strip?format=xml", "created_at" : "2012-03-01T19:19:32Z", "updated_at" : "2012-03-01T19:19:32Z" }
+{ "_id" : "4f4fcc37ed860756360000e3", "uid" : "100002621607826", "name" : "Penny Arcade", "type" : "RSS", "url" : "http://penny-arcade.com/feed", "created_at" : "2012-03-01T19:21:27Z", "updated_at" : "2012-03-01T19:21:27Z" }
+{ "_id" : "4f4fcc55ed8607563600010b", "uid" : "100002621607826", "name" : "Saturday Morning Breakfast Cereal (updated daily)", "type" : "RSS", "url" : "http://feeds.feedburner.com/smbc-comics/PvLb?format=xml", "created_at" : "2012-03-01T19:21:57Z", "updated_at" : "2012-03-01T19:21:57Z" }
+{ "_id" : "4f4fcc7ded86075636000134", "uid" : "100002621607826", "name" : "xkcd.com", "type" : "RSS", "url" : "http://xkcd.com/atom.xml", "created_at" : "2012-03-01T19:22:37Z", "updated_at" : "2012-03-01T19:22:37Z" }
+{ "_id" : "4f50e8a2ed860756360003e2", "uid" : "100002621607826", "name" : "erjjones's Activity", "type" : "RSS", "url" : "https://github.com/erjjones.atom", "created_at" : "2012-03-02T15:34:58Z", "updated_at" : "2012-03-02T15:34:58Z" }
+{ "_id" : "4f50e8b2ed8607563600040d", "uid" : "100002621607826", "name" : "pfarrell's Activity", "type" : "RSS", "url" : "https://github.com/pfarrell.atom", "created_at" : "2012-03-02T15:35:14Z", "updated_at" : "2012-03-02T15:35:14Z" }
+{ "_id" : "4f56e14ced860766e70000e5", "uid" : "100002621607826", "name" : "MeFi Music", "type" : "RSS", "url" : "http://feeds.feedburner.com/mefi/Music?format=xml", "created_at" : "2012-03-07T04:17:16Z", "updated_at" : "2012-03-07T04:17:16Z" }
+{ "_id" : "4f56e1b8ed860766e7000112", "uid" : "100002621607826", "name" : "MetaFilter", "type" : "RSS", "url" : "http://feeds.feedburner.com/Metafilter", "created_at" : "2012-03-07T04:19:04Z", "updated_at" : "2012-03-07T04:19:04Z" }
+{ "_id" : "4f70a449ed860720ec000041", "uid" : "100002621607826", "name" : "I, Cringely", "type" : "RSS", "url" : "http://feeds.feedburner.com/ICringely?format=xml", "created_at" : "2012-03-26T17:15:53Z", "updated_at" : "2012-03-26T17:15:53Z" }
+{ "_id" : "4f75f806ed86075d300000be", "uid" : "100002621607826", "name" : "Letters of Note", "type" : "RSS", "url" : "http://feeds.feedburner.com/LettersOfNote?format=xml", "created_at" : "2012-03-30T18:14:30Z", "updated_at" : "2012-03-30T18:14:30Z" }
+{ "_id" : "4f75f82ced86075d300000ee", "uid" : "100002621607826", "name" : "Gödel's Lost Letter and P=NP", "type" : "RSS", "url" : "http://rjlipton.wordpress.com/feed/", "created_at" : "2012-03-30T18:15:08Z", "updated_at" : "2012-03-30T18:15:08Z" }
+{ "_id" : "4f7b060aed8607461f0000c6", "uid" : "100002621607826", "name" : "John Graham-Cumming", "type" : "RSS", "url" : "http://blog.jgc.org/feeds/posts/default", "created_at" : "2012-04-03T14:15:38Z", "updated_at" : "2012-04-03T14:15:38Z" }
+{ "_id" : "4f91a158ed8607452c000033", "uid" : "100002621607826", "name" : "Data Mining: Text Mining, Visualization and Social Media", "type" : "RSS", "url" : "http://feeds.feedburner.com/DataMining", "created_at" : "2012-04-20T17:48:08Z", "updated_at" : "2012-04-20T17:48:08Z" }
+{ "_id" : "4f96296fed860748c0000064", "uid" : "100002621607826", "name" : "Nir and Far", "type" : "RSS", "url" : "http://feeds.feedburner.com/NirAndFar", "created_at" : "2012-04-24T04:17:51Z", "updated_at" : "2012-04-24T04:17:51Z" }
+{ "_id" : "4fa02a68ed86076b560000de", "uid" : "100002621607826", "name" : "Daring Fireball", "type" : "RSS", "url" : "http://daringfireball.net/index.xml", "created_at" : "2012-05-01T18:24:40Z", "updated_at" : "2012-05-01T18:24:40Z" }
+{ "_id" : "4fa17be7ed86073ab3000037", "uid" : "100002621607826", "name" : "Beta List", "type" : "RSS", "url" : "http://feeds.feedburner.com/betalist?format=xml", "created_at" : "2012-05-02T18:24:39Z", "updated_at" : "2012-05-02T18:24:39Z" }
+{ "_id" : "4fa2a20bed86073ab3000186", "uid" : "100002621607826", "name" : "Stevey's Blog Rants", "type" : "RSS", "url" : "http://steve-yegge.blogspot.com/atom.xml", "created_at" : "2012-05-03T15:19:39Z", "updated_at" : "2012-05-03T15:19:39Z" }
+{ "_id" : "4fa6d99fed860742ba000048", "uid" : "100002621607826", "name" : "Jef Claes", "type" : "RSS", "url" : "http://feeds.feedburner.com/DiaryOfAnetDeveloperByJefClaes", "created_at" : "2012-05-06T20:05:51Z", "updated_at" : "2012-05-06T20:05:51Z" }
+{ "_id" : "4faab07fed86073b33000069", "uid" : "100002621607826", "name" : "The GitHub Blog", "type" : "RSS", "url" : "https://github.com/blog.atom", "created_at" : "2012-05-09T17:59:27Z", "updated_at" : "2012-05-09T17:59:27Z" }
+{ "_id" : "4faab1f8ed86073b330000a2", "uid" : "100002621607826", "name" : "The Endeavour", "type" : "RSS", "url" : "http://feeds.feedburner.com/TheEndeavour?format=xml", "created_at" : "2012-05-09T18:05:44Z", "updated_at" : "2012-05-09T18:05:44Z" }
+{ "_id" : "4faab4feed86073b33000114", "uid" : "100002621607826", "name" : "profserious", "type" : "RSS", "url" : "http://blog.prof.so/feeds/posts/default", "created_at" : "2012-05-09T18:18:38Z", "updated_at" : "2012-05-09T18:18:38Z" }
+{ "_id" : "4faab571ed86073b3300014f", "uid" : "100002621607826", "name" : "Computational Complexity", "type" : "RSS", "url" : "http://blog.computationalcomplexity.org/feeds/posts/default", "created_at" : "2012-05-09T18:20:33Z", "updated_at" : "2012-05-09T18:20:33Z" }
+{ "_id" : "4faab58aed86073b3300018b", "uid" : "100002621607826", "name" : "Daniel Lemire's blog", "type" : "RSS", "url" : "http://feeds.feedburner.com/daniel-lemire/atom", "created_at" : "2012-05-09T18:20:58Z", "updated_at" : "2012-05-09T18:20:58Z" }
+{ "_id" : "4faab63aed86073b3300023d", "uid" : "100002621607826", "name" : "Communications of the ACM: Data / Storage And Retrieval", "type" : "RSS", "url" : "http://cacm.acm.org/browse-by-subject/data-storage-and-retrieval.rss", "created_at" : "2012-05-09T18:23:54Z", "updated_at" : "2012-05-09T18:23:54Z" }
+{ "_id" : "4faab652ed86073b3300027b", "uid" : "100002621607826", "name" : "Communications of the ACM: Artificial Intelligence", "type" : "RSS", "url" : "http://cacm.acm.org/browse-by-subject/artificial-intelligence.rss", "created_at" : "2012-05-09T18:24:18Z", "updated_at" : "2012-05-09T18:24:18Z" }
+{ "_id" : "4faab66ded86073b330002ba", "uid" : "100002621607826", "name" : "Communications of the ACM: Search", "type" : "RSS", "url" : "http://cacm.acm.org/browse-by-subject/search.rss", "created_at" : "2012-05-09T18:24:45Z", "updated_at" : "2012-05-09T18:24:45Z" }
+{ "_id" : "4faab67eed86073b330002fa", "uid" : "100002621607826", "name" : "Communications of the ACM: Theory", "type" : "RSS", "url" : "http://cacm.acm.org/browse-by-subject/theory.rss", "created_at" : "2012-05-09T18:25:02Z", "updated_at" : "2012-05-09T18:25:02Z" }
+{ "_id" : "4faab691ed86073b3300033b", "uid" : "100002621607826", "name" : "Communications of the ACM: Human Computer Interaction", "type" : "RSS", "url" : "http://cacm.acm.org/browse-by-subject/human-computer-interaction.rss", "created_at" : "2012-05-09T18:25:21Z", "updated_at" : "2012-05-09T18:25:21Z" }
+{ "_id" : "4faab6d7ed86073b3300037e", "uid" : "100002621607826", "name" : "Alan Winfield's Web Log", "type" : "RSS", "url" : "http://alanwinfield.blogspot.com/feeds/posts/default", "created_at" : "2012-05-09T18:26:31Z", "updated_at" : "2012-05-09T18:26:31Z" }
+{ "_id" : "4faab71ded86073b330003c1", "uid" : "100002621607826", "name" : "Communications of the ACM: blog@CACM", "type" : "RSS", "url" : "http://cacm.acm.org/blogs/blog-cacm.rss", "username" : "", "password" : "", "created_at" : "2012-05-09T18:27:41Z", "updated_at" : "2012-05-09T19:24:20Z" }
+{ "_id" : "4faab72eed86073b33000406", "uid" : "100002621607826", "name" : "Google Research", "type" : "RSS", "url" : "http://feeds.feedburner.com/blogspot/gJZg", "username" : "", "password" : "", "created_at" : "2012-05-09T18:27:58Z", "updated_at" : "2012-05-09T19:23:23Z" }
+{ "_id" : "4faac495ed86073b330005a6", "uid" : "100002621607826", "name" : "Machine Learning (Theory)", "type" : "RSS", "url" : "http://feeds2.feedburner.com/MachineLearningtheory", "created_at" : "2012-05-09T19:25:09Z", "updated_at" : "2012-05-09T19:25:09Z" }
+{ "_id" : "4faac4e6ed86073b330005ec", "uid" : "100002621607826", "name" : "Embedded in Academia", "type" : "RSS", "url" : "http://feeds.feedburner.com/EmbeddedInAcademia", "created_at" : "2012-05-09T19:26:30Z", "updated_at" : "2012-05-09T19:26:30Z" }
+{ "_id" : "4faade85ed86073b330006ba", "uid" : "100002621607826", "name" : "What's new", "type" : "RSS", "url" : "http://terrytao.wordpress.com/feed/", "created_at" : "2012-05-09T21:15:49Z", "updated_at" : "2012-05-09T21:15:49Z" }
+{ "_id" : "4faadec3ed86073b33000702", "uid" : "100002621607826", "name" : "tombone's blog", "type" : "RSS", "url" : "http://quantombone.blogspot.com/feeds/posts/default", "created_at" : "2012-05-09T21:16:51Z", "updated_at" : "2012-05-09T21:16:51Z" }
+{ "_id" : "4faadf3eed86073b33000793", "uid" : "100002621607826", "name" : "Computer Science: Theory and Application", "type" : "RSS", "url" : "http://www.reddit.com/r/compsci/.rss", "created_at" : "2012-05-09T21:18:54Z", "updated_at" : "2012-05-09T21:18:54Z" }
+{ "_id" : "4faadf6bed86073b330007dd", "uid" : "100002621607826", "name" : "Papers in Computer Science", "type" : "RSS", "url" : "http://www.reddit.com/r/compscipapers/.rss", "created_at" : "2012-05-09T21:19:39Z", "updated_at" : "2012-05-09T21:19:39Z" }
+{ "_id" : "4faadf84ed86073b33000828", "uid" : "100002621607826", "name" : "Machine Learning", "type" : "RSS", "url" : "http://www.reddit.com/r/machinelearning/.rss", "created_at" : "2012-05-09T21:20:04Z", "updated_at" : "2012-05-09T21:20:04Z" }
+{ "_id" : "4faadfb8ed86075e3300004d", "uid" : "100002621607826", "name" : "Semantic Web: Triples all the way down", "type" : "RSS", "url" : "http://www.reddit.com/r/semanticweb/.rss", "created_at" : "2012-05-09T21:20:56Z", "updated_at" : "2012-05-09T21:20:56Z" }
+{ "_id" : "4faadfd3ed86075e3300009a", "uid" : "100002621607826", "name" : "Machine Learning", "type" : "RSS", "url" : "http://www.reddit.com/r/machinelearning/.rss", "created_at" : "2012-05-09T21:21:23Z", "updated_at" : "2012-05-09T21:21:23Z" }
+{ "_id" : "4faae00fed86075e330000e8", "uid" : "100002621607826", "name" : "MetaOptimize Q+A - machine learning, nlpp, ai, text analysis, information retrieval, search, data mining, statistical modeling, and data visualization", "type" : "RSS", "url" : "http://metaoptimize.com/qa/feeds/rss/", "username" : "", "password" : "", "created_at" : "2012-05-09T21:22:23Z", "updated_at" : "2012-05-09T21:24:32Z" }
+{ "_id" : "4faae02aed86075e33000137", "uid" : "100002621607826", "name" : "No Free Hunch", "type" : "RSS", "url" : "http://blog.kaggle.com/feed/", "created_at" : "2012-05-09T21:22:50Z", "updated_at" : "2012-05-09T21:22:50Z" }
+{ "_id" : "4faae061ed86075e33000187", "uid" : "100002621607826", "name" : "Reverse Engineering", "type" : "RSS", "url" : "http://www.reddit.com/r/reverseengineering/.rss", "created_at" : "2012-05-09T21:23:45Z", "updated_at" : "2012-05-09T21:23:45Z" }
+{ "_id" : "4faae0b6ed86075e3300027c", "uid" : "100002621607826", "name" : "Types, typed programming, and static program analysis", "type" : "RSS", "url" : "http://www.reddit.com/r/types/.rss", "created_at" : "2012-05-09T21:25:10Z", "updated_at" : "2012-05-09T21:25:10Z" }
+{ "_id" : "4faae0cded86075e330002ce", "uid" : "100002621607826", "name" : "Matt Might's blog", "type" : "RSS", "url" : "http://matt.might.net/articles/feed.rss", "created_at" : "2012-05-09T21:25:33Z", "updated_at" : "2012-05-09T21:25:33Z" }
+{ "_id" : "4faae0ffed86075e33000321", "uid" : "100002621607826", "name" : "natural language processing blog", "type" : "RSS", "url" : "http://nlpers.blogspot.com/feeds/posts/default", "created_at" : "2012-05-09T21:26:22Z", "updated_at" : "2012-05-09T21:26:22Z" }
+{ "_id" : "4faae140ed86075e33000375", "uid" : "100002621607826", "name" : "Math ∩ Programming", "type" : "RSS", "url" : "http://jeremykun.wordpress.com/feed/", "created_at" : "2012-05-09T21:27:28Z", "updated_at" : "2012-05-09T21:27:28Z" }
+{ "_id" : "4fc5200bed86076bf30000ee", "uid" : "100002621607826", "name" : "The Naive Optimist", "type" : "RSS", "url" : "http://ryanleecarson.tumblr.com/rss", "created_at" : "2012-05-29T19:14:19Z", "updated_at" : "2012-05-29T19:14:19Z" }
+{ "_id" : "501693b0ed8607234800005a", "uid" : "100002621607826", "name" : "ProgrammableWeb", "type" : "RSS", "url" : "http://feeds.feedburner.com/ProgrammableWeb", "created_at" : "2012-07-30T14:01:20Z", "updated_at" : "2012-07-30T14:01:20Z" }
+{ "_id" : "5018393fed860723480001a1", "uid" : "100002621607826", "name" : "Ray Wenderlich", "type" : "RSS", "url" : "http://feeds.feedburner.com/RayWenderlich?format=xml", "created_at" : "2012-07-31T19:59:59Z", "updated_at" : "2012-07-31T19:59:59Z" }
+{ "_id" : "50856da9ed86070e9e000101", "uid" : "100002621607826", "name" : "thoughts from the red planet", "type" : "RSS", "url" : "http://feeds.feedburner.com/thoughtsfromtheredplanet?format=xml", "created_at" : "2012-10-22T16:00:41Z", "updated_at" : "2012-10-22T16:00:41Z" }
+{ "_id" : "5108541ded860755cb0000e5", "uid" : "100002621607826", "name" : "Simply Statistics", "type" : "RSS", "url" : "http://simplystatistics.org/feed/", "created_at" : "2013-01-29T22:58:37Z", "updated_at" : "2013-01-29T22:58:37Z" }
+{ "_id" : "51114bbfed86075e2600005e", "uid" : "100002621607826", "name" : "igvita.com", "type" : "RSS", "url" : "http://feeds.igvita.com/igvita", "created_at" : "2013-02-05T18:13:19Z", "updated_at" : "2013-02-05T18:13:19Z" }
+{ "_id" : "5155c32bed860752a600005e", "uid" : "100002621607826", "name" : "The Netflix Tech Blog", "type" : "RSS", "url" : "http://techblog.netflix.com/rss.xml", "created_at" : "2013-03-29T16:36:59Z", "updated_at" : "2013-03-29T16:36:59Z" }
+{ "_id" : "5249a0d4ed86075419000123", "uid" : "100002621607826", "name" : "Alex's Blog", "type" : "RSS", "url" : "http://alexjbantz.wordpress.com/feed/", "created_at" : "2013-09-30T16:03:32Z", "updated_at" : "2013-09-30T16:03:32Z" }
+{ "_id" : "53275779ed860757e50000c8", "uid" : "100002621607826", "name" : "FiveThirtyEightFiveThirtyEight | Features", "type" : "RSS", "url" : "http://fivethirtyeight.com/features/feed/", "created_at" : "2014-03-17T20:13:45Z", "updated_at" : "2014-03-17T20:13:45Z" }
+{ "_id" : "5331f49eed860730fa0000fd", "uid" : "100002621607826", "name" : "PhraseologyProject.com Phrases", "type" : "RSS", "url" : "http://feeds.feedburner.com/phraseologyproject?format=xml", "created_at" : "2014-03-25T21:26:54Z", "updated_at" : "2014-03-25T21:26:54Z" }
+{ "_id" : "533b12a8ed86070729000072", "uid" : "100002621607826", "name" : "\nLamer News\n", "type" : "RSS", "url" : "http://lamernews.com/rss", "created_at" : "2014-04-01T19:25:28Z", "updated_at" : "2014-04-01T19:25:28Z" }
+{ "_id" : "533b135fed860707290000d5", "uid" : "100002621607826", "name" : "programming", "type" : "RSS", "url" : "http://www.reddit.com/r/programming/.rss", "created_at" : "2014-04-01T19:28:31Z", "updated_at" : "2014-04-01T19:28:31Z" }
+{ "_id" : "533cd1a5ed86070729000213", "uid" : "100002621607826", "name" : "Ask a Mathematician / Ask a Physicist", "type" : "RSS", "url" : "http://www.askamathematician.com/feed/", "created_at" : "2014-04-03T03:12:38Z", "updated_at" : "2014-04-03T03:12:38Z" }
+{ "_id" : "53fe2063ed860732c3000001", "uid" : "100002621607826", "name" : "Google Poetics", "type" : "RSS", "url" : "http://www.googlepoetics.com/rss", "created_at" : "2014-08-27T18:16:03.137Z", "updated_at" : "2014-08-27T18:16:03.137Z" }
+{ "_id" : "5400da30ed86074b48000001", "uid" : "100002621607826", "name" : "Vox -  All", "type" : "RSS", "url" : "http://www.vox.com/rss/index.xml", "created_at" : "2014-08-29T19:53:20.433Z", "updated_at" : "2014-08-29T19:53:20.433Z" }
+{ "_id" : "54065808ed86074b48000002", "uid" : "100002621607826", "name" : "Gabriel Weinberg's Blog", "type" : "RSS", "url" : "http://www.gabrielweinberg.com/blog/atom.xml", "created_at" : "2014-09-02T23:51:36.954Z", "updated_at" : "2014-09-02T23:51:36.954Z" }
+{ "_id" : "540e9041ed86076619000001", "uid" : "100002621607826", "name" : "Giant Robots Smashing Into Other Giant Robots", "type" : "RSS", "url" : "http://feeds.feedburner.com/GiantRobotsSmashingIntoOtherGiantRobots", "created_at" : "2014-09-09T05:29:37.402Z", "updated_at" : "2014-09-09T05:29:37.402Z" }
+{ "_id" : "54134e98ed86076619000002", "uid" : "100002621607826", "name" : "Kartik Agaram", "type" : "RSS", "url" : "http://feeds.akkartik.name/kartiks-scrapbook", "created_at" : "2014-09-12T19:50:48.129Z", "updated_at" : "2014-09-12T19:50:48.129Z" }
+{ "_id" : "5421f338ed86076619000003", "uid" : "100002621607826", "name" : "Salon des Refusés", "type" : "RSS", "url" : "http://extension765.com/sdr.rss", "created_at" : "2014-09-23T22:24:56.848Z", "updated_at" : "2014-09-23T22:24:56.848Z" }
+{ "_id" : "54270d73ed860732b7000001", "uid" : "100002621607826", "name" : "The Register", "type" : "RSS", "url" : "http://www.theregister.co.uk/headlines.atom", "created_at" : "2014-09-27T19:18:11.413Z", "updated_at" : "2014-09-27T19:18:11.413Z" }
+{ "_id" : "5430c325ed86076646000001", "uid" : "100002621607826", "name" : "cdixon tumblr", "type" : "RSS", "url" : "http://nonchalantrepreneur.com/rss", "created_at" : "2014-10-05T04:03:49.542Z", "updated_at" : "2014-10-05T04:03:49.542Z" }
+{ "_id" : "547d6a0ced8607542d000001", "uid" : "100002621607826", "name" : "@Strilanc - Craig Gidney's Blog", "type" : "RSS", "url" : "", "username" : "", "password" : "", "created_at" : "2014-12-02T07:28:12.621Z", "updated_at" : "2014-12-02T07:28:49.548Z" }
+{ "_id" : "547d6a11ed8607542d000002", "uid" : "100002621607826", "name" : "@Strilanc - Craig Gidney's Blog", "type" : "RSS", "url" : "http://strilanc.com/feed.xml", "created_at" : "2014-12-02T07:28:17.509Z", "updated_at" : "2014-12-02T07:28:17.509Z" }
+{ "_id" : "54907ef5ed8607542d000003", "uid" : "100002621607826", "name" : "HTMLGoodies.com: Your source for HTML, CSS, JavaScript and Web Development Tutorials and Primers!", "type" : "RSS", "url" : "http://www.htmlgoodies.com/rss.xml", "created_at" : "2014-12-16T18:50:29.982Z", "updated_at" : "2014-12-16T18:50:29.982Z" }
+{ "_id" : "54907fe2ed8607542d000004", "uid" : "100002621607826", "name" : "Daily Writing Tips", "type" : "RSS", "url" : "http://feeds.feedburner.com/DailyWritingTips?format=xml", "created_at" : "2014-12-16T18:54:26.335Z", "updated_at" : "2014-12-16T18:54:26.335Z" }
+{ "_id" : "549086c3ed8607542d000005", "uid" : "100002621607826", "name" : "WIRED", "type" : "RSS", "url" : "http://feeds.wired.com/wired/index", "created_at" : "2014-12-16T19:23:47.510Z", "updated_at" : "2014-12-16T19:23:47.510Z" }
+{ "_id" : "549086f8ed8607542d000006", "uid" : "100002621607826", "name" : "MakeUseOf", "type" : "RSS", "url" : "http://feeds.feedburner.com/Makeuseof?format=xml", "created_at" : "2014-12-16T19:24:40.344Z", "updated_at" : "2014-12-16T19:24:40.344Z" }
+{ "_id" : "5490878bed8607542d000007", "uid" : "100002621607826", "name" : "SimplyRecipes.com", "type" : "RSS", "url" : "http://feeds.feedburner.com/elise/simplyrecipes?format=xml", "created_at" : "2014-12-16T19:27:07.112Z", "updated_at" : "2014-12-16T19:27:07.112Z" }
+{ "_id" : "549087e7ed8607542d000008", "uid" : "100002621607826", "name" : "Interesting Thing of the Day", "type" : "RSS", "url" : "http://feeds.feedburner.com/InterestingThingOfTheDay?format=xml", "created_at" : "2014-12-16T19:28:39.614Z", "updated_at" : "2014-12-16T19:28:39.614Z" }
+{ "_id" : "54908802ed8607542d000009", "uid" : "100002621607826", "name" : "News", "type" : "RSS", "url" : "http://www.npr.org/rss/rss.php?id=1001", "created_at" : "2014-12-16T19:29:06.725Z", "updated_at" : "2014-12-16T19:29:06.725Z" }
+{ "_id" : "5490882aed8607542d00000a", "uid" : "100002621607826", "name" : "Arts & Life", "type" : "RSS", "url" : "http://www.npr.org/rss/rss.php?id=1008", "created_at" : "2014-12-16T19:29:46.196Z", "updated_at" : "2014-12-16T19:29:46.196Z" }
+{ "_id" : "5490883ced8607542d00000b", "uid" : "100002621607826", "name" : "All Things Considered", "type" : "RSS", "url" : "http://www.npr.org/rss/rss.php?id=2", "created_at" : "2014-12-16T19:30:04.760Z", "updated_at" : "2014-12-16T19:30:04.760Z" }
+{ "_id" : "5490886ced8607542d00000c", "uid" : "100002621607826", "name" : "Author Interviews", "type" : "RSS", "url" : "http://www.npr.org/rss/rss.php?id=1033", "created_at" : "2014-12-16T19:30:52.206Z", "updated_at" : "2014-12-16T19:30:52.206Z" }
+{ "_id" : "5490887ded8607542d00000d", "uid" : "100002621607826", "name" : "Books", "type" : "RSS", "url" : "http://www.npr.org/rss/rss.php?id=1032", "created_at" : "2014-12-16T19:31:09.808Z", "updated_at" : "2014-12-16T19:31:09.808Z" }
+{ "_id" : "54908af1ed8607542d00000e", "uid" : "100002621607826", "name" : "HTML5Rocks", "type" : "RSS", "url" : "http://feeds.feedburner.com/html5rocks?format=xml", "created_at" : "2014-12-16T19:41:37.293Z", "updated_at" : "2014-12-16T19:41:37.293Z" }
+{ "_id" : "54908b8ced8607542d00000f", "uid" : "100002621607826", "name" : "The Quietus | All Articles", "type" : "RSS", "url" : "http://thequietus.com/feed", "created_at" : "2014-12-16T19:44:12.265Z", "updated_at" : "2014-12-16T19:44:12.265Z" }
+{ "_id" : "54908bfbed8607542d000010", "uid" : "100002621607826", "name" : "My Old Kentucky Blog", "type" : "RSS", "url" : "http://www.myoldkentuckyblog.com/?feed=rss2", "created_at" : "2014-12-16T19:46:03.523Z", "updated_at" : "2014-12-16T19:46:03.523Z" }
+{ "_id" : "5491ba04ed8607542d000011", "uid" : "100002621607826", "name" : "zen habits", "type" : "RSS", "url" : "http://feeds.feedburner.com/zenhabits?format=xml", "created_at" : "2014-12-17T17:14:44.313Z", "updated_at" : "2014-12-17T17:14:44.313Z" }
+{ "_id" : "549e5f62ed8607542d000012", "uid" : "100002621607826", "name" : "flak rss", "type" : "RSS", "url" : "http://www.tedunangst.com/flak/rss", "created_at" : "2014-12-27T07:27:30.720Z", "updated_at" : "2014-12-27T07:27:30.720Z" }
+{ "_id" : "54a75180ed86075ee1000001", "uid" : "100002621607826", "name" : "Grumpy Gamer", "type" : "RSS", "url" : "http://grumpygamer.com/rss2.0", "created_at" : "2015-01-03T02:18:40.788Z", "updated_at" : "2015-01-03T02:18:40.788Z" }
+{ "_id" : "54b04d7ded8607100c000001", "uid" : "100002621607826", "name" : "Changing Bits", "type" : "RSS", "url" : "http://blog.mikemccandless.com/feeds/posts/default", "created_at" : "2015-01-09T21:51:57.232Z", "updated_at" : "2015-01-09T21:51:57.232Z" }
+{ "_id" : "54b88279ed8607100c000002", "uid" : "100002621607826", "name" : "Casey's Blog", "type" : "RSS", "url" : "http://mollyrocket.com/casey/stream_atom.rss", "created_at" : "2015-01-16T03:16:09.259Z", "updated_at" : "2015-01-16T03:16:09.259Z" }
