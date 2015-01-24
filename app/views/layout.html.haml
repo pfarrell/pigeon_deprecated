@@ -23,16 +23,17 @@
           %a.navbar-brand{href:"#{url_for("/")}"}
             Pigeon
         .collapse.navbar-collapse#navbar-collapse
+          %ul.nav.navbar-nav
+            %li
+              {{#link-to 'sources'}}Sources{{/link-to}}
           %form.navbar-form.navbar-left{id: "search", action: "#{url_for("/search")}", method: "GET"}
             .form-group
               %input.form-control{type: "TEXT", id: "q", name: "q", autofocus: true}
       .container#content
         {{outlet}}
-      .container#footer
-        A 
-        %a{href:"http://patf.net"}
-          patf
-        joint
+    %script{type: "text/x-handlebars", id: "sources"}
+      {{#each model}} 
+        {{name}}
     %script{:type => "text/javascript", :src => "#{url_for('/libs/handlebars/handlebars.min.js')}"}
     %script{:type => "text/javascript", :src => "#{url_for('/libs/ember/ember.js')}"}
     %script{:type => "text/javascript", :src => "#{url_for('/libs/showdown/src/showdown.js')}"}

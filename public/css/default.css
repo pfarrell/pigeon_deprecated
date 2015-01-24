@@ -1,6 +1,10 @@
 body {
 }
 
+.active {
+  font-weight: bold;
+}
+
 .item { 
   width: 25%; 
   background-color: #f0f0f0;
