@@ -20,8 +20,8 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.navbar-brand{href:"#{url_for("/")}"}
-            Pigeon
+          .navbar-brand
+            {{#link-to 'index'}}Pigeon{{/link-to}}
         .collapse.navbar-collapse#navbar-collapse
           %ul.nav.navbar-nav
             %li
