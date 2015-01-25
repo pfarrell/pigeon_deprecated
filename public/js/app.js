@@ -38,4 +38,3 @@ App.SourcesRoute = Ember.Route.extend({
     return sources;
   }
 });
-
