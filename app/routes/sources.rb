@@ -13,12 +13,12 @@ class Pigeon < Sinatra::Application
     RssFeed[params[:id].to_i].to_json 
   end
 
-  get "/source/:id/current" do
+  get "/source/:id/articles" do
     feed = RssFeed[params[:id]]
     feed.articles.to_json
   end
 
-  post "/source/new" do
+  post "/source" do
     feed = RssFeed.new(params)
     feed.save
     url_for("/sources")

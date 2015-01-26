@@ -5,7 +5,7 @@ class Article < Sequel::Model
   many_to_many :links
 
   def source_urls
-    ret = Hash[links.collect{|link| [link.type, link.url]}]
+    Hash[links.collect{|link| [link.type, link.url]}]
   end
 
   # should allow instantiation by direct argument, this method
@@ -15,7 +15,7 @@ class Article < Sequel::Model
   end
     
   def self.from_rss(item)
-    article = self.new(title: item.title)#, date: item.pubDate || DateTime.now)
+    article = self.new(title: item.title, url: item.link)#, date: item.pubDate || DateTime.now)
     article.links << Link.new(type: "content", url: "#{item.link}")
     article.links << Link.new(type: "comments", url: "#{item.comments}")
     article
