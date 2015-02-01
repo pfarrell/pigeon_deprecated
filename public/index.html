@@ -29,6 +29,9 @@
         <div class="collapse navbar-collapse" id="#navbar-collapse">
           <ul class="nav navbar-nav">
             <li>
+              {{#link-to 'sources'}}Sources{{/link-to}}
+            </li>
+            <li>
               {{#link-to 'articles'}}Articles{{/link-to}}
             </li>
           </ul>
@@ -45,19 +48,22 @@
       </div>
     </script>
 
-    <script type="text/x-handlebars" id="articles">
-      {{#each article in model}}
+    <script type="text/x-handlebars" id="sources">
+      {{#each source in model}}
         <div class="article">
-          {{#link-to 'article' article.id}}
-            {{article.title}}
+          {{#link-to 'articles'}}
+            {{source.title}}
           {{/link-to}}
         </div>
       {{/each}}
     </script>
 
-    <script type="text/x-handlebars" id="article">
-      <h1>{{title}}</h1>
-      <h4>{{url}}</h4>
+    <script type="text/x-handlebars" id="articles">
+      {{#each article in model}}
+        <div class="article">
+          <a {{bind-attr href=article.url}}>{{article.title}}</a>
+        </div>
+      {{/each}}
     </script>
 
     <script type="text/javascript" src="/libs/handlebars/handlebars.min.js"></script>
