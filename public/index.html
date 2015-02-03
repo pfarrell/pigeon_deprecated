@@ -31,9 +31,6 @@
             <li>
               {{#link-to 'sources'}}Sources{{/link-to}}
             </li>
-            <li>
-              {{#link-to 'articles'}}Articles{{/link-to}}
-            </li>
           </ul>
           <form class="navbar-form navbar-left" id="search" action="/search" method="GET">
             <div class="form-group">
@@ -51,17 +48,24 @@
     <script type="text/x-handlebars" id="sources">
       {{#each source in model}}
         <div class="article">
-          {{#link-to 'articles'}}
+          {{#link-to 'source' source}}
             {{source.title}}
           {{/link-to}}
         </div>
       {{/each}}
     </script>
 
+    <script type="text/x-handlebars" id="source">
+      {{#link-to 'articles' this}}
+        {{this.title}}
+      {{/link-to}}
+    </script>
+
     <script type="text/x-handlebars" id="articles">
-      {{#each article in model}}
+      HELLO
+      {{#each source in model}}
         <div class="article">
-          <a {{bind-attr href=article.url}}>{{article.title}}</a>
+          <a {{bind-attr href=source.url}}>{{source.title}}</a>
         </div>
       {{/each}}
     </script>
