@@ -15,20 +15,14 @@ App.ApplicationController = Ember.Controller.extend({
 });
 
 App.Router.map(function() {
-  this.resource('sources');
-  this.resource('source', {path: '/source/:source_id'});
-  this.resource('articles', { path: '/articles/:source_id'});
+  this.resource('sources', function() {
+    this.resource('articles', { path: '/:source_id/articles'});
+  });
 });
 
 App.SourcesRoute = Ember.Route.extend({
   model: function() {
     return Ember.$.getJSON('/sources');
-  }
-});
-
-App.SourceRoute = Ember.Route.extend({
-  model: function(params) {
-    return Ember.$.getJSON('/source/' + params.source_id);
   }
 });
 

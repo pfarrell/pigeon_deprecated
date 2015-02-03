@@ -41,33 +41,33 @@
       </nav>
     
       <div class="container" id="content">
-        {{outlet}}
+        <div class="row">
+          {{outlet}}
+        </div>
       </div>
     </script>
 
     <script type="text/x-handlebars" id="sources">
-      {{#each source in model}}
-        <div class="article">
-          {{#link-to 'articles' source.id}}
-            {{source.title}}
-          {{/link-to}}
-        </div>
-      {{/each}}
-    </script>
-
-    <script type="text/x-handlebars" id="source">
-      {{#link-to 'articles' this.id}}
-        {{this.title}}
-      {{/link-to}}
+      <div class="col-md-3 view">
+        {{#each source in model}}
+          <div class="article">
+            {{#link-to 'articles' source.id}}
+              {{source.title}}
+            {{/link-to}}
+          </div>
+        {{/each}}
+      </div>
+      <div class="col-md-9 view">
+        {{outlet}}
+      </div>
     </script>
 
     <script type="text/x-handlebars" id="articles">
-      HELLO
-      {{#each source in model}}
-        <div class="article">
-          <a {{bind-attr href=source.url}}>{{source.title}}</a>
-        </div>
-      {{/each}}
+        {{#each article in model}}
+          <div class="article">
+            <a {{bind-attr href=article.url}}>{{article.title}}</a>
+          </div>
+        {{/each}}
     </script>
 
     <script type="text/javascript" src="/libs/handlebars/handlebars.min.js"></script>
