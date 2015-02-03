@@ -4,6 +4,7 @@ Sequel.migration do
       primary_key :id
       Fixnum :article_id
       Fixnum :link_id
+      String :url
       DateTime :created_at
       DateTime :updated_at
     end
