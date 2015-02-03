@@ -36,8 +36,4 @@ App.ArticlesRoute = Ember.Route.extend({
   model: function(params) {
     return Ember.$.getJSON('/source/' + params.source_id + '/articles');
   },
-  setupController: function(controller, model) {
-    var articles_model = Ember.$.getJSON('/source/' + model.id + '/articles');
-    controller.set("content", articles_model);
-  }
 });

@@ -48,7 +48,7 @@
     <script type="text/x-handlebars" id="sources">
       {{#each source in model}}
         <div class="article">
-          {{#link-to 'source' source}}
+          {{#link-to 'articles' source.id}}
             {{source.title}}
           {{/link-to}}
         </div>
@@ -56,7 +56,7 @@
     </script>
 
     <script type="text/x-handlebars" id="source">
-      {{#link-to 'articles' this}}
+      {{#link-to 'articles' this.id}}
         {{this.title}}
       {{/link-to}}
     </script>
