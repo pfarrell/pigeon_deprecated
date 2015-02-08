@@ -1,10 +1,14 @@
 require 'byebug'
 namespace :import do
   def import_feed(feed) 
-    feed.articles.each do |article|
-      next unless Article.first(title: article.title, source: feed).nil?
-      article.source = feed
-      article.save
+    begin
+      feed.articles.each do |article|
+        next unless Article.first(title: article.title, source: feed).nil?
+        article.source = feed
+        article.save
+      end
+    rescue Exception => ex
+      $stderr.puts("error getting #{feed.url}: #{ex.message}")
     end
   end
 
