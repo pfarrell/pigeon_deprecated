@@ -1,4 +1,5 @@
 body {
+  height: 100%;
 }
 
 .active {
@@ -22,5 +23,6 @@ body {
 }
 
 .view {
-  max-height: 900px;
+ height: 700px;
+ overflow: scroll;
 }
