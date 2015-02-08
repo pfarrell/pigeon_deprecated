@@ -3,6 +3,11 @@ require 'spec_helper'
 describe 'Pigeon' do
   it "should allow access to the home page" do
     get "/"
+    expect(last_response).to be_redirect
+  end
+
+  it "should allow access to the home page" do
+    get "/index.html"
     expect(last_response).to be_ok
     expect(last_response.body).to match(/Pigeon/)
   end
@@ -10,31 +15,30 @@ describe 'Pigeon' do
   it "has a /sources route" do
     get "/sources"
     expect(last_response).to be_ok
-    expect(last_response.body).to match(/Pigeon/)
   end
 
-  it "has a /source/new route" do
-    get "/source/new"
+  it "has a /sources/new route" do
+    get "/sources/new"
     expect(last_response).to be_ok
     expect(last_response.body).to match(/Pigeon/)
   end
 
-  it "has a /source/:id/current route" do
-    get "/source/1/current"
+  it "has a /sources/:id/articles route" do
+    get "/sources/1/articles"
     expect(last_response).to be_ok
-    expect(last_response.body).to match(/Pigeon/)
+    expect(last_response.body).to match(/1/)
   end
 
-  it "has a /source/:id route" do
-    get "/source/1"
+  it "has a /sources/:id route" do
+    get "/sources/1"
     expect(last_response).to be_ok
-    expect(last_response.body).to match(/Pigeon/)
+    expect(last_response.body).to match(/1/)
   end
 
   it "has a route for a single source" do
-    get "/source/1"
+    get "/sources/1"
     expect(last_response).to be_ok
-    expect(last_response.body).to match(/Pigeon/)
+    expect(last_response.body).to match(/1/)
   end
 
   it "redirects for searches with / as first character" do
