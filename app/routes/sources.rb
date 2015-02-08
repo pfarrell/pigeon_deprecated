@@ -5,26 +5,26 @@ class Pigeon < Sinatra::Application
     RssFeed.all.to_json
   end
 
-  get "/source/new" do
+  get "/sources/new" do
     haml :source
   end
 
-  get "/source/:id" do
+  get "/sources/:id" do
     RssFeed[params[:id].to_i].to_json 
   end
 
-  get "/source/:id/articles" do
+  get "/sources/:id/articles" do
     feed = RssFeed[params[:id]]
     feed.articles.to_json
   end
 
-  post "/source" do
+  post "/sources/new" do
     feed = RssFeed.new(params)
     feed.save
     url_for("/sources")
   end
 
-  post "/source/:id" do
+  post "/sources/:id" do
     feed = RssFeed[params[:id].to_i]
     feed.title= params[:title]
     feed.url = params[:url]

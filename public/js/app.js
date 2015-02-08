@@ -18,6 +18,6 @@ App.SourcesRoute = Ember.Route.extend({
 
 App.ArticlesRoute = Ember.Route.extend({
   model: function(params) {
-    return Ember.$.getJSON('/source/' + params.source_id + '/articles');
+    return Ember.$.getJSON('/sources/' + params.source_id + '/articles');
   },
 });
