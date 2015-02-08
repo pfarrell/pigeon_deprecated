@@ -2,7 +2,9 @@ require 'byebug'
 namespace :import do
   def import_feed(feed) 
     feed.articles.each do |article|
-      puts article.title
+      next unless Article.first(title: article.title, source: feed).nil?
+      article.source = feed
+      article.save
     end
   end
 
