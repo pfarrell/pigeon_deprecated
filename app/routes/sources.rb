@@ -15,7 +15,7 @@ class Pigeon < Sinatra::Application
 
   get "/sources/:id/articles" do
     feed = RssFeed[params[:id]]
-    feed.articles.to_json
+    Article.where(source: feed).order(Sequel.desc(:id)).to_json
   end
 
   post "/sources/new" do
