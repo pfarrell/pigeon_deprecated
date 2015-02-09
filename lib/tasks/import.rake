@@ -1,4 +1,3 @@
-require 'byebug'
 namespace :import do
   def import_feed(feed) 
     begin
