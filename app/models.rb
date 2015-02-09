@@ -3,7 +3,7 @@ require 'logger'
 
 
 $console = Logger.new STDOUT
-DB = Sequel.connect(ENV['DATABASE_URL'] || 'postgres://localhost/pigeon',logger: $console)
+DB = Sequel.connect(ENV['PIGEON_DB'] || 'postgres://localhost/pigeon',logger: $console)
 
 DB.sql_log_level = :debug
 DB.extension(:pagination)
