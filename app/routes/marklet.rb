@@ -5,6 +5,7 @@ class Pigeon < Sinatra::Application
   end
 
   get "/bookmark/new" do
+    content_type "application/javascript"
     enqueue("incoming:links", {:url => params[:url]}.to_json)
     nil
   end
