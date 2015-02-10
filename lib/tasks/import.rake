@@ -38,5 +38,16 @@ namespace :import do
       article.save
     end
   end
-  
+
+  task :drain do
+    redis = Redis.new
+    json = redis.lpop("incoming:links")
+    until(!json.nil?)
+      obj = JSON.parse(json)
+      article = Article.new
+      article.marked = true
+      article.url = obj['url']
+      article.title = URI.unescape(obj['title']) unless obj['title'].nil?
+      json = redis.lpop("incoming:links")
+    end
 end
