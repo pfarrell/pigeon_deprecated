@@ -1,7 +1,7 @@
 class Pigeon < Sinatra::Application
   get "/marklet.js" do
     content_type "application/javascript"
-    haml :marklet, :layout=>false
+    haml :marklet, :layout=>false, locals: {host: settings.host}
   end
 
   get "/bookmark/new" do

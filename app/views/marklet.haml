@@ -22,7 +22,7 @@
   
   function init() {
   (window.myBookmarklet = function() {
-    $.getJSON(settings.host + "/bookmark/new?url=" + document.URL + "&title=" + encodeURI(document.title) + "&callback=?")
+    $.getJSON(#{host} + "/bookmark/new?url=" + document.URL + "&title=" + encodeURI(document.title) + "&callback=?")
     alert("carrier pigeon dispatched!");
   })();
   }
