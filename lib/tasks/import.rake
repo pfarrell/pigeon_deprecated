@@ -51,4 +51,5 @@ namespace :import do
       article.save
       json = redis.lpop("incoming:links")
     end
+  end
 end
