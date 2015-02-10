@@ -31,6 +31,11 @@
             <li>
               {{#link-to 'sources'}}Sources{{/link-to}}
             </li>
+            <li>
+              <a href="javascript:(function(){if(window.myBookmarklet!==undefined){myBookmarklet();}else{document.body.appendChild(document.createElement('script')).src='https://patf.net/pigeon/marklet.js?';}})();">
+                Save to Pigeon
+              </a>
+            </li>
           </ul>
           <form class="navbar-form navbar-left" id="search" action="/search" method="GET">
             <div class="form-group">

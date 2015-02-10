@@ -5,6 +5,7 @@ gem "sinatra-contrib"
 gem 'emk-sinatra-url-for'
 gem "sequel"
 gem "pg"
+gem "redis"
 gem "haml"
 gem 'capistrano', '~> 3.2.0'
 gem 'capistrano-bundler', '~> 1.1.2'
