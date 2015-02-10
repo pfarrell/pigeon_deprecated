@@ -29,13 +29,14 @@ namespace :import do
   task :process do
     redis = Redis.new
     json = redis.lpop("incoming:links")
-    return if json.nil?
-    obj = JSON.parse(json)
-    article = Article.new
-    article.marked = true
-    article.url = obj['url']
-    article.title = URI.unescape(obj['title']) unless obj['title'].nil?
-    article.save
+    unless(json.nil?)
+      obj = JSON.parse(json)
+      article = Article.new
+      article.marked = true
+      article.url = obj['url']
+      article.title = URI.unescape(obj['title']) unless obj['title'].nil?
+      article.save
+    end
   end
   
 end
