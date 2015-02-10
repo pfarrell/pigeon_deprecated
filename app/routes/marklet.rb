@@ -5,7 +5,7 @@ class Pigeon < Sinatra::Application
   end
 
   get "/bookmark/new" do
-    enqueue("incoming:links", {url => params[:url]}.to_json)
+    enqueue("incoming:links", {:url => params[:url]}.to_json)
     nil
   end
 end
