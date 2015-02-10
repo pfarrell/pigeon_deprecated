@@ -33,7 +33,7 @@ namespace :import do
     article = Article.new
     article.marked = true
     article.url = obj[:url]
-    article.title = URI.unescape(obj[:title])
+    article.title = URI.unescape(obj[:title]) unless obj[:title].nil?
     article.save
   end
   
