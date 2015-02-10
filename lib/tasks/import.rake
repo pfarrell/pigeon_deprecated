@@ -1,3 +1,6 @@
+require 'json'
+require 'uri'
+
 namespace :import do
   def import_feed(feed) 
     begin
@@ -21,6 +24,17 @@ namespace :import do
 
   task :list do
     RssFeed.all.each {|feed| print "[#{feed.id}] #{feed.title.strip}\n"}
+  end
+
+  task :process do
+    redis = Redis.new
+    json = redis.lpop("incoming:links")
+    obj = JSON.parse(json)
+    article = Article.new
+    article.marked = true
+    article.url = obj[:url]
+    article.title = URI.unescape(obj[:title])
+    article.save
   end
   
 end
