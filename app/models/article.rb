@@ -3,6 +3,7 @@ require 'date'
 class Article < Sequel::Model
   many_to_one :source
   many_to_many :links
+  one_to_many :capture
 
   def source_urls
     Hash[links.collect{|link| [link.type, link.url]}]

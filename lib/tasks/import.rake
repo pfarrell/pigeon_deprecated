@@ -31,11 +31,12 @@ namespace :import do
     json = redis.lpop("incoming:links")
     unless(json.nil?)
       obj = JSON.parse(json)
-      article = Article.new
-      article.marked = true
-      article.url = obj['url']
+      article = Article.find_or_create(:url => obj['url'])
       article.title = URI.unescape(obj['title']) unless obj['title'].nil?
       article.save
+      capture = Capture.new(:article => article)
+      capture.download
+      capture.save
     end
   end
 

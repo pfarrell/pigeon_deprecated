@@ -2,7 +2,7 @@ require 'sequel'
 require 'logger'
 
 
-$console = Logger.new STDOUT
+$console = ENV['RACK_ENV'] == 'development' ? Logger.new(STDOUT) : nil
 DB = Sequel.connect(ENV['PIGEON_DB'] || 'postgres://localhost/pigeon',logger: $console)
 
 DB.sql_log_level = :debug
@@ -15,3 +15,4 @@ require_relative 'models/article'
 require_relative 'models/link'
 require_relative 'models/source'
 require_relative 'models/rss_feed'
+require_relative 'models/capture'
