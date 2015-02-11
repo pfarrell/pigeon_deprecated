@@ -13,7 +13,7 @@ class Capture < Sequel::Model
 
   def short_dir(size=5)
     dir = random_alphanumeric(size)
-    while Capture.where(:dir => dir).count > 0
+    while directory_exists?("public/sites/#{dir}")
       dir = random_alphanumeric(size)
     end
     dir
@@ -44,5 +44,8 @@ class Capture < Sequel::Model
     retval
   end
 
+  def directory_exists?(directory)
+    File.directory?(directory)
+  end
 end
 
