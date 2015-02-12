@@ -6,10 +6,11 @@ require 'byebug'
 File.open(ARGV[0], "r") do |file_handle|
   file_handle.each_line do |line|
     hsh = JSON.parse(line)
+    date = Time.at(hsh['date']['$date'].to_i / 1000)
     article = Article.find_or_create(:url => hsh['remote_url'])
+    article.date = date
     article.save
     next unless hsh['local_url'].nil? || hsh['local_url'] == ""
-    date = Time.at(hsh['date']['$date'].to_i / 1000)
     capture = Capture.find_or_create(:article => article, :date => date)
     capture.url = hsh['local_url']
     capture.save
