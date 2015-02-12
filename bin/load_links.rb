@@ -8,6 +8,7 @@ File.open(ARGV[0], "r") do |file_handle|
     hsh = JSON.parse(line)
     article = Article.find_or_create(:url => hsh['remote_url'])
     article.save
+    next unless hsh['local_url'].nil? || hsh['local_url'] == ""
     date = Time.at(hsh['date']['$date'].to_i / 1000)
     capture = Capture.find_or_create(:article => article, :date => date)
     capture.url = hsh['local_url']
