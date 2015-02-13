@@ -50,6 +50,9 @@ namespace :import do
       article.url = obj['url']
       article.title = URI.unescape(obj['title']) unless obj['title'].nil?
       article.save
+      capture = Capture.new(:article => article)
+      article.date = 
+      article.marked = true
       json = redis.lpop("incoming:links")
     end
   end
