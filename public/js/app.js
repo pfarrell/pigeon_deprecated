@@ -5,12 +5,10 @@ App = Ember.Application.create({
 });
 
 App.Router.map(function() {
-  this.resource('sources', function() {
-    this.resource('articles', { path: ':source_id/articles'});
-  });
+  this.resource('articles', { path: ':source_id/articles'});
 });
 
-App.SourcesRoute = Ember.Route.extend({
+App.IndexRoute = Ember.Route.extend({
   model: function() {
     return Ember.$.getJSON('sources');
   }
