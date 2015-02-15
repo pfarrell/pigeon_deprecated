@@ -1,14 +1,22 @@
 App = Ember.Application.create({
- LOG_TRANSITIONS: true,
- LOG_VIEW_LOOKUPS: true,
- LOG_ACTIVE_GENERATION: true
+   LOG_TRANSITIONS: true,
+    LOG_VIEW_LOOKUPS: true,
+     LOG_ACTIVE_GENERATION: true
 });
 
 App.Router.map(function() {
-  this.resource('articles', { path: ':source_id/articles'});
+  this.resource('sources', function() {
+    this.resource('articles', { path: ':source_id/articles'});
+  });
 });
 
 App.IndexRoute = Ember.Route.extend({
+  beforeModel: function() {
+    this.transitionTo('sources');
+  }
+});
+
+App.SourcesRoute = Ember.Route.extend({
   model: function() {
     return Ember.$.getJSON('sources');
   }
