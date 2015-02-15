@@ -29,9 +29,6 @@
         <div class="collapse navbar-collapse" id="navbar-collapse">
           <ul class="nav navbar-nav">
             <li>
-              {{#link-to 'sources'}}Sources{{/link-to}}
-            </li>
-            <li>
               <a href="javascript:(function(){if(window.myBookmarklet!==undefined){myBookmarklet();}else{document.body.appendChild(document.createElement('script')).src='https://patf.net/pigeon/marklet.js?';}})();">
                 Save to Pigeon
               </a>
@@ -52,7 +49,7 @@
       </div>
     </script>
 
-    <script type="text/x-handlebars" id="sources">
+    <script type="text/x-handlebars" id="index">
       <div class="col-md-3 view">
         {{#each source in model}}
           <div class="article">
