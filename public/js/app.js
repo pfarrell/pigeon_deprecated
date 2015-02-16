@@ -11,8 +11,8 @@ App.Router.map(function() {
 });
 
 App.IndexRoute = Ember.Route.extend({
-  beforeModel: function() {
-    this.transitionTo('sources');
+  model: function() {
+    return Ember.$.getJSON('captures');
   }
 });
 

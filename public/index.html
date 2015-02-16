@@ -49,6 +49,16 @@
       </div>
     </script>
 
+    <script type="text/x-handlebars" id="captures">
+      <div class="col-md-12 view">
+        {{#each article in model}}
+          <div class="article">
+            <a {{bind-attr href=article.url}}>{{article.title}}</a>
+          </div>
+        {{/each}}
+      </div>
+    </script>
+
     <script type="text/x-handlebars" id="sources">
       <div class="col-md-3 view">
         {{#each source in model}}

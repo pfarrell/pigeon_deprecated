@@ -139,6 +139,7 @@ File.open(ARGV[0], "r") do |file_handle|
     date = Time.at(hsh['date']['$date'].to_i / 1000)
     article = Article.find_or_create(:url => hsh['remote_url'])
     article.date = date
+    article.title = hsh["title"]
     article.source = get_source(hsh["stream_id"]) unless hsh["stream_id"].nil?
     article.save
     next if hsh['local_url'].nil? || hsh['local_url'] == ""
