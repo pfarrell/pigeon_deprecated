@@ -23,8 +23,8 @@ body {
 }
 
 .view {
- height: 700px;
- overflow: scroll;
+ height: 800px;
+ position:relative;
 }
 
 .article {
