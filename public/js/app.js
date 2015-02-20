@@ -15,7 +15,7 @@ App.Router.map(function() {
 App.ApplicationRoute = Ember.Route.extend({
   actions: {
     search: function(params) {
-      this.transitionTo('search', params);
+      this.transitionTo('search', encodeURIComponent(params));
     }
   }
 });
@@ -61,7 +61,7 @@ App.SearchRoute = Ember.Route.extend({
   },
   actions: {
     search: function(params) {
-      this.transitionTo('search', params);
+      this.transitionTo('search', encodeURIComponent(params));
     }
   }
 });
