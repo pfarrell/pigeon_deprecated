@@ -61,7 +61,7 @@
     </script>
 
     <script type="text/x-handlebars" id="sources">
-      <div class="col-sm-2 col-md-6 view">
+      <div class="col-md-4 view">
         {{#each source in model}}
           <div class="article">
             {{#link-to 'articles' source.id}}
@@ -70,7 +70,7 @@
           </div>
         {{/each}}
       </div>
-      <div class="col-sm-10 col-md-6 view">
+      <div class="col-md-8 view">
         {{outlet}}
       </div>
     </script>
@@ -84,7 +84,7 @@
     </script>
 
     <script type="text/x-handlebars" id="search">
-      <div class="col-md-6">
+      <div class="col-md-12">
         {{#each article in model}}
           <div class="article">
             <a {{bind-attr href=article.url}}>{{article.title}}</a>
