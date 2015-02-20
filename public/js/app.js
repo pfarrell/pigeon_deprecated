@@ -20,14 +20,12 @@ App.ApplicationRoute = Ember.Route.extend({
   }
 });
 
-/*
-App.IndexController = Ember.ObjectController.extend({
-  model: {
+App.IndexRoute = Ember.Route.extend({
+  beforeModel: function() {
     this.transitionTo('captures');
   }
 });
-*/
-  
+
 App.CapturesRoute = Ember.Route.extend({
   model: function() {
     return Ember.$.getJSON('captures');
