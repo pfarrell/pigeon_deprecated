@@ -1,0 +1,12 @@
+{
+  id: Database id for article,
+  url: captured url,
+  canonical: canonical url calculated or discovered,
+  domain: domain for the url (is this needed?)
+  image: url for main image,
+  date: capture date,
+  content: page content (with html removed)
+}
+
+
+
