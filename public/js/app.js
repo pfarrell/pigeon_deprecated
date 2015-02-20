@@ -8,14 +8,14 @@ App.Router.map(function() {
   this.resource('sources', function() {
     this.resource('articles', { path: ':source_id/articles'});
   });
-  this.resource('search', {path: 'search'});
+  this.resource('search', {path: 'search/:search_term'});
   this.resource('captures', {path: 'captures'});
 });
 
 App.ApplicationRoute = Ember.Route.extend({
   actions: {
-    search: function() {
-      this.transitionTo('search');
+    search: function(params) {
+      this.transitionTo('search', params);
     }
   }
 });
@@ -57,13 +57,11 @@ App.ArticlesRoute = Ember.Route.extend({
 App.SearchRoute = Ember.Route.extend({
   model: function(params) {
     console.log(params);
-    return Ember.$.getJSON('search/?q=' + params.search)
+    return Ember.$.getJSON('search/?q=' + params.search_term)
   },
   actions: {
     search: function(params) {
-      console.log(params);
-      
-      return Ember.$.getJSON('search/?q=' + params)
+      this.transitionTo('search', params);
     }
   }
 });
