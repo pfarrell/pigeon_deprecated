@@ -9,6 +9,7 @@ App.Router.map(function() {
     this.resource('articles', { path: ':source_id/articles'});
   });
   this.resource('search', {path: 'search'});
+  this.resource('captures', {path: 'captures'});
 });
 
 App.ApplicationRoute = Ember.Route.extend({
@@ -19,16 +20,21 @@ App.ApplicationRoute = Ember.Route.extend({
   }
 });
 
+/*
 App.IndexController = Ember.ObjectController.extend({
+  model: {
+    this.transitionTo('captures');
+  }
 });
-
-App.IndexRoute = Ember.Route.extend({
+*/
+  
+App.CapturesRoute = Ember.Route.extend({
   model: function() {
     return Ember.$.getJSON('captures');
   },
   actions: {
     search: function(query) {
-      console.log(query);
+      return true;
     }
   }
 });
