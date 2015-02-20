@@ -53,6 +53,7 @@
       <div class="col-md-12">
         {{#each capture in model}}
           <div class="article">
+            <a {{bind-attr href=capture.article.url}}><span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a>
             <a {{bind-attr href=capture.url}}>{{capture.article.title}}</a>
           </div>
         {{/each}}
