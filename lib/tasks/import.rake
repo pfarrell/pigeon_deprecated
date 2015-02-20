@@ -33,9 +33,11 @@ namespace :import do
       obj = JSON.parse(json)
       article = Article.find_or_create(:url => obj['url'])
       article.title = URI.unescape(obj['title']) unless obj['title'].nil?
+      article.date = obj['date']
       article.save
       capture = Capture.new(:article => article)
-      capture.download
+      capture.date = obj['date']
+      capture.download!
       capture.save
     end
   end
@@ -49,10 +51,10 @@ namespace :import do
       article.marked = true
       article.url = obj['url']
       article.title = URI.unescape(obj['title']) unless obj['title'].nil?
+      article.date = obj['date']
       article.save
       capture = Capture.new(:article => article)
-      article.date = 
-      article.marked = true
+      capture.download!
       json = redis.lpop("incoming:links")
     end
   end
