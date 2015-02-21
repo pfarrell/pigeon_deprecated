@@ -12,6 +12,8 @@ gem 'capistrano-bundler', '~> 1.1.2'
 gem 'capistrano-bower'
 gem 'simple-rss'
 gem 'sinatra-respond_to'
+gem 'sanitize'
+gem 'httparty'
 
 group 'development' do
   gem 'byebug'
