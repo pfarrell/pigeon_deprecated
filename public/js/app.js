@@ -5,9 +5,8 @@ App = Ember.Application.create({
 });
 
 App.Router.map(function() {
-  this.resource('sources', function() {
-    this.resource('articles', { path: ':source_id/articles'});
-  });
+  this.resource('sources', {path: 'sources'});
+  this.resource('articles', { path: 'sources/:source_id/articles'});
   this.resource('search', {path: 'search/:search_term'});
   this.resource('captures', {path: 'captures'});
 });

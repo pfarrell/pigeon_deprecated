@@ -1,5 +1,5 @@
 class Pigeon < Sinatra::Application
-  get '/' do
+  get '/?' do
     redirect '/index.html'
   end
 end

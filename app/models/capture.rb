@@ -5,7 +5,8 @@ class Capture < Sequel::Model
 
   def download!(dir=short_dir)
     raise "no associated article" if article.nil?
-    system("wget -qnd -pHEKk --no-check-certificate --random-wait --timeout=60 -P public/sites/" + dir + " " + article.url)
+    command = "wget -qnd -pHEKk --no-check-certificate --random-wait --timeout=60 -P public/sites/#{dir} #{article.url}"
+    system(command)
     self.url = "sites/#{dir}/#{CGI.escapeHTML(clean(article.url))}"
     self.save
     dir
