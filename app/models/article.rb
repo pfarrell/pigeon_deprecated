@@ -1,4 +1,6 @@
 require 'date'
+require 'sanitize'
+require 'byebug'
 
 class Article < Sequel::Model
   many_to_one :source
@@ -20,6 +22,10 @@ class Article < Sequel::Model
     article.links << Link.new(type: "content", url: "#{item.link}")
     article.links << Link.new(type: "comments", url: "#{item.comments}")
     article
+  end
+
+  def content
+    byebug
   end
 
   def self.encode(str)
