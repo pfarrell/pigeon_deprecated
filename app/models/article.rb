@@ -1,6 +1,5 @@
 require 'date'
 require 'sanitize'
-require 'byebug'
 
 class Article < Sequel::Model
   many_to_one :source
@@ -25,7 +24,6 @@ class Article < Sequel::Model
   end
 
   def content
-    byebug
   end
 
   def self.encode(str)
