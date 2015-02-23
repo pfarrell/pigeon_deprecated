@@ -32,7 +32,7 @@ namespace :import do
     unless(json.nil?)
       obj = JSON.parse(json)
       article = Article.find_or_create(:url => obj['url'])
-      article.title = URI.unescapeHTML(obj['title']) unless obj['title'].nil?
+      article.title = URI.unescape(obj['title']) unless obj['title'].nil?
       article.date = obj['date' || DateTime.now]
       article.save
       capture = Capture.new(:article => article)
@@ -49,7 +49,7 @@ namespace :import do
       obj = JSON.parse(json)
       article = Article.new
       article.url = obj['url']
-      article.title = URI.unescapeHTML(obj['title']) unless obj['title'].nil?
+      article.title = URI.unescape(obj['title']) unless obj['title'].nil?
       article.date = obj['date'] || DateTime.now
       article.save
       capture = Capture.new(:article => article)
