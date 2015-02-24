@@ -1,12 +1,14 @@
 require 'json'
+require 'htmlentities'
+
 
 namespace :import do
   def import_feed(feed) 
+    ent = HTMLEntities.new
     begin
       feed.articles.each do |article|
-        next unless Article.first(title: article.title, source: feed).nil?
-        article.source = feed
-        article.save
+        next unless Article.first(title: (ent.decode(article.title)), source: feed).nil?
+        Article.new(title: ent.decode(article.title), source: feed).save
       end
     rescue Exception => ex
       $stderr.puts("error getting #{feed.url}: #{ex.message}")
@@ -31,7 +33,7 @@ namespace :import do
     unless(json.nil?)
       obj = JSON.parse(json)
       article = Article.find_or_create(:url => obj['url'])
-      article.title = CGI.unescapeHTML(obj['title']) unless obj['title'].nil?
+      article.title = ent.decode(obj['title']) unless obj['title'].nil?
       article.date = obj['date' || DateTime.now]
       article.save
       capture = Capture.new(:article => article)
@@ -48,7 +50,7 @@ namespace :import do
       obj = JSON.parse(json)
       article = Article.new
       article.url = obj['url']
-      article.title = CGI.unescapeHTML(obj['title']) unless obj['title'].nil?
+      article.title = ent.decode(obj['title']) unless obj['title'].nil?
       article.date = obj['date'] || DateTime.now
       article.save
       capture = Capture.new(:article => article)
