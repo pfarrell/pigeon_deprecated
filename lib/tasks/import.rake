@@ -7,8 +7,9 @@ namespace :import do
     ent = HTMLEntities.new
     begin
       feed.articles.each do |article|
-        next unless Article.first(title: (ent.decode(article.title)), source: feed).nil?
-        Article.new(title: ent.decode(article.title), source: feed).save
+        next unless Article.first(url: article.url, title: (ent.decode(article.title)), source: feed).nil?
+        article.title = ent.decode(article.title)
+        article.save
       end
     rescue Exception => ex
       $stderr.puts("error getting #{feed.url}: #{ex.message}")
