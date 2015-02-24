@@ -2,7 +2,7 @@ require 'httparty'
 
 class ElasticSearch
   include HTTParty
-  attr_accessor :host
+  attr_accessor :host, :url, :hostname, :canonical, :date, :image, :content
 
   def initialize(host="http://localhost:9200")
     @host = host
@@ -12,7 +12,11 @@ class ElasticSearch
     "#{@host}/#{index}/#{type}/#{id}"
   end
 
-  def save(index, type, id, json)
-    self.class.put(url(index, type, id), body: json)
+  def save(index, type, id)
+    self.class.put(url(index, type, id), body: self.to_json)
+  end
+
+  def to_json(opts={}) 
+    return {url: @url, host: @hostname, canonical: @canonical, image: @image, date: @date, content: @content}.to_json(opts)
   end
 end
