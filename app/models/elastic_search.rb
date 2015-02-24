@@ -2,18 +2,20 @@ require 'httparty'
 
 class ElasticSearch
   include HTTParty
-  attr_accessor :host, :url, :hostname, :canonical, :date, :image, :content
+  attr_accessor :id, :type, :index, :host, :url, :hostname, :canonical, :date, :image, :content
 
-  def initialize(host="http://localhost:9200")
+  def initialize(index, type, host="http://localhost:9200")
     @host = host
+    @index = index
+    @type = type
   end
 
-  def url(index, type, id)
-    "#{@host}/#{index}/#{type}/#{id}"
+  def es_url
+    "#{@host}/#{@index}/#{@type}/#{@id}"
   end
 
-  def save(index, type, id)
-    self.class.put(url(index, type, id), body: self.to_json)
+  def save
+    self.class.put(es_url, body: self.to_json)
   end
 
   def to_json(opts={}) 

@@ -1,5 +1,7 @@
 require './app'
+require 'byebug'
 require 'json'
+require 'sanitize'
 
 lookup = {}
 lookup["4f2ee4e8ed860767a8000008"]="Hacker News"
@@ -134,18 +136,16 @@ File.open(ARGV[0], "r") do |file_handle|
   cnt = 0 
   file_handle.each_line do |line|
     cnt +=1 
-    print '.' if cnt % 500 == 0
+    print '.' if cnt % 50 == 0
     hsh = JSON.parse(line)
-    source = get_source(hsh["stream_id"]) unless hsh["stream_id"].nil?
+    article = Article.find_or_create(:url => hsh['remote_url'])
     date = Time.at(hsh['date']['$date'].to_i / 1000)
-    article = Article.find_or_create(:source => source, :url => hsh['remote_url'])
-    article.date = date
-    article.title = hsh["title"]
-    article.save
-    next if hsh['local_url'].nil? || hsh['local_url'] == ""
-    capture = Capture.find_or_create(:article => article, :date => date)
-    capture.url = hsh['local_url']
-    capture.save
+    es = ElasticSearch.new("pigeon", "html")
+    es.id = article.id
+    es.url = hsh['remote_url']
+    es.date = date
+    es.content = hsh['content']
+    es.save
   end 
 end
 
