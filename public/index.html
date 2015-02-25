@@ -104,12 +104,12 @@
       <div class="col-md view">
         <table class="table">
           <thead>
-            <tr><th>SourceID</th><th>Count</th></tr>
+            <tr><th>Source</th><th>Count</th></tr>
           </thead>
           <tbody>
           {{#each stat in model}}
             <tr>
-              <td>{{stat.source_id}}</td><td>{{stat.count}}</td>
+              <td>{{stat.title}}</td><td>{{stat.count}}</td>
             </tr>
           {{/each}}
         </table>
