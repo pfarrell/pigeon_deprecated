@@ -8,6 +8,7 @@ namespace :import do
     begin
       feed.articles.each do |article|
         next unless Article.first(url: article.url, title: (ent.decode(article.title)), source: feed).nil?
+        article.source = feed
         article.title = ent.decode(article.title)
         article.save
       end
