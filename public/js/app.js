@@ -9,6 +9,7 @@ App.Router.map(function() {
   this.resource('articles', { path: 'sources/:source_id/articles'});
   this.resource('search', {path: 'search/:search_term'});
   this.resource('captures', {path: 'captures'});
+  this.resource('stats', {path: 'stats'});
 });
 
 App.ApplicationRoute = Ember.Route.extend({
@@ -50,6 +51,12 @@ App.SourcesRoute = Ember.Route.extend({
 App.ArticlesRoute = Ember.Route.extend({
   model: function(params) {
     return Ember.$.getJSON('sources/' + params.source_id + '/articles');
+  }
+});
+
+App.StatsRoute = Ember.Route.extend({
+  model: function(params) {
+    return Ember.$.getJSON('stats');
   }
 });
 

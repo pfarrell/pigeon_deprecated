@@ -37,6 +37,9 @@
               {{#link-to 'sources'}}Sources{{/link-to}}
             </li>
             <li>
+              {{#link-to 'stats'}}Stats{{/link-to}}
+            </li>
+            <li>
               <a href="javascript:(function(){if(window.myBookmarklet!==undefined){myBookmarklet();}else{document.body.appendChild(document.createElement('script')).src='https://patf.net/pigeon/marklet.js?';}})();">
                 Save to Pigeon
               </a>
@@ -94,6 +97,22 @@
             <a {{bind-attr href=article.url}}>{{article.title}}</a>
           </div>
         {{/each}}
+      </div>
+    </script>
+
+    <script type="text/x-handlebars" id="stats">
+      <div class="col-md view">
+        <table class="table">
+          <thead>
+            <tr><th>SourceID</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+          {{#each stat in model}}
+            <tr>
+              <td>{{stat.source_id}}</td><td>{{stat.count}}</td>
+            </tr>
+          {{/each}}
+        </table>
       </div>
     </script>
 
