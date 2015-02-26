@@ -139,7 +139,7 @@ File.open(ARGV[0], "r") do |file_handle|
     print '.' if cnt % 50 == 0
     hsh = JSON.parse(line)
     article = Article.find_or_create(:url => hsh['remote_url'])
-    date = Time.at(hsh['date']['$date'].to_i / 1000)
+    date = Time.at(hsh['date']['$date'].to_i / 1000).strftime('%Y-%m-%dT%H:%m:%S')
     es = ElasticSearch.new("pigeon", "html")
     es.id = article.id
     es.url = hsh['remote_url']
