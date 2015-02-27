@@ -60,7 +60,7 @@
         {{#each capture in model}}
           <div class="article">
             <a {{bind-attr href=capture.article.url}}><span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a>
-            <a {{bind-attr href=capture.url}}>{{capture.article.title}}{{date capture.article.created_at}}</a>
+            <a {{bind-attr href=capture.url}}>{{capture.article.title}} {{date capture.article.date}}</a>
           </div>
         {{/each}}
       </div>
@@ -84,7 +84,7 @@
     <script type="text/x-handlebars" id="articles">
         {{#each article in model}}
           <div class="article">
-            <a {{bind-attr href=article.url}}>{{article.title}}{{date article.created_at}}</a>
+            <a {{bind-attr href=article.url}}>{{article.title}} {{date article.date}}</a>
           </div>
         {{/each}}
     </script>
