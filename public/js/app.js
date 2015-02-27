@@ -4,6 +4,11 @@ App = Ember.Application.create({
      LOG_ACTIVE_GENERATION: true
 });
 
+Ember.Handlebars.helper('date', function(value, options) {
+  var date = new Date(value).toDateString();
+  return new Ember.Handlebars.SafeString('<span class="meta">' + date + '</span>');
+});
+
 App.Router.map(function() {
   this.resource('sources', {path: 'sources'});
   this.resource('articles', { path: 'sources/:source_id/articles'});
