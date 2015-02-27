@@ -5,8 +5,7 @@ App = Ember.Application.create({
 });
 
 Ember.Handlebars.helper('date', function(value, options) {
-  var date = new Date(value).toDateString();
-  return new Ember.Handlebars.SafeString('<span class="meta">' + date + '</span>');
+  return new Ember.Handlebars.SafeString('<span class="meta">' + moment(value).fromNow() + '</span>');
 });
 
 App.Router.map(function() {
