@@ -109,7 +109,12 @@
           <tbody>
           {{#each stat in model}}
             <tr>
-              <td>{{stat.title}}</td><td>{{stat.count}}</td>
+              <td>
+                {{#link-to 'articles' stat.source_id}}
+                  {{stat.title}}
+                {{/link-to}}
+              </td>
+              <td>{{stat.count}}</td>
             </tr>
           {{/each}}
         </table>
