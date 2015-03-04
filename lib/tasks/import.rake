@@ -31,6 +31,7 @@ namespace :import do
 
   task :process do
     redis = Redis.new
+    ent = HTMLEntities.new
     json = redis.lpop("incoming:links")
     unless(json.nil?)
       obj = JSON.parse(json)
@@ -47,6 +48,7 @@ namespace :import do
 
   task :drain do
     redis = Redis.new
+    ent = HTMLEntities.new
     json = redis.lpop("incoming:links")
     until(json.nil?)
       obj = JSON.parse(json)
