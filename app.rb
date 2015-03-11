@@ -4,13 +4,13 @@ require 'sinatra/json'
 require 'sinatra/cookies'
 require 'sinatra/url_for'
 require 'redis'
-require 'sinatra/respond_to'
+#require 'sinatra/respond_to'
 
 
 class Pigeon < Sinatra::Application
   helpers Sinatra::JSON
   helpers Sinatra::Cookies
-  register Sinatra::RespondTo
+#  register Sinatra::RespondTo
 
   enable :sessions
   set :session_secret, ENV["PIGEON_SESSION_SECRET"]
