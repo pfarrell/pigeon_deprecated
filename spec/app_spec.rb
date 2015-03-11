@@ -43,7 +43,7 @@ describe 'Pigeon' do
 
   it "redirects for searches with / as first character" do
     get "/search?q=/test"
-    expect(last_response).to be_redirect
+    expect(last_response).to be_ok
   end
 
   it "searches" do
