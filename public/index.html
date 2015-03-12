@@ -85,6 +85,7 @@
         {{#each article in model}}
           <div class="article">
             <a {{bind-attr href=article.url}}>{{article.title}} {{date article.date}}</a>
+            {{date article.created_at}}</a>
           </div>
         {{/each}}
     </script>
