@@ -5,7 +5,11 @@ App = Ember.Application.create({
 });
 
 Ember.Handlebars.helper('date', function(value, options) {
-  return new Ember.Handlebars.SafeString('<span class="meta">' + moment(value).fromNow() + '</span>');
+  if(value==null) {
+    return "";
+  }else{
+    return new Ember.Handlebars.SafeString('<span class="meta">' + moment(value.replace(" ", "T").replace(" ", "")).fromNow() + '</span>');
+  }
 });
 
 App.Router.map(function() {
