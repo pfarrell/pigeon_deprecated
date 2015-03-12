@@ -84,8 +84,7 @@
     <script type="text/x-handlebars" id="articles">
         {{#each article in model}}
           <div class="article">
-            <a {{bind-attr href=article.url}}>{{article.title}} {{date article.date}}</a>
-            {{date article.created_at}}</a>
+            <a {{bind-attr href=article.url}}>{{article.title}} {{date article.created_at}}</a>
           </div>
         {{/each}}
     </script>
@@ -95,7 +94,7 @@
         {{#each article in model}}
           <div class="article">
             <a><span class="glyphicon glyphicon-download" aria-hidden="true"></span></a>
-            <a {{bind-attr href=article.url}}>{{article.title}} {{date article.date}}</a>
+            <a {{bind-attr href=article.url}}>{{article.title}} {{date article.created_at}}</a>
           </div>
         {{/each}}
       </div>
