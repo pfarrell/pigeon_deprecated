@@ -26,6 +26,10 @@ class Article < Sequel::Model
   def content
   end
 
+  def comments
+    self.links.select{|x| x.type == "comments"}
+  end
+
   def self.encode(str)
     encoding_options = {
       :invalid           => :replace,  # Replace invalid byte sequences
