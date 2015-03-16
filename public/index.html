@@ -85,6 +85,9 @@
         {{#each article in model}}
           <div class="article">
             <a {{bind-attr href=article.url}}>{{article.title}} {{date article.created_at}}</a>
+            {{#if article.meta.comments }}
+              <a class="meta" {{bind-attr href=article.meta.comments}}>comments</a>
+            {{/if}}
           </div>
         {{/each}}
     </script>

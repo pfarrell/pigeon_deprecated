@@ -10,6 +10,7 @@ namespace :import do
         next unless Article.first(url: article.url, title: (ent.decode(article.title)), source: feed).nil?
         article.source = feed
         article.title = ent.decode(article.title)
+        article.meta={comments: article.comments.first.url} unless article.comments.nil? || article.comments.empty?
         article.save
       end
     rescue Exception => ex
