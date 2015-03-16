@@ -2,7 +2,7 @@ require 'rss'
 
 class Pigeon < Sinatra::Application
   get "/sources" do
-    RssFeed.all.to_json
+    RssFeed.sort_by{|x| x.title.strip}.to_json
   end
 
   get "/sources/new" do
