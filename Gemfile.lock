@@ -1,6 +1,7 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    addressable (2.3.6)
     backports (3.6.0)
     byebug (3.4.0)
       columnize (~> 0.8)
@@ -100,6 +101,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  addressable
   byebug
   capistrano (~> 3.2.0)
   capistrano-bower

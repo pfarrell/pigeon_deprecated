@@ -15,6 +15,7 @@ gem 'sinatra-respond_to'
 gem 'htmlentities'
 gem 'sanitize'
 gem 'httparty'
+gem 'addressable'
 
 group 'development' do
   gem 'byebug'
