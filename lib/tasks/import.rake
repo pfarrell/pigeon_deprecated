@@ -1,4 +1,5 @@
 require 'json'
+require 'uri'
 require 'htmlentities'
 
 
@@ -8,9 +9,10 @@ namespace :import do
     begin
       feed.articles.each do |article|
         next unless Article.first(url: article.url, title: (ent.decode(article.title)), source: feed).nil?
+        uri = URI(article.url)
         article.source = feed
         article.title = ent.decode(article.title)
-        article.meta={comments: article.comments.first.url} unless article.comments.nil? || article.comments.empty?
+        article.meta={domain: uri.host, comments: article.comments.first.url} unless article.comments.nil? || article.comments.empty?
         article.save
       end
     rescue Exception => ex
@@ -36,9 +38,13 @@ namespace :import do
     json = redis.lpop("incoming:links")
     unless(json.nil?)
       obj = JSON.parse(json)
+      uri = URI(obj['url'])
       article = Article.find_or_create(:url => obj['url'])
       article.title = ent.decode(obj['title']) unless obj['title'].nil?
       article.date = obj['date' || DateTime.now]
+      meta=article.meta
+      meta[:domain]= uri.host
+      article.meta = meta
       article.save
       capture = Capture.new(:article => article)
       capture.date = obj['date'] || DateTime.now

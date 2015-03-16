@@ -84,10 +84,16 @@
     <script type="text/x-handlebars" id="articles">
         {{#each article in model}}
           <div class="article">
-            <a {{bind-attr href=article.url}}>{{article.title}} {{date article.created_at}}</a>
-            {{#if article.meta.comments }}
-              <a class="meta" {{bind-attr href=article.meta.comments}}>comments</a>
+            <a {{bind-attr href=article.url}}>{{article.title}}</a>
+            {{#if article.meta.domain}}
+              <span class="meta">({{article.meta.domain}})</span>
             {{/if}}
+            <div>
+              {{#if article.meta.comments}}
+                <a class="meta" {{bind-attr href=article.meta.comments}}>comments</a> 
+              {{/if}}
+              {{date article.created_at}}
+            </div>
           </div>
         {{/each}}
     </script>
