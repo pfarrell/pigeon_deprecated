@@ -12,7 +12,9 @@ namespace :import do
         uri = URI(article.url)
         article.source = feed
         article.title = ent.decode(article.title)
-        article.meta={domain: uri.host, comments: article.comments.first.url} unless article.comments.nil? || article.comments.empty?
+        article.meta={}
+        article.meta[:domain]= uri.host
+        article.meta[:comments]=article.comments.first.url unless article.comments.nil? || article.comments.empty?
         article.save
       end
     rescue Exception => ex
@@ -39,12 +41,11 @@ namespace :import do
     unless(json.nil?)
       obj = JSON.parse(json)
       uri = URI(obj['url'])
-      article = Article.find_or_create(:url => obj['url'])
-      article.title = ent.decode(obj['title']) unless obj['title'].nil?
+      article = Article.find_or_create(url: obj['url'])
+      article.title ||= ent.decode(obj['title']) unless obj['title'].nil?
       article.date = obj['date' || DateTime.now]
-      meta=article.meta
-      meta[:domain]= uri.host
-      article.meta = meta
+      article.meta ||= {}
+      article.meta[:domain] ||= uri.host
       article.save
       capture = Capture.new(:article => article)
       capture.date = obj['date'] || DateTime.now
@@ -59,10 +60,12 @@ namespace :import do
     json = redis.lpop("incoming:links")
     until(json.nil?)
       obj = JSON.parse(json)
-      article = Article.new
-      article.url = obj['url']
-      article.title = ent.decode(obj['title']) unless obj['title'].nil?
-      article.date = obj['date'] || DateTime.now
+      uri = URI(obj['url'])
+      article = Article.find_or_create(:url => obj['url'])
+      article.title ||= ent.decode(obj['title']) unless obj['title'].nil?
+      article.date ||= obj['date'] || DateTime.now
+      article.meta ||= {}
+      article.meta[:domain] ||= uri.host
       article.save
       capture = Capture.new(:article => article)
       capture.date = obj['date'] || DateTime.now

@@ -63,7 +63,7 @@
             <a {{bind-attr href=capture.article.url}} class="meta">{{capture.article.meta.domain}}</a>
             <div>
               {{#if capture.article.meta.comments}}
-                <a class="meta" {{bind-attr href=article.meta.comments}}>comments</a> 
+                <a class="meta" {{bind-attr href=capture.article.meta.comments}}>comments</a> 
               {{/if}}
               {{date capture.article.date}}
             </div>
