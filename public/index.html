@@ -39,6 +39,9 @@
             <li>
               {{#link-to 'stats'}}Stats{{/link-to}}
             </li>
+            <li>
+              {{#link-to 'recent'}}Recent{{/link-to}}
+            </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li>
@@ -92,6 +95,21 @@
     </script>
 
     <script type="text/x-handlebars" id="articles">
+        {{#each article in model}}
+          <div class="article">
+            <a {{bind-attr href=article.url}}>{{article.title}}</a>
+            <div>
+              <span class="meta">({{article.meta.domain}})</span>
+              {{#if article.meta.comments}}
+                <a class="meta" {{bind-attr href=article.meta.comments}}>comments</a> 
+              {{/if}}
+              {{date article.created_at}}
+            </div>
+          </div>
+        {{/each}}
+    </script>
+
+    <script type="text/x-handlebars" id="recent">
         {{#each article in model}}
           <div class="article">
             <a {{bind-attr href=article.url}}>{{article.title}}</a>

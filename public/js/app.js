@@ -18,6 +18,7 @@ App.Router.map(function() {
   this.resource('search', {path: 'search/:search_term'});
   this.resource('captures', {path: 'captures'});
   this.resource('stats', {path: 'stats'});
+  this.resource('recent', {path: 'recent'});
 });
 
 App.ApplicationRoute = Ember.Route.extend({
@@ -37,6 +38,17 @@ App.IndexRoute = Ember.Route.extend({
 App.CapturesRoute = Ember.Route.extend({
   model: function() {
     return Ember.$.getJSON('captures');
+  },
+  actions: {
+    search: function(query) {
+      return true;
+    }
+  }
+});
+
+App.RecentRoute = Ember.Route.extend({
+  model: function() {
+    return Ember.$.getJSON('articles/recent');
   },
   actions: {
     search: function(query) {

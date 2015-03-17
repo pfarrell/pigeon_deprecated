@@ -8,4 +8,9 @@ class Pigeon < Sinatra::Application
       wants.json { link.to_json }
     end
   end
+
+  get "/articles/recent" do
+    count = params[:size] || 100
+    Article.last(count).to_json
+  end
 end
