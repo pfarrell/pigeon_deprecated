@@ -8,10 +8,11 @@ namespace :import do
     ent = HTMLEntities.new
     begin
       feed.articles.each do |article|
-        next unless Article.first(url: article.url, title: (ent.decode(article.title)), source: feed).nil?
+        title=ent.decode(article.title)
+        next unless Article.first(url: article.url, title: title, source: feed).nil?
         uri = URI(article.url)
         article.source = feed
-        article.title = ent.decode(article.title)
+        article.title = title
         article.meta={}
         article.meta[:domain]= uri.host
         article.meta[:comments]=article.comments.first.url unless article.comments.nil? || article.comments.empty?
