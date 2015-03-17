@@ -60,8 +60,8 @@
         {{#each capture in model}}
           <div class="article">
             <a {{bind-attr href=capture.url}}>{{capture.article.title}}</a>
-            <a {{bind-attr href=capture.article.url}} class="meta">{{capture.article.meta.domain}}</a>
             <div>
+              <a {{bind-attr href=capture.article.url}} class="meta">({{capture.article.meta.domain}})</a>
               {{#if capture.article.meta.comments}}
                 <a class="meta" {{bind-attr href=capture.article.meta.comments}}>comments</a> 
               {{/if}}
@@ -91,10 +91,8 @@
         {{#each article in model}}
           <div class="article">
             <a {{bind-attr href=article.url}}>{{article.title}}</a>
-            {{#if article.meta.domain}}
-              <span class="meta">({{article.meta.domain}})</span>
-            {{/if}}
             <div>
+              <span class="meta">({{article.meta.domain}})</span>
               {{#if article.meta.comments}}
                 <a class="meta" {{bind-attr href=article.meta.comments}}>comments</a> 
               {{/if}}
