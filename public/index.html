@@ -59,8 +59,14 @@
       <div class="col-md-12 view">
         {{#each capture in model}}
           <div class="article">
-            <a {{bind-attr href=capture.article.url}}><span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a>
-            <a {{bind-attr href=capture.url}}>{{capture.article.title}} {{date capture.article.date}}</a>
+            <a {{bind-attr href=capture.url}}>{{capture.article.title}}</a>
+            <a {{bind-attr href=capture.article.url}} class="meta">{{capture.article.meta.domain}}</a>
+            <div>
+              {{#if capture.article.meta.comments}}
+                <a class="meta" {{bind-attr href=article.meta.comments}}>comments</a> 
+              {{/if}}
+              {{date capture.article.date}}
+            </div>
           </div>
         {{/each}}
       </div>
