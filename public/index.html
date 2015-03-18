@@ -128,8 +128,14 @@
       <div class="col-md-12 view">
         {{#each article in model}}
           <div class="article">
-            <a><span class="glyphicon glyphicon-download" aria-hidden="true"></span></a>
-            <a {{bind-attr href=article.url}}>{{article.title}} {{date article.created_at}}</a>
+            <a {{bind-attr href=article.url}}>{{article.title}}</a>
+            <div>
+              <span class="meta">({{article.meta.domain}})</span>
+              {{#if article.meta.comments}}
+                <a class="meta" {{bind-attr href=article.meta.comments}}>comments</a> 
+              {{/if}}
+              {{date article.created_at}}
+            </div>
           </div>
         {{/each}}
       </div>
