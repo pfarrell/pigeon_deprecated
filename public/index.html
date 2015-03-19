@@ -62,23 +62,6 @@
       </div>
     </script>
 
-    <script type="text/x-handlebars" id="captures">
-      <div class="col-md-12 view">
-        {{#each capture in model}}
-          <div class="article">
-            <a {{bind-attr href=capture.url}}>{{capture.article.title}}</a>
-            <div>
-              <a {{bind-attr href=capture.article.url}} class="meta">({{capture.article.meta.domain}})</a>
-              {{#if capture.article.meta.comments}}
-                <a class="meta" {{bind-attr href=capture.article.meta.comments}}>comments</a> 
-              {{/if}}
-              {{date capture.article.date}}
-            </div>
-          </div>
-        {{/each}}
-      </div>
-    </script>
-
     <script type="text/x-handlebars" id="sources">
       <div class="col-md-4 view">
         {{#each source in model}}
@@ -94,51 +77,42 @@
       </div>
     </script>
 
+    <script type="text/x-handlebars" id="_article">
+      <div class="article">
+        <a {{bind-attr href=article.url}}>{{article.title}}</a>
+        <div>
+          <span class="meta">({{article.meta.domain}})</span>
+          {{#if article.meta.comments}}
+            <a class="meta" {{bind-attr href=article.meta.comments}}>comments</a> 
+          {{/if}}
+          {{date article.created_at}}
+        </div>
+      </div>
+    </script>
+
+    <script type="text/x-handlebars" id="_articles">
+      {{#each article in model}}
+        {{partial "article"}}
+      {{/each}}
+    </script>
+
+    <script type="text/x-handlebars" id="captures">
+      {{#each capture in model}}
+        {{render "_article" capture}}
+      {{/each}}
+    </script>
+
+
     <script type="text/x-handlebars" id="articles">
-        {{#each article in model}}
-          <div class="article">
-            <a {{bind-attr href=article.url}}>{{article.title}}</a>
-            <div>
-              <span class="meta">({{article.meta.domain}})</span>
-              {{#if article.meta.comments}}
-                <a class="meta" {{bind-attr href=article.meta.comments}}>comments</a> 
-              {{/if}}
-              {{date article.created_at}}
-            </div>
-          </div>
-        {{/each}}
+      {{partial "articles"}}
     </script>
 
     <script type="text/x-handlebars" id="recent">
-        {{#each article in model}}
-          <div class="article">
-            <a {{bind-attr href=article.url}}>{{article.title}}</a>
-            <div>
-              <span class="meta">({{article.meta.domain}})</span>
-              {{#if article.meta.comments}}
-                <a class="meta" {{bind-attr href=article.meta.comments}}>comments</a> 
-              {{/if}}
-              {{date article.created_at}}
-            </div>
-          </div>
-        {{/each}}
+      {{partial "articles"}}
     </script>
 
     <script type="text/x-handlebars" id="search">
-      <div class="col-md-12 view">
-        {{#each article in model}}
-          <div class="article">
-            <a {{bind-attr href=article.url}}>{{article.title}}</a>
-            <div>
-              <span class="meta">({{article.meta.domain}})</span>
-              {{#if article.meta.comments}}
-                <a class="meta" {{bind-attr href=article.meta.comments}}>comments</a> 
-              {{/if}}
-              {{date article.created_at}}
-            </div>
-          </div>
-        {{/each}}
-      </div>
+      {{partial "articles"}}
     </script>
 
     <script type="text/x-handlebars" id="stats">
