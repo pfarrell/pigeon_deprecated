@@ -6,7 +6,7 @@ class RssFeed < Source
   def instantiate(params={})
     @title = params[:title]
     @url  = params[:url]
-    @type = params[:type]
+    @type = 'rss'
   end
 
   def articles
