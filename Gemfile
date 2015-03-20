@@ -16,6 +16,7 @@ gem 'htmlentities'
 gem 'sanitize'
 gem 'httparty'
 gem 'addressable'
+gem 'nokogiri'
 
 group 'development' do
   gem 'byebug'

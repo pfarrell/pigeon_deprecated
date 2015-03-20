@@ -110,6 +110,7 @@ DEPENDENCIES
   haml
   htmlentities
   httparty
+  nokogiri
   pg
   redis
   rspec
