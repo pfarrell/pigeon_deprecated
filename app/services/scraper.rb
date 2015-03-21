@@ -3,9 +3,48 @@ require 'open-uri'
 require 'addressable/uri'
 
 class Scraper
+  attr_accessor :doc, :url, :uri, :final
 
-  def scrape(url)
-    Html.new(url, Nokogiri::HTML(open(url)))
+  def initialize(url=nil)
+    @url=url
+    @uri=uri(url)
+    @final=final(@uri)
+    @doc=Html.new(@final, Nokogiri::HTML(open(@final)))
+  end
+
+  def self.scrape(url)
+    Scraper.new(url)
+  end
+
+  def uri(url)
+    Addressable::URI.parse(url)
+  end
+
+  def final(uri)
+    page_head=head(uri)
+    case page_head.code
+      when "301"
+        return uri.to_s if uri.to_s == page_head['location']
+        return final(uri(page_head['location']))
+      when "200"
+        return uri.to_s 
+    end
+  end  
+  
+  def head(uri)
+    Net::HTTP.start(uri.host, uri.port) {|http| http.head(uri.normalized_path) }
+  end
+
+  def sort_file_sizes(base_url, urls)
+    urls.sort_by{ |url| 
+      uri = uri(normalize(uri(base_url).origin, url))
+      head(uri).content_length * -1
+    }
+  end
+
+  def normalize(base, url)
+    return url if url =~ /^http/
+    return "#{base}#{url}"
   end
 
 end
@@ -33,7 +72,17 @@ class Html
   def title
     @raw.title
   end
+
+  def meta
+    @raw.css("meta").map{|x| x.first }.to_h
+  end
   
+  def canonical
+    links= @raw.css("link").select{|x| x["rel"]=="canonical"}
+    warn "more than one canonical link found" if links.size > 1
+    links.first["href"]
+  end
+
   def headings(level="1")
     @raw.css("h#{level}").select{|x| !x.text.nil?}.map{|x| x.text}
   end
@@ -46,26 +95,17 @@ class Html
     @raw.css('a').map{|x| x.attributes["href"].value unless x.attributes["href"].nil? }
   end
 
-
-  def headers(uri=@uri)
-    response=nil
-    Net::HTTP.start(uri.host, uri.port) {|http|
-     response = http.head(uri.path)
-    byebug
-    }.header.to_hash
-  end
-
   def external_links
     links.select do |x| 
       uri=Addressable::URI.parse(x)
-      uri.host != host
+      !uri.host.nil? && !host.nil? && !host.end_with?(uri.host) && (uri.to_s =~ /^(\/|#)/).nil?
     end
   end
 
   def internal_links
     links.select do |x| 
       uri=Addressable::URI.parse(x)
-      uri.host == host
+      !host.nil? || host.end_with?(uri.host) || uri.to_s =~ /^(\/|#)/
     end
   end
 end
