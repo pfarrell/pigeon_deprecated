@@ -79,6 +79,7 @@ class Html
   
   def canonical
     links= @raw.css("link").select{|x| x["rel"]=="canonical"}
+    return [] if links.size==0
     warn "more than one canonical link found" if links.size > 1
     links.first["href"]
   end
