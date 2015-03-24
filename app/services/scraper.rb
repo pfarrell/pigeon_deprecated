@@ -27,7 +27,7 @@ class Scraper
     case page_head.code
       when "301"
         return u.to_s if u.to_s == page_head['location']
-        return final_url(uri(page_head['location']))
+        return final_url(page_head['location'])
       when "200"
         return u.to_s 
     end

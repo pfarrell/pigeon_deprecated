@@ -10,9 +10,11 @@ describe Scraper do
     expect(s.doc).to be_nil
   end
 
-  it "scrapes" do
+  it "follows redirects" do
+    #require 'byebug'
+    #byebug
     s="http://patf.net"
-    expect(Scraper.newlfinal_url(s)).to eq ("http://pfarrell.github.io")
+    expect(Scraper.new.final_url(s)).to eq ("https://patf.net/")
   end
   
   it "detects when 200's are returned" do
