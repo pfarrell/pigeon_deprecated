@@ -1,14 +1,4 @@
 class Pigeon < Sinatra::Application
-  post "/article/new" do
-    link = Link.new
-    link.url = params[:url]
-    link.save
-    respond_to do |wants|
-      wants.html { "saved" }
-      wants.json { link.to_json }
-    end
-  end
-
   get "/articles/recent" do
     count = params[:size] || 100
     Article.last(count).to_json
