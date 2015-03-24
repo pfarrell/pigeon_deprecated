@@ -11,8 +11,8 @@ describe Scraper do
   end
 
   it "scrapes" do
-    s=Scraper.scrape("http://patf.net")
-    expect(s.url).to eq ("https://pfarrell.github.io")
+    s="http://patf.net"
+    expect(Scraper.newlfinal_url(s)).to eq ("http://pfarrell.github.io")
   end
   
   it "detects when 200's are returned" do
@@ -22,7 +22,7 @@ describe Scraper do
 
   it "normalizes urls" do
     s = Scraper.new
-    expect(s.normalize("http://patf.net", "http://paatf.net/test.jpg")).to eq ("http://patf.net/test.jpg")
+    expect(s.normalize("http://patf.net", "http://patf.net/test.jpg")).to eq ("http://patf.net/test.jpg")
   end
 
   it "normalizes urls" do

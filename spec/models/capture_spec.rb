@@ -9,26 +9,29 @@ describe Capture do
   end
 
   it 'cleans filenames' do
-    expect(capture.clean("test#frag")).to eq("test")
+    expect(capture.clean("test#frag")).to eq("test.html")
   end
+
   it 'cleans filenames' do
     expect(capture.clean("test.html?")).to eq("test.html")
   end
-  it 'cleans filenames' do
-    expect(capture.clean("test.html?test=name")).to eq("test.html")
-  end
+
   it 'cleans filenames' do
     expect(capture.clean("test/")).to eq ("index.html")
   end
+
   it 'cleans filenames' do
     expect(capture.clean("test/a.pdf")).to eq ("a.pdf")
   end
+
   it 'cleans filenames' do
     expect(capture.clean("test/a.jpeg")).to eq ("a.jpeg")
   end
+
   it 'cleans filenames' do
     expect(capture.clean("test/a.jpg")).to eq ("a.jpg")
   end
+
   it 'cleans filenames' do
     expect(capture.clean("test/a.gif")).to eq ("a.gif")
   end

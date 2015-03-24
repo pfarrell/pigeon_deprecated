@@ -58,16 +58,16 @@ describe 'Pigeon' do
 
   it "has a marklet route" do
     get "/marklet.js"
-    expect (last_response).to be_ok
+    expect(last_response).to be_ok
   end
   
   it "has a bookmark route" do
     get "/bookmark/new"
-    expect (last_response).to be_ok
+    expect(last_response).to be_ok
   end
 
   it "has a stats route" do
     get "/stats"
-    expect (last_response).to be_ok
+    expect(last_response).to be_ok
   end
 end

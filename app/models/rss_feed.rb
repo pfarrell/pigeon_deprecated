@@ -3,12 +3,6 @@ require 'simple-rss'
 
 class RssFeed < Source
 
-  def instantiate(params={})
-    @title = params[:title]
-    @url  = params[:url]
-    @type = 'rss'
-  end
-
   def articles
     feed = SimpleRSS.parse open(url)
     if block_given?
