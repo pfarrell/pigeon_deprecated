@@ -3,33 +3,30 @@ require 'open-uri'
 require 'addressable/uri'
 
 class Scraper
-  attr_accessor :doc, :url, :uri, :final
-
-  def initialize(url=nil)
-    @url=url
-    @uri=uri(url)
-    @final=final(@uri)
-    @doc=Html.new(@final, Nokogiri::HTML(open(@final)))
-  end
+  attr_accessor :doc, :url, :final
 
   def self.scrape(url)
-    Scraper.new(url)
+    s=Scraper.new
+    s.url = url
+    s.final = s.final_url(s.uri(url))
+    s.doc = Html.new(s.final, Nokogiri::HTML(open(s.final)))
+    s
   end
 
   def uri(url)
     Addressable::URI.parse(url)
   end
 
-  def favicon
-    "#{@uri.origin}/favicon.ico"
+  def favicon(url)
+    "#{uri(url).origin}/favicon.ico"
   end
 
-  def final(uri)
+  def final_url(uri)
     page_head=head(uri)
     case page_head.code
       when "301"
         return uri.to_s if uri.to_s == page_head['location']
-        return final(uri(page_head['location']))
+        return final_url(uri(page_head['location']))
       when "200"
         return uri.to_s 
     end
@@ -42,7 +39,8 @@ class Scraper
   def sort_file_sizes(base_url, urls)
     urls.sort_by{ |url| 
       uri = uri(normalize(uri(base_url).origin, url))
-      head(uri).content_length * -1
+      len= head(uri).content_length
+      len * -1 unless len.nil?
     }
   end
 
@@ -89,7 +87,7 @@ class Html
   def favicon
     link = select("link").select{|x| x["rel"]=~ /icon/}.first
     return normalize(link["href"]) unless link.nil?
-    Scraper.favicon(@uri)
+    Scraper.new.favicon(@uri.to_s)
   end
 
   def select(selector)
@@ -113,7 +111,7 @@ class Html
   end
 
   def images
-    @raw.css('img').map{|x| x.attributes["src"].value unless x.attributes["src"].nil? }
+    @raw.css('img').map{|x| normalize(x.attributes["src"].value) unless x.attributes["src"].nil? }
   end
 
   def links
