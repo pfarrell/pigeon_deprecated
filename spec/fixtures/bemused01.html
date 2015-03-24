@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title id='title'>
+      
+    </title>
+    <meta charset='utf-8'>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport'>
+    <meta content='yes' name='apple-mobile-web-app-capable'>
+    <script src='/bemused/libs/jquery/dist/jquery.min.js' type='text/javascript'></script>
+    <link href='//fonts.googleapis.com/css?family=Lato&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link href='/bemused/libs/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+    <link href='/bemused/libs/jplayer/skin/blue.monday/jplayer.blue.monday.css' rel='stylesheet' type='text/css'>
+    <link href='/bemused/css/default.css' media='screen' rel='stylesheet' type='text/css'>
+    <link href='//patf.net/images/bemused.ico' rel='shortcut icon'>
+    <script src='/bemused/libs/bootstrap/dist/js/bootstrap.min.js' type='text/javascript'></script>
+    <script src='/bemused/libs/jplayer/jquery.jplayer/jquery.jplayer.js' type='text/javascript'></script>
+    <script src='/bemused/libs/jplayer/add-on/jplayer.playlist.js' type='text/javascript'></script>
+    <script src='/bemused/libs/masonry/dist/masonry.pkgd.js' type='text/javascript'></script>
+    <script src='/bemused/libs/imagesloaded/imagesloaded.pkgd.min.js' type='text/javascript'></script>
+    <script src='/bemused/libs/devbridge-autocomplete/dist/jquery.autocomplete.min.js' type='text/javascript'></script>
+  </head>
+  <body>
+    <nav class='navbar navbar-default' id='nav' role='navigation'>
+      <div class='navbar-header'>
+        <button class='navbar-toggle' data-target='#navbar-collapse' data-toggle='collapse' type='button'>
+          <span class='sr-only'>
+            Toggle navigation
+          </span>
+          <span class='icon-bar'></span>
+          <span class='icon-bar'></span>
+          <span class='icon-bar'></span>
+        </button>
+        <a class='navbar-brand' href='/bemused/'>
+          Bemused
+        </a>
+      </div>
+      <div class='collapse navbar-collapse' id='navbar-collapse'>
+        <form action='/bemused/search' class='navbar-form navbar-left' id='search' method='GET'>
+          <div class='form-group'>
+            <input autofocus class='form-control' id='q' name='q' placeholder='Search' type='TEXT'>
+          </div>
+        </form>
+        <ul class='nav navbar-brand'>
+          <li>
+            <span class='navbar-info'></span>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class='container' id='content'>
+      <a class='item' href='/bemused/artist/3194'>
+        <img class='artist' src='/bemused/images/artists/sm/nwa.jpg' title='N.W.A.'>
+      </a>
+      <a class='item' href='/bemused/artist/980'>
+        <img class='artist' src='/bemused/images/artists/sm/three_tenors.jpg' title='Vincent Scotto'>
+      </a>
+      <a class='item' href='/bemused/artist/778'>
+        <img class='artist' src='/bemused/images/artists/sm/muddy_waters.jpg' title='Muddy Waters'>
+      </a>
+      <a class='item' href='/bemused/artist/620'>
+        <img class='artist' src='/bemused/images/artists/sm/prefuse.jpg' title='Prefuse 73 Feat. Mikah 9'>
+      </a>
+      <a class='item' href='/bemused/artist/808'>
+        <img class='artist' src='/bemused/images/artists/sm/stevie_ray_vaughan.jpg' title='Stevie Ray Vaughan'>
+      </a>
+      <a class='item' href='/bemused/artist/256'>
+        <img class='artist' src='/bemused/images/artists/sm/flock_of_seagulls.jpg' title='A Flock of Seagulls'>
+      </a>
+      <a class='item' href='/bemused/artist/210'>
+        <img class='artist' src='/bemused/images/artists/sm/sex_pistols.jpg' title='Sex Pistols'>
+      </a>
+      <a class='item' href='/bemused/artist/2651'>
+        <img class='artist' src='/bemused/images/artists/sm/queens_of_the_stone_age.jpg' title='Queens Of The Stone Age'>
+      </a>
+      <a class='item' href='/bemused/artist/16992'>
+        <img class='artist' src='/bemused/images/artists/sm/st_vincent.jpg' title='St. Vincent'>
+      </a>
+      <a class='item' href='/bemused/artist/376'>
+        <img class='artist' src='/bemused/images/artists/sm/king_curtis.jpg' title='King Curtis'>
+      </a>
+      <a class='item' href='/bemused/artist/127'>
+        <img class='artist' src='/bemused/images/artists/sm/the_kinks.jpg' title='The Kinks'>
+      </a>
+      <a class='item' href='/bemused/artist/117'>
+        <img class='artist' src='/bemused/images/artists/sm/willie_nelson.jpg' title='Willie Nelson'>
+      </a>
+      <a class='item' href='/bemused/artist/1618'>
+        <img class='artist' src='/bemused/images/artists/sm/dave_hepler.jpg' title='Dave Hepler Trio'>
+      </a>
+      <a class='item' href='/bemused/artist/147'>
+        <img class='artist' src='/bemused/images/artists/sm/waylon_jennings2.jpg' title='Waylon Jennings'>
+      </a>
+      <a class='item' href='/bemused/artist/1592'>
+        <img class='artist' src='/bemused/images/artists/sm/red_hot_chili_peppers.jpg' title='Red Hot Chili Peppers'>
+      </a>
+      <a class='item' href='/bemused/artist/5051'>
+        <img class='artist' src='/bemused/images/artists/sm/color_me_badd.jpg' title='Color Me Badd'>
+      </a>
+      <a class='item' href='/bemused/artist/395'>
+        <img class='artist' src='/bemused/images/artists/sm/dave_clark_five.jpg' title='Dave Clark Five'>
+      </a>
+      <a class='item' href='/bemused/artist/118'>
+        <img class='artist' src='/bemused/images/artists/sm/jimi_hendrix.gif' title='Jimi Hendrix'>
+      </a>
+      <a class='item' href='/bemused/artist/1229'>
+        <img class='artist' src='/bemused/images/artists/sm/wu_tang_clan.jpg' title='Wu-Tang Clan'>
+      </a>
+      <a class='item' href='/bemused/artist/2429'>
+        <img class='artist' src='/bemused/images/artists/sm/moby.jpg' title='Moby'>
+      </a>
+      <a class='item' href='/bemused/artist/471'>
+        <img class='artist' src='/bemused/images/artists/sm/bobby_freeman.jpg' title='Bobby Freeman'>
+      </a>
+      <a class='item' href='/bemused/artist/4089'>
+        <img class='artist' src='/bemused/images/artists/sm/keith_sweat.jpg' title='Keith Sweat'>
+      </a>
+      <a class='item' href='/bemused/artist/8794'>
+        <img class='artist' src='/bemused/images/artists/sm/hood_internet.jpg' title='Hood Internet'>
+      </a>
+      <a class='item' href='/bemused/artist/1886'>
+        <img class='artist' src='/bemused/images/artists/sm/alicia_keys.jpg' title='Alicia Keys'>
+      </a>
+      <a class='item' href='/bemused/artist/1780'>
+        <img class='artist' src='/bemused/images/artists/sm/early_genesis.jpg' title='Genesis'>
+      </a>
+      <script>
+        var container = document.querySelector('.container');
+        var msnry = new Masonry( container, {
+          // options
+          columnWidth: 200,
+          itemSelector: '.item'
+        });
+        imagesLoaded(container, function() {
+          msnry.layout();
+        });
+      </script>
+    </div>
+    <div class='row' id='footer'>
+      <div class='container footer'>
+        A
+        <a href='https://patf.net'>
+          patf
+        </a>
+        joint
+      </div>
+    </div>
+  </body>
+</html>
+<script src='/bemused/js/keypress.js' type='text/javascript'></script>
+<script>
+  $('#q').autocomplete({
+    serviceUrl: '/bemused/livesearch',
+    paramName: 'q',
+    minChars: 1,
+    lookupLimit: 50,
+    autoSelectFirst: true,
+  });
+</script>

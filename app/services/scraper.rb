@@ -62,7 +62,7 @@ class Html
 
   def initialize(opts={})
     @doc= Nokogiri::HTML(opts[:content]) unless opts[:doc]
-    @uri= Addressable::URI.parse(opts[:url]) unless opts[:url].nil?
+    @uri= Scraper.new.uri(opts[:url]) unless opts[:url].nil?
   end
 
   def host

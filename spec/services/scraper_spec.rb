@@ -16,6 +16,18 @@ describe Scraper do
     s="http://patf.net"
     expect(Scraper.new.final_url(s)).to eq ("https://patf.net/")
   end
+
+  it "gets favicons" do
+    s = Scraper.new
+    expect( s.favicon("https://patf.net/bemused")).to eq("https://patf.net/favicon.ico")
+  end
+
+  it "scrapes pages" do
+    s = Scraper.scrape("http://pfarrell.github.io")
+    expect(s.url).to eq("http://pfarrell.github.io")
+    expect(s.final).to eq("http://pfarrell.github.io")
+    expect(s.doc).to be_a Html
+  end
   
   it "detects when 200's are returned" do
     s = Scraper.new
