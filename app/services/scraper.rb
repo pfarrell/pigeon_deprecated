@@ -20,6 +20,10 @@ class Scraper
     Addressable::URI.parse(url)
   end
 
+  def favicon
+    "#{@uri.origin}/favicon.ico"
+  end
+
   def final(uri)
     page_head=head(uri)
     case page_head.code
@@ -69,9 +73,29 @@ class Html
     @raw.to_s
   end
 
+  def scheme
+    @uri.scheme
+  end
+
+  def normalize(path)
+    ret="#{scheme}:#{path}" if path =~ /^\/\//
+    ret || path
+  end
+
   def title
     @raw.title
   end
+
+  def favicon
+    link = select("link").select{|x| x["rel"]=~ /icon/}.first
+    return normalize(link["href"]) unless link.nil?
+    Scraper.favicon(@uri)
+  end
+
+  def select(selector)
+    @raw.css(selector)
+  end
+    
 
   def meta
     @raw.css("meta").map{|x| x.first }.to_h
@@ -101,7 +125,7 @@ class Html
       uri=Addressable::URI.parse(x)
       !uri.host.nil? && !host.nil? && !host.end_with?(uri.host) && (uri.to_s =~ /^(\/|#)/).nil?
     end
-  end
+  end    
 
   def internal_links
     links.select do |x| 

@@ -1,7 +1,10 @@
 require './app'
 
+require 'byebug'
 scraper = Scraper.scrape(ARGV[0])
 puts "meta : #{scraper.doc.meta.inspect}\n\n"
+byebug
+puts "favic: #{scraper.doc.favicon}\n\n"
 puts "canon: #{scraper.doc.canonical}\n\n"
 puts "title: #{scraper.doc.title}\n\n"
 puts "imgs : #{scraper.doc.images.inspect}\n\n"
