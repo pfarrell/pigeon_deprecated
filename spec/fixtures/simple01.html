@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>pfarrell</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <script src="/js/masonry.pkgd.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <link href='//fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
+    <link href='/css/style.css' rel='stylesheet' type='text/css'>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-27164060-1']);
+      _gaq.push(['_trackPageview']);
+      
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </head>
+  <body>
+    <div class="container">
+        <div class="row">
+    <div class="col-xs-1">
+      <a href="https://github.com/pfarrell">
+        github
+      </a>
+    </div>
+    <div class="col-xs-1">
+      <a href="https://twitter.com/pfarrell">
+        twitter
+      </a>
+    </div>
+    <div class="col-xs-1">
+      <a href="https://patf.net/gitlab">
+        gitlab
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <h3>Bits</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div id="projects">
+      <div class='project item'>
+        <a href='https://github.com/pfarrell/dragons' title="Dragons">
+          <img src="/images/dragons.jpg"></img>
+        </a>
+      </div>
+      <div class='project item'>
+        <a href='https://github.com/pfarrell/buster' title="Buster">
+          <img src="/images/buster_sm2.jpg"></img>
+        </a>
+      </div>
+      <div class='project item'>
+        <a href='https://lippy.herokuapp.com' title="Lip">
+          <img src="/images/lip.jpg"></img>
+        </a>
+      </div>
+      <div class='project item'>
+        <a href='https://patf.net/pigeon/index.html' title="Pigeon">
+          <img src="/images/pigeon_sm2.jpg"></img>
+        </a>
+      </div>
+      <div class='project item'>
+        <a href='https://patf.net/quota' title="Quota">
+          <img src="/images/quota_sm.jpg"></img>
+        </a>
+      </div>
+      <div class='project item'>
+        <a href='http://github.com/pfarrell/timetrap' title="TimeTrap">
+          <img src="/images/timetrap_sm.jpg"></img>
+        </a>
+      </div>
+      <div class='project item' title="Bemused">
+        <a href='http://github.com/pfarrell/bemused' title="Bemused">
+          <img src="/images/bemused_sm.jpg"></img>
+        </a>
+      </div>
+      <div class='project item' title="Oblique Stratagems">
+        <a class='' href='https://patf.net/obst'>
+          <img src="/images/obst_sm.jpg"></img>
+        </a>
+      </div>
+      <div class='project item' title="Game of Life">
+        <a class='' href='https://rawgithub.com/pfarrell/canvas/master/gol.html'>
+          <img src="/images/gol.gif"></img>
+        </a>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(window).load(function()
+      {
+        var container = document.querySelector('#projects');
+        var msnry = new Masonry( container, {
+            // options
+              columnWidth: 100,
+                itemSelector: '.item'
+        });
+      });
+  </script>
+
+    </div>
+  </body>
+</html>
+

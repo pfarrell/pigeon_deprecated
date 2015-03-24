@@ -1,6 +1,7 @@
 require 'simplecov'
 require 'test/unit'
 require 'rack/test'
+require './spec/fixture_helper'
 
 ENV['RACK_ENV'] = 'test'
 
@@ -11,6 +12,7 @@ end
 
 module RSpecMixin
   include Rack::Test::Methods
+  include FixtureHelper
   def app() Pigeon end
 end
 
