@@ -9,4 +9,24 @@ describe Scraper do
     expect(s.url).to be_nil
     expect(s.doc).to be_nil
   end
+
+  it "scrapes" do
+    s=Scraper.scrape("http://patf.net")
+    expect(s.url).to eq ("https://pfarrell.github.io")
+  end
+  
+  it "detects when 200's are returned" do
+    s = Scraper.new
+    expect(s.final_url("https://pfarrell.github.io/")).to eq ("https://pfarrell.github.io/")
+  end
+
+  it "normalizes urls" do
+    s = Scraper.new
+    expect(s.normalize("http://patf.net", "http://paatf.net/test.jpg")).to eq ("http://patf.net/test.jpg")
+  end
+
+  it "normalizes urls" do
+    s = Scraper.new
+    expect(s.normalize("http://patf.net", "/test.jpg")).to eq ("http://patf.net/test.jpg")
+  end
 end

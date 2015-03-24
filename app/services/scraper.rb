@@ -6,8 +6,6 @@ class Scraper
   attr_accessor :doc, :url, :final
 
   def self.scrape(url)
-    require 'byebug'
-    byebug
     s=Scraper.new
     s.url = url
     s.final = s.final_url(s.uri(url))
