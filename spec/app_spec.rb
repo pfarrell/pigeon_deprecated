@@ -17,11 +17,11 @@ describe 'Pigeon' do
     expect(last_response).to be_ok
   end
 
-  it "has a /sources/new route" do
-    get "/sources/new"
-    expect(last_response).to be_ok
-    expect(last_response.body).to match(/Pigeon/)
-  end
+#  it "has a /sources/new route" do
+#    get "/sources/new"
+#    expect(last_response).to be_ok
+#    expect(last_response.body).to match(/Pigeon/)
+#  end
 
   it "has a /sources/:id/articles route" do
     get "/sources/1/articles"
