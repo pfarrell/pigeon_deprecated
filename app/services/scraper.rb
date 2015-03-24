@@ -6,10 +6,12 @@ class Scraper
   attr_accessor :doc, :url, :final
 
   def self.scrape(url)
+    require 'byebug'
+    byebug
     s=Scraper.new
     s.url = url
     s.final = s.final_url(s.uri(url))
-    s.doc = Html.new(s.final, Nokogiri::HTML(open(s.final)))
+    s.doc = Html.new(url: s.final, content: open(s.final))
     s
   end
 
@@ -21,19 +23,21 @@ class Scraper
     "#{uri(url).origin}/favicon.ico"
   end
 
-  def final_url(uri)
-    page_head=head(uri)
+  def final_url(url)
+    u=uri(url)
+    page_head=head(u)
     case page_head.code
       when "301"
-        return uri.to_s if uri.to_s == page_head['location']
+        return u.to_s if u.to_s == page_head['location']
         return final_url(uri(page_head['location']))
       when "200"
-        return uri.to_s 
+        return u.to_s 
     end
   end  
   
-  def head(uri)
-    Net::HTTP.start(uri.host, uri.port) {|http| http.head(uri.normalized_path) }
+  def head(url)
+    u = uri(url)
+    Net::HTTP.start(u.host, u.port) {|http| http.head(u.normalized_path) }
   end
 
   def sort_file_sizes(base_url, urls)
@@ -52,15 +56,15 @@ class Scraper
 end
 
 class Html
-  attr_accessor :raw, :uri 
+  attr_accessor :doc, :uri
   # bigger images are more important?
   # external links are more important?
   # repeated links/image are less important?
   # functions not memoized because i don't have that problem atm
 
-  def initialize(url, doc)
-    @raw = doc
-    @uri=Addressable::URI.parse(url)
+  def initialize(opts={})
+    @doc= Nokogiri::HTML(opts[:content]) unless opts[:doc]
+    @uri= Addressable::URI.parse(opts[:url]) unless opts[:url].nil?
   end
 
   def host
@@ -68,7 +72,7 @@ class Html
   end
 
   def content
-    @raw.to_s
+    @doc.to_s
   end
 
   def scheme
@@ -81,7 +85,7 @@ class Html
   end
 
   def title
-    @raw.title
+    @doc.title
   end
 
   def favicon
@@ -91,31 +95,31 @@ class Html
   end
 
   def select(selector)
-    @raw.css(selector)
+    @doc.css(selector)
   end
     
 
   def meta
-    @raw.css("meta").map{|x| x.first }.to_h
+    @doc.css("meta").map{|x| x.first }.to_h
   end
   
   def canonical
-    links= @raw.css("link").select{|x| x["rel"]=="canonical"}
+    links= @doc.css("link").select{|x| x["rel"]=="canonical"}
     return [] if links.size==0
     warn "more than one canonical link found" if links.size > 1
     links.first["href"]
   end
 
   def headings(level="1")
-    @raw.css("h#{level}").select{|x| !x.text.nil?}.map{|x| x.text}
+    @doc.css("h#{level}").select{|x| !x.text.nil?}.map{|x| x.text}
   end
 
   def images
-    @raw.css('img').map{|x| normalize(x.attributes["src"].value) unless x.attributes["src"].nil? }
+    @doc.css('img').map{|x| normalize(x.attributes["src"].value) unless x.attributes["src"].nil? }
   end
 
   def links
-    @raw.css('a').map{|x| x.attributes["href"].value unless x.attributes["href"].nil? }
+    @doc.css('a').map{|x| x.attributes["href"].value unless x.attributes["href"].nil? }
   end
 
   def external_links
