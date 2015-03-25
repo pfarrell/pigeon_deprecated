@@ -20,4 +20,16 @@ describe ElasticSearch do
     e.id = 1
     expect(e.es_url).to eq("http://example.com/index/type/1")
   end
+
+  it "saves documents to elasticsearch" do
+    e=ElasticSearch.new("pigeon_test", "test")
+    e.hostname="Test Source"
+    e.canonical="http://example.com/test"
+    e.date=Time.now
+    e.image="test_image.jpg"
+    e.content="test content"
+    e.id=1
+    e.save
+    expect(e.id).to eq(1)
+  end
 end
