@@ -2,7 +2,6 @@ require 'open-uri'
 require 'simple-rss'
 
 class RssFeed < Source
-
   def articles
     feed = SimpleRSS.parse open(url)
     if block_given?
