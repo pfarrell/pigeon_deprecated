@@ -51,6 +51,11 @@ describe 'Pigeon' do
     expect(last_response).to be_ok
   end
 
+  it "shows captured pages" do
+    get "/captures"
+    expect(last_response).to be_ok
+  end
+
   it "shows recent articles" do
     get "/articles/recent"
     expect(last_response).to be_ok
