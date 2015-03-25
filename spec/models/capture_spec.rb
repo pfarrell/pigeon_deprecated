@@ -35,4 +35,13 @@ describe Capture do
   it 'cleans filenames' do
     expect(capture.clean("test/a.gif")).to eq ("a.gif")
   end
+
+  it "is downloadable" do
+    article=Article.new(url: "http://example.com")
+    article.save
+    capture = Capture.new(article: article)
+    dir=capture.download!
+    expect(dir).to_not be_nil
+  end
+  
 end
