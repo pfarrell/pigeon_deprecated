@@ -12,4 +12,11 @@ RSpec.describe Article do
     expect(article.source_urls['content']).to eq("http://techcrunch.com/2015/03/24/apple-acquires-durable-database-company-foundationdb")
     expect(article.source_urls['comments']).to eq("https://news.ycombinator.com/item?id=9259986")
   end
+
+  it "can retrieve comments" do
+    link=Link.new
+    link.type="comments"
+    link.url="https://news.ycombinator.com/item?id=9259986"
+    expect(article.comments).to eq([link])
+  end
 end
