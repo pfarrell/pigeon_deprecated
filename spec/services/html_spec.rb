@@ -73,6 +73,13 @@ describe Html do
     expect(bemused.images.size).to eq(25)
   end
 
+  it "sorts images by file size using head... don't laugh" do
+    s=Scraper.new
+    sorted=s.sort_file_sizes("https://patf.net", bemused.images)
+    expect(sorted.first).to eq("/bemused/images/artists/sm/wu_tang_clan.jpg")
+    expect(sorted.last).to eq("/bemused/images/artists/sm/jimi_hendrix.gif")
+  end
+
   it "detects link tags" do
     expect(bemused.links).to be_a Array
     expect(bemused.links.size).to eq(27)
