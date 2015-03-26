@@ -135,6 +135,7 @@ File.open(ARGV[0], "r") do |file_handle|
   file_handle.each_line do |line|
     cnt +=1 
     print '.' if cnt % 500 == 0
+    print "\n" if cnt % 20000 == 0
     hsh = JSON.parse(line)
     date = Time.at(hsh['date']['$date'].to_i / 1000)
     article = Article.find_or_create(:url => hsh['remote_url'])
@@ -147,4 +148,5 @@ File.open(ARGV[0], "r") do |file_handle|
     capture.url = hsh['local_url']
     capture.save
   end 
+  print "\n"
 end
