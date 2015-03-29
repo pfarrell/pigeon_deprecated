@@ -29,6 +29,9 @@ describe ElasticSearch do
     e.image="test_image.jpg"
     e.content="test content"
     e.id=1
+    setup_method!(:put, "http://localhost:9200/#{e.index}/#{e.type}/#{e.id}", e.to_json)
+
+
     e.save
     expect(e.id).to eq(1)
   end

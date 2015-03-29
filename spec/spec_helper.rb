@@ -1,9 +1,12 @@
+require 'webmock/rspec'
 require 'simplecov'
 require 'test/unit'
 require 'rack/test'
 require './spec/fixture_helper'
 
 ENV['RACK_ENV'] = 'test'
+
+WebMock.disable_net_connect!
 
 SimpleCov.start do
   add_filter "/vendor/"
@@ -14,6 +17,16 @@ module RSpecMixin
   include Rack::Test::Methods
   include FixtureHelper
   def app() Pigeon end
+
+  def setup_method!(method, endpoint, fixture)
+    stub_request(method, endpoint).
+      to_return(status: 200, headers: {'Content-Length' => fixture.length})
+  end
+
+  def setup_redirect!(method, endpoint, destination)
+    stub_request(method, endpoint).
+      to_return(status: 301, headers: {'Location' => destination})
+  end
 end
 
 RSpec.configure do |config|

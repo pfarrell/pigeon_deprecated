@@ -11,10 +11,11 @@ describe Scraper do
   end
 
   it "follows redirects" do
-    #require 'byebug'
-    #byebug
-    s="http://patf.net"
-    expect(Scraper.new.final_url(s)).to eq ("https://patf.net/")
+    page="http://patf.net"
+    dest="https://patf.net/"
+    setup_redirect!(:head, page, dest)
+    setup_method!(:head, dest, "./spec/fixtures/simple01.html") 
+    expect(Scraper.new.final_url(page)).to eq ("https://patf.net/")
   end
 
   it "gets favicons" do
@@ -23,13 +24,17 @@ describe Scraper do
   end
 
   it "scrapes pages" do
-    s = Scraper.scrape("http://pfarrell.github.io")
-    expect(s.url).to eq("http://pfarrell.github.io")
-    expect(s.final).to eq("http://pfarrell.github.io")
+    page="http://pfarrell.github.io"
+    setup_method!(:get, page, "./spec/fixture/simple01.html")
+    setup_method!(:head, page, "./spec/fixture/simple01.html")
+    s = Scraper.scrape(page)
+    expect(s.url).to eq(page)
+    expect(s.final).to eq(page)
     expect(s.doc).to be_a Html
   end
   
   it "detects when 200's are returned" do
+    setup_redirect!(:head, "https://pfarrell.github.io/", "https://pfarrell.github.io/")
     s = Scraper.new
     expect(s.final_url("https://pfarrell.github.io/")).to eq ("https://pfarrell.github.io/")
   end

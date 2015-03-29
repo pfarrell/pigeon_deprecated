@@ -18,6 +18,8 @@ GEM
       sshkit (~> 1.2)
     colorize (0.7.3)
     columnize (0.8.9)
+    crack (0.4.2)
+      safe_yaml (~> 1.0.0)
     crass (1.0.1)
     debugger-linecache (1.2.0)
     diff-lcs (1.2.5)
@@ -63,6 +65,7 @@ GEM
     rspec-mocks (3.1.0)
       rspec-support (~> 3.1.0)
     rspec-support (3.1.0)
+    safe_yaml (1.0.4)
     sanitize (3.1.1)
       crass (~> 1.0.1)
       nokogiri (>= 1.4.4)
@@ -96,6 +99,9 @@ GEM
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     tilt (1.4.1)
+    webmock (1.20.4)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
 
 PLATFORMS
   ruby
@@ -121,3 +127,4 @@ DEPENDENCIES
   sinatra
   sinatra-contrib
   sinatra-respond_to
+  webmock

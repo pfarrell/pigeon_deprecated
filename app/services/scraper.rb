@@ -35,7 +35,7 @@ class Scraper
   
   def head(url)
     u = uri(url)
-    Net::HTTP.start(u.host, u.port) {|http| http.head(u.normalized_path) }
+    Net::HTTP.start(u.host, u.port, use_ssl: (u.scheme == "https")) {|http| http.head(u.normalized_path) }
   end
 
   def sort_file_sizes(base_url, urls)
