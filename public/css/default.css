@@ -28,10 +28,10 @@ body {
 }
 
 .article {
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 2px solid #f0f0f0;
   font-size: 1.4em;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top:5px;
+  padding-bottom:5px;
 }
 
 .search {

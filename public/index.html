@@ -81,13 +81,13 @@
     <script type="text/x-handlebars" id="_article">
       <div class="article col-md-12">
         <a {{bind-attr href=article.url}}>{{article.title}}</a>
-        <div>
-          <span class="meta">({{article.meta.domain}})</span>
+        <div class="meta">
+          <span>({{article.meta.domain}})</span>
           {{#if article.meta.comments}}
-            <a class="meta" {{bind-attr href=article.meta.comments}}>comments</a> 
+            <a {{bind-attr href=article.meta.comments}}>comments</a> 
           {{/if}}
           {{#if url}}
-            <a class="meta" {{bind-attr href=url}}>cached</a> 
+            <a {{bind-attr href=url}}>cached</a> 
           {{/if}}
           {{date article.created_at}}
         </div>
