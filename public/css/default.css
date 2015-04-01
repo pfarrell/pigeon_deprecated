@@ -39,9 +39,12 @@ body {
 }
 
 .meta {
-  padding-left: .2em;
   color: #a0a0a0;
   font-size: .6em;
+}
+
+.meta span {
+  padding-left:.4em;
 }
 
 .bookmarklet {

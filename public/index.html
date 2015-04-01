@@ -84,10 +84,10 @@
         <div class="meta">
           <span>({{article.meta.domain}})</span>
           {{#if article.meta.comments}}
-            <a {{bind-attr href=article.meta.comments}}>comments</a> 
+          <span><a {{bind-attr href=article.meta.comments}}>comments</a></span> 
           {{/if}}
           {{#if url}}
-            <a {{bind-attr href=url}}>cached</a> 
+            <span><a {{bind-attr href=url}}>cached</a></span> 
           {{/if}}
           {{date article.created_at}}
         </div>
