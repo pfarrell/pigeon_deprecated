@@ -96,5 +96,9 @@ describe Html do
     expect(bemused.internal_links).to be_a Array
     expect(bemused.internal_links.size).to eq(27)
   end
+
+  it "strips html" do
+    expect(simple.content).to eq("")
+  end
     
 end

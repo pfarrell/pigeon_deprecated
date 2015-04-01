@@ -70,7 +70,7 @@ class Html
   end
 
   def content
-    @doc.to_s
+    @doc.css("body").to_s
   end
 
   def scheme
@@ -106,6 +106,12 @@ class Html
     return [] if links.size==0
     warn "more than one canonical link found" if links.size > 1
     links.first["href"]
+  end
+
+  def content
+    doc = @doc
+    doc.remove_elements("script")
+    doc.css("body").content
   end
 
   def headings(level="1")
