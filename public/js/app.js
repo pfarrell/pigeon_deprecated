@@ -8,7 +8,7 @@ Ember.Handlebars.helper('date', function(value, options) {
   if(value==null) {
     return "";
   }else{
-    return new Ember.Handlebars.SafeString('<span class="meta">' + moment(value.replace(" ", "T").replace(" ", "")).fromNow() + '</span>');
+    return new Ember.Handlebars.SafeString('<span>' + moment(value.replace(" ", "T").replace(" ", "")).fromNow() + '</span>');
   }
 });
 
