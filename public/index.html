@@ -86,6 +86,9 @@
           {{#if article.meta.comments}}
             <a class="meta" {{bind-attr href=article.meta.comments}}>comments</a> 
           {{/if}}
+          {{#if url}}
+            <a class="meta" {{bind-attr href=url}}>cached</a> 
+          {{/if}}
           {{date article.created_at}}
         </div>
       </div>
