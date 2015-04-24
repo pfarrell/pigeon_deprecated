@@ -6,7 +6,7 @@ require './spec/fixture_helper'
 
 ENV['RACK_ENV'] = 'test'
 
-#WebMock.disable_net_connect!
+WebMock.disable_net_connect!
 
 SimpleCov.start do
   add_filter "/vendor/"
