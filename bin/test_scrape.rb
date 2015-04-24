@@ -1,6 +1,7 @@
 require './app'
 
 scraper = Scraper.scrape(ARGV[0])
+puts "cont : #{scraper.doc.content}"
 puts "meta : #{scraper.doc.meta.inspect}\n\n"
 puts "favic: #{scraper.doc.favicon}\n\n"
 puts "canon: #{scraper.doc.canonical}\n\n"
