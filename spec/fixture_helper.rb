@@ -13,4 +13,10 @@ module FixtureHelper
     Nokogiri.HTML(html)
   end
 
+  def stub_image_request(url, length)
+    stub_request(:head, url).
+      with(:headers => {'Accept'=>'*/*', 'User-Agent'=>'Ruby'}).
+      to_return(:status => 200, :body => "", :headers => {'Content-Length'=>length})
+  end
+
 end

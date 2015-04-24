@@ -4,6 +4,7 @@ describe Html do
   let(:simple_content) { fixture_file_content('simple01.html') }
   let(:simple) { Html.new(content: simple_content) }
   let(:bemused) { Html.new(content: fixture_file_content('bemused01.html')) }
+  let(:bemused2) { Html.new(content: fixture_file_content('bemused02.html')) }
 
   it "is instantiated with content" do
     expect(simple.title).to eq("pfarrell")
@@ -74,10 +75,15 @@ describe Html do
   end
 
   it "sorts images by file size using head" do
+    stub_image_request("https://patf.net/bemused/images/artists/sm/nwa.jpg",3)
+    stub_image_request("https://patf.net/bemused/images/artists/sm/muddy_waters.jpg",2)
+    stub_image_request("https://patf.net/bemused/images/artists/sm/keith_sweat.jpg",4)
+    stub_image_request("https://patf.net/bemused/images/artists/sm/early_genesis.jpg",1)
+
     s=Scraper.new
-    sorted=s.sort_file_sizes("https://patf.net", bemused.images)
-    expect(sorted.first).to eq("/bemused/images/artists/sm/wu_tang_clan.jpg")
-    expect(sorted.last).to eq("/bemused/images/artists/sm/jimi_hendrix.gif")
+    sorted=s.sort_file_sizes("https://patf.net", bemused2.images)
+    expect(sorted.first).to eq("/bemused/images/artists/sm/keith_sweat.jpg")
+    expect(sorted.last).to eq("/bemused/images/artists/sm/early_genesis.jpg")
   end
 
   it "detects link tags" do
@@ -97,8 +103,4 @@ describe Html do
     expect(bemused.internal_links.size).to eq(27)
   end
 
-  it "strips html" do
-    expect(simple.content).to eq("")
-  end
-    
 end

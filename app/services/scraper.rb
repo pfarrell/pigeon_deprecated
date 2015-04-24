@@ -108,12 +108,6 @@ class Html
     links.first["href"]
   end
 
-  def content
-    doc = @doc
-    doc.remove_elements("script")
-    doc.css("body").content
-  end
-
   def headings(level="1")
     @doc.css("h#{level}").select{|x| !x.text.nil?}.map{|x| x.text}
   end
