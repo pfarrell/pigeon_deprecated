@@ -1,3 +1,5 @@
+require 'json'
+
 class Cleanup
   include HTTParty
   attr_accessor :host
@@ -11,6 +13,6 @@ class Cleanup
   end
 
   def clean(page)
-    self.class.get(url(page))
+    JSON.parse(self.class.get(url(page)))
   end
 end
