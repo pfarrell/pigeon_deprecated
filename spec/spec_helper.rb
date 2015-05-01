@@ -9,8 +9,13 @@ ENV['RACK_ENV'] = 'test'
 WebMock.disable_net_connect!
 
 SimpleCov.start do
+  require 'simplecov-badge'
   add_filter "/vendor/"
   add_filter "/spec/"
+  SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+    SimpleCov::Formatter::HTMLFormatter,
+    SimpleCov::Formatter::BadgeFormatter,
+  ]
 end
 
 module RSpecMixin

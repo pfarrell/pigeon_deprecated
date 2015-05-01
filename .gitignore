@@ -5,6 +5,7 @@ log
 .bundle/config
 .rspec
 vendor
-coverage
+coverage/**/*
+!coverage/coverage-badge.png
 doc
 html
