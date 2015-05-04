@@ -10,4 +10,4 @@ Pigeon will monitor a gmail address, extract the content, and create a magazine 
 
 Uses bookmarklets to get data to the main site
 
-Search works on titles. Soon expanded to full text searches
+Search works on titles. Soon expanded to full text searches using elastic search
