@@ -17,6 +17,11 @@ describe 'Pigeon' do
     expect(last_response).to be_ok
   end
 
+  it "has a bookmarklet" do
+    get "/marklet.js"
+    expect(last_response).to be_ok
+  end
+
 #  it "has a /sources/new route" do
 #    get "/sources/new"
 #    expect(last_response).to be_ok
