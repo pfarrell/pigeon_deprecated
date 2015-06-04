@@ -1,4 +1,4 @@
-# Pigeon <img src="https://raw.githubusercontent.com/pfarrell/bemused/master/coverage/coverage-badge.png" align="right" height="20" >
+# Pigeon <img src="https://raw.githubusercontent.com/pfarrell/pigeon/master/coverage/coverage-badge.png" align="right" height="20" >
 
 ## About
 
