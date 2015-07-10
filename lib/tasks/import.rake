@@ -5,6 +5,7 @@ require 'htmlentities'
 
 namespace :import do
   def import_feed(feed) 
+    redis = Redis.new
     ent = HTMLEntities.new
     begin
       feed.articles.each do |article|
@@ -17,6 +18,7 @@ namespace :import do
         article.meta[:domain]= uri.host
         article.meta[:comments]=article.comments.first.url unless article.comments.nil? || article.comments.empty?
         article.save
+        article.publish(article.to_json, "incoming:page")
       end
     rescue Exception => ex
       $stderr.puts("error getting #{feed.url}: #{ex.message}")
