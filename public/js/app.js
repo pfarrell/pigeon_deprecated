@@ -82,7 +82,6 @@ App.StatsRoute = Ember.Route.extend({
 
 App.SearchRoute = Ember.Route.extend({
   model: function(params) {
-    console.log(params);
     return Ember.$.getJSON('search/?q=' + params.search_term)
   },
   actions: {
