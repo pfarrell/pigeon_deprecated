@@ -4,7 +4,8 @@
   "dependencies": {
     "bootstrap": "~3.3.4",
     "ember": "~1.9.1",
-    "moment": "2.9.0"
+    "moment": "2.9.0",
+    "ember-data": "1.13.5"
   },
   "homepage": "https://github.com/pfarrell/pigeon",
   "authors": [
