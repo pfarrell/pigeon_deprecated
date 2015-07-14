@@ -65,6 +65,8 @@
 
     <script type="text/x-handlebars" id="sources">
       <div class="col-md-4 view">
+        {{debugger}}
+        {{log record}} 
         {{#each source in model}}
           <div class="article">
             {{#link-to 'articles' source.id}}
@@ -145,6 +147,7 @@
     <script type="text/javascript" src="libs/moment/min/moment.min.js"></script>
     <script type="text/javascript" src="libs/handlebars/handlebars.min.js"></script>
     <script type="text/javascript" src="libs/ember/ember.min.js"></script>
+    <script type="text/javascript" src="libs/ember-data/ember-data.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
   </body>
 </html>

@@ -4,6 +4,18 @@ App = Ember.Application.create({
      LOG_ACTIVE_GENERATION: true
 });
 
+var attr = DS.attr;
+
+App.Source = DS.Model.extend({
+  id: attr(),
+  type: attr(),
+  title: attr(),
+  created_at: attr(),
+  updated_at: attr(),
+  color: attr(),
+  url: attr()
+});
+
 Ember.Handlebars.helper('date', function(value, options) {
   if(value==null) {
     return "";
@@ -59,7 +71,8 @@ App.RecentRoute = Ember.Route.extend({
 
 App.SourcesRoute = Ember.Route.extend({
   model: function() {
-    return Ember.$.getJSON('sources');
+    return sources = this.store.findAll('source');
+    //return Ember.$.getJSON('sources');
   },
   actions: {
     search: function(query) {
@@ -70,7 +83,8 @@ App.SourcesRoute = Ember.Route.extend({
 
 App.ArticlesRoute = Ember.Route.extend({
   model: function(params) {
-    return Ember.$.getJSON('sources/' + params.source_id + '/articles');
+    return this.store.find('source', 1);
+    //return Ember.$.getJSON('sources/' + params.source_id + '/articles');
   }
 });
 
