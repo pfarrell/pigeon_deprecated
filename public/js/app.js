@@ -6,12 +6,11 @@ App = Ember.Application.create({
 
 var attr = DS.attr;
 
-App.Source = DS.Model.extend({
+App.RssFeed = DS.Model.extend({
   id: attr(),
   type: attr(),
   title: attr(),
-  created_at: attr(),
-  updated_at: attr(),
+  rss_feed_id: attr(),
   color: attr(),
   url: attr()
 });
@@ -25,7 +24,7 @@ Ember.Handlebars.helper('date', function(value, options) {
 });
 
 App.Router.map(function() {
-  this.resource('sources', {path: 'sources'});
+  this.resource('rssFeeds', {path: 'rssFeeds'});
   this.resource('articles', { path: 'sources/:source_id/articles'});
   this.resource('search', {path: 'search/:search_term'});
   this.resource('captures', {path: 'captures'});
@@ -69,10 +68,10 @@ App.RecentRoute = Ember.Route.extend({
   }
 });
 
-App.SourcesRoute = Ember.Route.extend({
-  model: function() {
-    return sources = this.store.findAll('source');
-    //return Ember.$.getJSON('sources');
+App.RssFeedsRoute = Ember.Route.extend({
+  model: function(params) {
+    return this.store.find('rssFeed');
+    //return Ember.$.getJSON('rssFeeds');
   },
   actions: {
     search: function(query) {
@@ -83,7 +82,7 @@ App.SourcesRoute = Ember.Route.extend({
 
 App.ArticlesRoute = Ember.Route.extend({
   model: function(params) {
-    return this.store.find('source', 1);
+    this.store.find('source', 1);
     //return Ember.$.getJSON('sources/' + params.source_id + '/articles');
   }
 });

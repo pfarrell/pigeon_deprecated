@@ -38,7 +38,7 @@
               {{#link-to 'recent'}}Recent{{/link-to}}
             </li>
             <li>
-              {{#link-to 'sources'}}Sources{{/link-to}}
+              {{#link-to 'rssFeeds'}}Sources{{/link-to}}
             </li>
             <li>
               {{#link-to 'stats'}}Stats{{/link-to}}
@@ -63,14 +63,12 @@
       </div>
     </script>
 
-    <script type="text/x-handlebars" id="sources">
+    <script type="text/x-handlebars" id="rssFeeds">
       <div class="col-md-4 view">
-        {{debugger}}
-        {{log record}} 
-        {{#each source in model}}
+        {{#each feed in model}}
           <div class="article">
-            {{#link-to 'articles' source.id}}
-              {{source.title}}
+            {{#link-to 'articles' feed.id}}
+              {{feed.title}}
             {{/link-to}}
           </div>
         {{/each}}
@@ -147,7 +145,7 @@
     <script type="text/javascript" src="libs/moment/min/moment.min.js"></script>
     <script type="text/javascript" src="libs/handlebars/handlebars.min.js"></script>
     <script type="text/javascript" src="libs/ember/ember.min.js"></script>
-    <script type="text/javascript" src="libs/ember-data/ember-data.min.js"></script>
+    <script type="text/javascript" src="libs/ember-data/ember-data.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
   </body>
 </html>

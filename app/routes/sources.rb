@@ -1,8 +1,8 @@
 require 'rss'
 
 class Pigeon < Sinatra::Application
-  get "/sources" do
-    RssFeed.to_json(array: RssFeed.sort_by{|x| x.title.strip}, root: :instance)
+  get "/rssFeeds" do
+    RssFeed.to_json(except: [:created_at, :updated_at], array: RssFeed.sort_by{|x| x.title.strip}, root: "rssFeeds")
   end
 
   get "/sources/:id" do

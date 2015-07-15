@@ -3,7 +3,7 @@ source "http://rubygems.org"
 gem "sinatra"
 gem "sinatra-contrib"
 gem 'emk-sinatra-url-for'
-gem "sequel"
+gem "sequel", :git => 'https://github.com/pfarrell/sequel.git'
 gem "pg"
 gem "redis"
 gem "haml"
