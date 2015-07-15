@@ -1,17 +1,14 @@
 App = Ember.Application.create({
-   LOG_TRANSITIONS: true,
-    LOG_VIEW_LOOKUPS: true,
-     LOG_ACTIVE_GENERATION: true
+  LOG_TRANSITIONS: true,
+  LOG_VIEW_LOOKUPS: true,
+  LOG_ACTIVE_GENERATION: true
 });
 
 var attr = DS.attr;
 
 App.RssFeed = DS.Model.extend({
-  id: attr(),
   type: attr(),
   title: attr(),
-  rss_feed_id: attr(),
-  color: attr(),
   url: attr()
 });
 
@@ -70,7 +67,7 @@ App.RecentRoute = Ember.Route.extend({
 
 App.RssFeedsRoute = Ember.Route.extend({
   model: function(params) {
-    return this.store.find('rssFeed');
+    return this.store.findAll('rssFeed');
     //return Ember.$.getJSON('rssFeeds');
   },
   actions: {
