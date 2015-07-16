@@ -12,6 +12,10 @@ App.RssFeed = DS.Model.extend({
   url: attr()
 });
 
+App.Recent = DS.Model.extend({
+  url: attr()
+});
+
 Ember.Handlebars.helper('date', function(value, options) {
   if(value==null) {
     return "";
@@ -23,10 +27,10 @@ Ember.Handlebars.helper('date', function(value, options) {
 App.Router.map(function() {
   this.resource('rssFeeds', {path: 'rssFeeds'});
   this.resource('articles', { path: 'sources/:source_id/articles'});
-  this.resource('search', {path: 'search/:search_term'});
+  this.resource('search',   {path: 'search/:search_term'});
   this.resource('captures', {path: 'captures'});
-  this.resource('stats', {path: 'stats'});
-  this.resource('recent', {path: 'recent'});
+  this.resource('stats',    {path: 'stats'});
+  this.resource('recents',  {path: 'recents'});
 });
 
 App.ApplicationRoute = Ember.Route.extend({
@@ -39,7 +43,7 @@ App.ApplicationRoute = Ember.Route.extend({
 
 App.IndexRoute = Ember.Route.extend({
   beforeModel: function() {
-    this.transitionTo('recent');
+    this.transitionTo('recents');
   }
 });
 
@@ -54,9 +58,9 @@ App.CapturesRoute = Ember.Route.extend({
   }
 });
 
-App.RecentRoute = Ember.Route.extend({
+App.RecentsRoute = Ember.Route.extend({
   model: function() {
-    return Ember.$.getJSON('articles/recent');
+    return this.store.findAll('recent');
   },
   actions: {
     search: function(query) {
@@ -68,7 +72,6 @@ App.RecentRoute = Ember.Route.extend({
 App.RssFeedsRoute = Ember.Route.extend({
   model: function(params) {
     return this.store.findAll('rssFeed');
-    //return Ember.$.getJSON('rssFeeds');
   },
   actions: {
     search: function(query) {

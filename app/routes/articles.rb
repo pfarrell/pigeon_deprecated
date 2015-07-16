@@ -1,5 +1,5 @@
 class Pigeon < Sinatra::Application
-  get "/articles/recent" do
+  get "/recents" do
     count = params[:size] || 100
     Article.last(count.to_i).to_json(include: :source)
   end
