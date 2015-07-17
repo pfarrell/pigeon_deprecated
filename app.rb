@@ -17,6 +17,7 @@ class Pigeon < Sinatra::Application
   set :views, Proc.new { File.join(root, "app/views") }
   set :redis, Redis.new
   set :host, ENV["PIGEON_HOST"] || "http://localhost:9292"
+  set :path, ENV["PIGEON_PATH"] || "" 
 
   before do
     response.set_cookie(:pnc, value: SecureRandom.uuid, expires: Time.now + 3600 * 24 * 365 * 10) if request.cookies["pnc"].nil?

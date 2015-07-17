@@ -6,7 +6,9 @@ class Pigeon < Sinatra::Application
 
   get "/app.js" do 
     content_type "application/javascript"
-    haml :app, :layout=>false, locals: {host: settings.host}
+    redirect = "/redirect"
+    redirect = "/#{settings.path}/#{redirect}" unless settings.path == ""
+    haml :app, :layout=>false, locals: {path: settings.path, redirect: redirect}
   end
 
   get "/bookmark/new" do

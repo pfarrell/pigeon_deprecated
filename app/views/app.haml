@@ -8,7 +8,7 @@
   var attr = DS.attr;
 
   App.ApplicationAdapter = DS.RESTAdapter.extend({
-    namespace: ''
+    namespace: '#{path}'
   });
 
   App.RssFeed = DS.Model.extend({
@@ -23,7 +23,7 @@
     created_at: attr(),
     meta: attr(),
     redirect: function() {
-      return "/redirect?url=" + this.get('url');
+      return "#{redirect}?url=" + this.get('url');
     }.property('url')
   });
 
