@@ -13,7 +13,10 @@ App.RssFeed = DS.Model.extend({
 });
 
 App.Recent = DS.Model.extend({
-  url: attr()
+  url: attr(),
+  title: attr(),
+  created_at: attr(),
+  meta: attr()
 });
 
 Ember.Handlebars.helper('date', function(value, options) {
