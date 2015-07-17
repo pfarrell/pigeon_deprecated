@@ -9,7 +9,7 @@ App = Ember.Application.create({
 var attr = DS.attr;
 
 App.ApplicationAdapter = DS.RESTAdapter.extend({
-  namespace: 'pigeon'
+  namespace: ''
 });
 
 App.RssFeed = DS.Model.extend({
@@ -24,7 +24,7 @@ App.Recent = DS.Model.extend({
   created_at: attr(),
   meta: attr(),
   redirect: function() {
-    return "/pigeon/redirect?url=" + this.get('url');
+    return "/redirect?url=" + this.get('url');
   }.property('url')
 });
 
