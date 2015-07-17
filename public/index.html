@@ -80,7 +80,7 @@
 
     <script type="text/x-handlebars" id="_article">
       <div class="article col-md-12">
-        <a {{bind-attr href=article.url}}>{{article.title}}</a>
+        <a {{bind-attr href=article.redirect}}>{{article.title}}</a>
         <div class="meta">
           <span>({{article.meta.domain}})</span>
           {{#if article.meta.comments}}

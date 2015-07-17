@@ -4,19 +4,28 @@ App = Ember.Application.create({
   LOG_ACTIVE_GENERATION: true
 });
 
+
+
 var attr = DS.attr;
+
+//App.ApplicationAdapter = DS.RESTAdapter.extend({
+//  namespace: 'pigeon'
+//});
 
 App.RssFeed = DS.Model.extend({
   type: attr(),
   title: attr(),
-  url: attr()
+  url: attr(),
 });
 
 App.Recent = DS.Model.extend({
   url: attr(),
   title: attr(),
   created_at: attr(),
-  meta: attr()
+  meta: attr(),
+  redirect: function() {
+    return "/redirect?url=" + this.get('url');
+  }.property('url')
 });
 
 App.Capture = DS.Model.extend({
@@ -89,13 +98,6 @@ App.RssFeedsRoute = Ember.Route.extend({
       return true;
     }
   } 
-});
-
-App.ArticlesRoute = Ember.Route.extend({
-  model: function(params) {
-    this.store.find('source', 1);
-    //return Ember.$.getJSON('sources/' + params.source_id + '/articles');
-  }
 });
 
 App.StatsRoute = Ember.Route.extend({
