@@ -32,8 +32,23 @@
     title: attr(),
     article: attr(),
     created_at: attr(),
-    meta: attr()
+    meta: attr(),
+    redirect: function() {
+      return "#{redirect}?url=" + this.get('url');
+    }.property('url') 
   });
+
+  App.Search = DS.Model.extend({
+    url: attr(),
+    title: attr(),
+    article: attr(),
+    created_at: attr(),
+    meta: attr(),
+    redirect: function() {
+      return "#{redirect}?url=" + this.get('url');
+    }.property('url')
+  });
+    
 
   Ember.Handlebars.helper('date', function(value, options) {
     if(value==null) {
@@ -107,7 +122,8 @@
 
   App.SearchRoute = Ember.Route.extend({
     model: function(params) {
-      return Ember.$.getJSON('search/?q=' + params.search_term)
+      return this.store.find('search', { q: params.search_term });
+      //return Ember.$.getJSON('search/?q=' + params.search_term)
     },
     actions: {
       search: function(params) {
