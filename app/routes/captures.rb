@@ -1,5 +1,5 @@
 class Pigeon < Sinatra::Application
   get "/captures" do
-    Capture.order(Sequel.desc(:id)).limit(100).to_json(include: :article)
+    Capture.to_json(array: Capture.order(Sequel.desc(:id)).limit(100), include: :article, root: :collection)
   end
 end

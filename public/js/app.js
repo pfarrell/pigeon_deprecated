@@ -19,6 +19,14 @@ App.Recent = DS.Model.extend({
   meta: attr()
 });
 
+App.Capture = DS.Model.extend({
+  url: attr(),
+  title: attr(),
+  article: attr(),
+  created_at: attr(),
+  meta: attr()
+});
+
 Ember.Handlebars.helper('date', function(value, options) {
   if(value==null) {
     return "";
@@ -52,7 +60,7 @@ App.IndexRoute = Ember.Route.extend({
 
 App.CapturesRoute = Ember.Route.extend({
   model: function() {
-    return Ember.$.getJSON('captures');
+    return this.store.findAll('capture');
   },
   actions: {
     search: function(query) {
