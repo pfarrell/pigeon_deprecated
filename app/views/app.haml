@@ -48,6 +48,18 @@
       return "#{redirect}?url=" + this.get('url');
     }.property('url')
   });
+
+  App.Click = DS.Model.extend({
+    url: attr(),
+    title: attr(),
+    article: attr(),
+    created_at: attr(),
+    meta: attr(),
+    created_at: attr(),
+    redirect: function() {
+      return "#{redirect}?url=" + this.get('url');
+    }.property('url') 
+  });
     
 
   Ember.Handlebars.helper('date', function(value, options) {
@@ -65,6 +77,7 @@
     this.resource('captures', {path: 'captures'});
     this.resource('stats',    {path: 'stats'});
     this.resource('recents',  {path: 'recents'});
+    this.resource('clicks',  {path: 'clicks'});
   });
 
   App.ApplicationRoute = Ember.Route.extend({
@@ -128,6 +141,17 @@
     actions: {
       search: function(params) {
         this.transitionTo('search', encodeURIComponent(params));
+      }
+    }
+  });
+
+  App.ClicksRoute = Ember.Route.extend({
+    model: function(params) {
+      return this.store.findAll('click');
+    },
+    actions: {
+      search: function(query) {
+        return true;
       }
     }
   });

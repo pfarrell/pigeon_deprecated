@@ -43,6 +43,9 @@
             <li>
               {{#link-to 'stats'}}Stats{{/link-to}}
             </li>
+            <li>
+              {{#link-to 'clicks'}}History{{/link-to}}
+            </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li>
@@ -106,6 +109,11 @@
       {{/each}}
     </script>
 
+    <script type="text/x-handlebars" id="clicks">
+      {{#each capture in model}}
+        {{render "_article" capture}}
+      {{/each}}
+    </script>
 
     <script type="text/x-handlebars" id="articles">
       {{partial "articles"}}

@@ -18,7 +18,6 @@ namespace :import do
         article.meta[:domain]= uri.host
         article.meta[:comments]=article.comments.first.url unless article.comments.nil? || article.comments.empty?
         article.save
-        article.publish(article.to_json, "incoming:page")
       end
     rescue Exception => ex
       $stderr.puts("error getting #{feed.url}: #{ex.message}")
