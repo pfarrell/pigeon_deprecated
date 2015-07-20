@@ -81,6 +81,22 @@
       </div>
     </script>
 
+    <script type="text/x-handlebars" id="_assoc_article">
+      <div class="article col-md-12">
+        <a {{bind-attr href=redirect}}>{{article.title}}</a>
+        <div class="meta">
+          <span>({{article.meta.domain}})</span>
+          {{#if article.meta.comments}}
+            <span><a {{bind-attr href=article.meta.comments}}>comments</a></span> 
+          {{/if}}
+          {{#if url}}
+            <span><a {{bind-attr href=url}}>cached</a></span> 
+          {{/if}}
+          {{date article.created_at}}
+        </div>
+      </div>
+    </script>
+
     <script type="text/x-handlebars" id="_article">
       <div class="article col-md-12">
         <a {{bind-attr href=article.redirect}}>{{article.title}}</a>
@@ -105,13 +121,13 @@
 
     <script type="text/x-handlebars" id="captures">
       {{#each capture in model}}
-        {{render "_article" capture}}
+        {{render "_assoc_article" capture}}
       {{/each}}
     </script>
 
     <script type="text/x-handlebars" id="clicks">
       {{#each click in model}}
-        {{render "_article" click}}
+        {{render "_assoc_article" click}}
       {{/each}}
     </script>
 

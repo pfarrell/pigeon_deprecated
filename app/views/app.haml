@@ -22,20 +22,20 @@
     title: attr(),
     created_at: attr(),
     meta: attr(),
-    redirect: function() {
+    redirect: Ember.computed('url', function(key, value) {
       return "#{redirect}?url=" + this.get('url');
-    }.property('url')
+    })
   });
 
   App.Capture = DS.Model.extend({
     url: attr(),
     title: attr(),
-    article: attr(),
     created_at: attr(),
     meta: attr(),
+    article: attr(),
     redirect: function() {
-      return "#{redirect}?url=" + this.get('url');
-    }.property('url') 
+      return "#{redirect}?url=" + this.get('article.url');
+    }.property('article.url')
   });
 
   App.Search = DS.Model.extend({
