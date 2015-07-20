@@ -5,7 +5,7 @@ class Pigeon < Sinatra::Application
 
   get '/redirect' do
     puts params[:url]
-    Article.where(url: params[:url]).each do |article|
+    Article.where(Sequel.like(:url, "#{params[:url]}%")).each do |article|
       article.clicks += 1
       article.save
       click = Click.new(article: article)
