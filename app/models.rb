@@ -8,6 +8,7 @@ DB = Sequel.connect(ENV['PIGEON_DB'] || 'postgres://localhost/pigeon',logger: $c
 DB.sql_log_level = :debug
 DB.extension(:pagination)
 DB.extension(:pg_array, :pg_json)
+DB.extension(:connection_validator)
 
 Sequel::Model.plugin :timestamps
 Sequel::Model.plugin :json_serializer
