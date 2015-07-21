@@ -12,8 +12,8 @@ describe 'Pigeon' do
     expect(last_response.body).to match(/Pigeon/)
   end
 
-  it "has a /sources route" do
-    get "/sources"
+  it "has an /rssFeeds route" do
+    get "/rssFeeds"
     expect(last_response).to be_ok
   end
 
@@ -46,13 +46,8 @@ describe 'Pigeon' do
     expect(last_response.body).to match(/1/)
   end
 
-  it "redirects for searches with / as first character" do
-    get "/search?q=/test"
-    expect(last_response).to be_ok
-  end
-
   it "searches" do
-    get "/search"
+    get "/searches?q=/test"
     expect(last_response).to be_ok
   end
 
@@ -62,7 +57,7 @@ describe 'Pigeon' do
   end
 
   it "shows recent articles" do
-    get "/articles/recent"
+    get "/recents"
     expect(last_response).to be_ok
   end
 
@@ -78,6 +73,21 @@ describe 'Pigeon' do
 
   it "has a stats route" do
     get "/stats"
+    expect(last_response).to be_ok
+  end
+
+  it "redirects click" do
+    get "/redirect?url=http://example.com"
+    expect(last_response).to be_redirect
+  end
+
+  it "renders app.js" do
+    get "/app.js"
+    expect(last_response).to be_ok
+  end
+
+  it "has a click history" do
+    get "/clicks" 
     expect(last_response).to be_ok
   end
 end
