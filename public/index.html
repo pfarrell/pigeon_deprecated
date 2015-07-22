@@ -38,6 +38,9 @@
               {{#link-to 'recents'}}Recent{{/link-to}}
             </li>
             <li>
+              {{#link-to 'randoms'}}Random{{/link-to}}
+            </li>
+            <li>
               {{#link-to 'clicks'}}History{{/link-to}}
             </li>
             <li>
@@ -136,6 +139,10 @@
     </script>
 
     <script type="text/x-handlebars" id="recents">
+      {{partial "articles"}}
+    </script>
+
+    <script type="text/x-handlebars" id="randoms">
       {{partial "articles"}}
     </script>
 

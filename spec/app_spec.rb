@@ -90,4 +90,9 @@ describe 'Pigeon' do
     get "/clicks" 
     expect(last_response).to be_ok
   end
+
+  it "has gets random articles" do
+    get "/randoms" 
+    expect(last_response).to be_ok
+  end
 end

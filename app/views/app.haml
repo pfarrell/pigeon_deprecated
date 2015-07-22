@@ -27,6 +27,16 @@
     })
   });
 
+  App.Random = DS.Model.extend({
+    url: attr(),
+    title: attr(),
+    created_at: attr(),
+    meta: attr(),
+    redirect: Ember.computed('url', function(key, value) {
+      return "#{redirect}?url=" + this.get('url');
+    })
+  });
+
   App.Capture = DS.Model.extend({
     url: attr(),
     title: attr(),
@@ -77,6 +87,7 @@
     this.resource('captures', {path: 'captures'});
     this.resource('stats',    {path: 'stats'});
     this.resource('recents',  {path: 'recents'});
+    this.resource('randoms',  {path: 'randoms'});
     this.resource('clicks',  {path: 'clicks'});
   });
 
@@ -148,6 +159,17 @@
   App.ClicksRoute = Ember.Route.extend({
     model: function(params) {
       return this.store.findAll('click');
+    },
+    actions: {
+      search: function(query) {
+        return true;
+      }
+    }
+  });
+
+  App.RandomsRoute= Ember.Route.extend({
+    model: function() {
+      return this.store.findAll('random');
     },
     actions: {
       search: function(query) {
