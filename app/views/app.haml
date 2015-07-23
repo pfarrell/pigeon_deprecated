@@ -95,7 +95,10 @@
     actions: {
       search: function(params) {
         this.transitionTo('search', encodeURIComponent(params));
-      }
+      },
+      refresh: function() {
+        this.refresh();
+      } 
     }
   });
 
@@ -174,9 +177,6 @@
     actions: {
       search: function(query) {
         return true;
-      },
-      refresh: function() {
-        this.refresh();
       }
     }
   });
