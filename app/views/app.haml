@@ -85,16 +85,20 @@
     this.resource('articles', { path: 'sources/:source_id/articles'});
     this.resource('search',   {path: 'search/:search_term'});
     this.resource('captures', {path: 'captures'});
+    this.resource('capture',  {path: 'capture/:capture_url'});
     this.resource('stats',    {path: 'stats'});
     this.resource('recents',  {path: 'recents'});
     this.resource('randoms',  {path: 'randoms'});
-    this.resource('clicks',  {path: 'clicks'});
+    this.resource('clicks',   {path: 'clicks'});
   });
 
   App.ApplicationRoute = Ember.Route.extend({
     actions: {
       search: function(params) {
         this.transitionTo('search', encodeURIComponent(params));
+      },
+      capture: function(params) {
+        this.transitionTo('capture', encodeURIComponent(params));
       },
       refresh: function() {
         this.refresh();
@@ -147,10 +151,18 @@
     }
   });
 
+  App.CaptureRoute = Ember.Route.extend({
+    model: function(params) {
+      var capture = this.store.createRecord('capture', {
+        url: params.capture_url
+      });
+      capture.save();
+    },
+  });
+
   App.SearchRoute = Ember.Route.extend({
     model: function(params) {
       return this.store.find('search', { q: params.search_term });
-      //return Ember.$.getJSON('search/?q=' + params.search_term)
     },
     actions: {
       search: function(params) {

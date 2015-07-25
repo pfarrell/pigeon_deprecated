@@ -55,6 +55,11 @@
               </button>
             </li>
           </ul>
+          <div class="navbar-right navbar-form">
+            <div class="input-group">
+              {{input action="capture" type="search" class="form-control" placeholder="Capture a Link"}}
+            </div>
+          </div>
           <ul class="nav navbar-nav navbar-right">
             <li>
               <p class="navbar-btn bookmarklet">
@@ -125,6 +130,10 @@
       {{#each article in model}}
         {{partial "article"}}
       {{/each}}
+    </script>
+
+    <script type="text/x-handlebars" id="capture">
+      Got it..
     </script>
 
     <script type="text/x-handlebars" id="captures">

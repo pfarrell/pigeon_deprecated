@@ -4,6 +4,11 @@ require 'htmlentities'
 
 
 namespace :import do
+  def scrape_title(url)
+    scraper = Scraper.scrape(url)
+    scraper.doc.title
+  end
+
   def import_feed(feed) 
     redis = Redis.new
     ent = HTMLEntities.new
@@ -65,6 +70,7 @@ namespace :import do
       uri = URI(obj['url'])
       article = Article.find_or_create(:url => obj['url'])
       article.title ||= ent.decode(obj['title']) unless obj['title'].nil?
+      article.title = scrape_title(obj['url']) if article.title.nil?
       article.date ||= obj['date'] || DateTime.now
       article.meta ||= {}
       article.meta[:domain] ||= uri.host
