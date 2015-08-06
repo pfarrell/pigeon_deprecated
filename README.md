@@ -2,7 +2,7 @@
 
 ## About
 
-Delicious + Instapaper + Flipboard
+Delicious + Instapaper + Flipboard.  Well, maybe not Flipboard
 
 I want content to be automatically captured and placed into a format I can browse offline.
 
