@@ -8,7 +8,7 @@ class Scraper
   def self.scrape(url)
     s=Scraper.new
     s.url = url
-    s.final = s.final_url(s.uri(url))
+    s.final = s =~ /http/ ? s.final_url(s.uri(url)) : url
     s.doc = Html.new(url: s.final, content: open(s.final))
     s
   end
