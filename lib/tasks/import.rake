@@ -53,6 +53,28 @@ namespace :import do
     import_page(args[:url])
   end
 
+  task :pages, [:start, :count] do |t, args|
+    id = args[:start].to_i - 1
+    es = ElasticSearch.new("pigeon", "page")
+    args[:count].to_i.times do 
+      id+=1
+      puts 'get article'
+      article = Article[id]
+      next if article.nil? || article.url.nil? || article.url == ""
+      puts "article_id: #{article.id}"
+      puts 'scrape page'
+      begin 
+        page = Scraper.scrape(article.url)
+        es.id = article.id
+        es.content = page.doc.content
+        puts "save to es"
+        es.save
+      rescue Exception=>ex
+        $stderr.puts "blargh!!!!: #{ex.message}"
+      end
+    end
+  end
+
   task :feed, [:id] do |t, args|
     import_feed(RssFeed[args[:id].to_i])
   end
