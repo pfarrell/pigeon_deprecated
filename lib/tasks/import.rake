@@ -42,6 +42,7 @@ namespace :import do
       puts "article_id: #{article.id}"
       es.id = article.id
       es.content = page.doc.content
+      es.date = article.created_at.to_s.sub(/ /, "T").sub(/ .*/, '')
       puts "save to es"
       es.save
     rescue Exception => ex
@@ -58,7 +59,7 @@ namespace :import do
     es = ElasticSearch.new("pigeon", "page")
     args[:count].to_i.times do 
       id+=1
-      puts 'get article'
+      puts "get article: #{id}"
       article = Article[id]
       next if article.nil? || article.url.nil? || article.url == ""
       puts "article_id: #{article.id}"
@@ -67,6 +68,7 @@ namespace :import do
         page = Scraper.scrape(article.url)
         es.id = article.id
         es.content = page.doc.content
+        es.date = article.created_at.to_s.sub(/ /, "T").sub(/ .*/, '')
         puts "save to es"
         es.save
       rescue Exception=>ex
