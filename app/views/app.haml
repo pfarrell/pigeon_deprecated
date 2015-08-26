@@ -80,6 +80,14 @@
     }
   });
 
+  Ember.Handlebars.helper('add_commas', function(value, options) {
+    if(value==null) {
+      return "";
+    }else{
+      return value.toLocaleString();
+    }
+  });
+
   App.Router.map(function() {
     this.resource('rssFeeds', {path: 'rssFeeds'});
     this.resource('articles', { path: 'sources/:source_id/articles'});
