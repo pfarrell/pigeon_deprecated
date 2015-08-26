@@ -67,18 +67,20 @@ namespace :import do
     json = redis.lpop("incoming:links")
     until(json.nil?)
       obj = JSON.parse(json)
-      uri = URI(obj['url'])
-      article = Article.find_or_create(:url => obj['url'])
-      article.title ||= ent.decode(obj['title']) unless obj['title'].nil?
-      article.title = scrape_title(obj['url']) if article.title.nil?
-      article.date ||= obj['date'] || DateTime.now
-      article.meta ||= {}
-      article.meta[:domain] ||= uri.host
-      article.save
-      capture = Capture.new(:article => article)
-      capture.date = obj['date'] || DateTime.now
-      capture.download!
-      capture.save
+      unless obj['url'].nil?
+        uri = URI(obj['url']) 
+        article = Article.find_or_create(:url => obj['url'])
+        article.title ||= ent.decode(obj['title']) unless obj['title'].nil?
+        article.title = scrape_title(obj['url']) if article.title.nil?
+        article.date ||= obj['date'] || DateTime.now
+        article.meta ||= {}
+        article.meta[:domain] ||= uri.host
+        article.save
+        capture = Capture.new(:article => article)
+        capture.date = obj['date'] || DateTime.now
+        capture.download!
+        capture.save
+      end
       json = redis.lpop("incoming:links")
     end
   end
