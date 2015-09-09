@@ -88,6 +88,11 @@
     }
   });
 
+  Ember.Handlebars.helper('decode_entities', function(value, options) {
+    var decoded = $('<textarea />').html(value).val();
+    return new Ember.Handlebars.SafeString(decoded);
+  });
+
   App.Router.map(function() {
     this.resource('rssFeeds', {path: 'rssFeeds'});
     this.resource('articles', { path: 'sources/:source_id/articles'});
